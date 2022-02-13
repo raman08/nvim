@@ -18,3 +18,9 @@ require "user.impatient"
 require "user.indentline"
 require "user.alpha"
 require "user.whichkey"
+
+
+if (vim.g.vscode) then
+	require "user.vscode"
+end
+
