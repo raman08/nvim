@@ -11,3 +11,5 @@ lspconfig.phpactor.setup{}
 lspconfig.tailwindcss.setup {
 	filetypes = {"blade", "django-html", "html"}
 }
+
+require "user.lsp.lsp-signature"

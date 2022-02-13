@@ -18,7 +18,12 @@ require "user.impatient"
 require "user.indentline"
 require "user.alpha"
 require "user.whichkey"
-
+require "user.project"
+-- require "user.quickscope"
+require "user.colorized"
+require "user.session-manager"
+require "user.renamer"
+require "user.symbol-outline"
 
 if (vim.g.vscode) then
 	require "user.vscode"

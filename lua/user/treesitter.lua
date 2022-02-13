@@ -5,23 +5,27 @@ if not status_ok then
 end
 
 configs.setup {
-  ensure_installed = "maintained",
-  sync_install = false,
-  ignore_install = { "" }, -- List of parsers to ignore installing
-  highlight = {
-    enable = true, -- false will disable the whole extension
-    disable = { "" }, -- list of language that will be disabled
-    additional_vim_regex_highlighting = true,
-  },
-  indent = { enable = true, disable = { "yaml" } },
-  rainbow = {
-    -- Setting colors
+	ensure_installed = "maintained",
+	sync_install = false,
+	ignore_install = { "" }, -- List of parsers to ignore installing
+	highlight = {
+	enable = true, -- false will disable the whole extension
+	disable = { "" }, -- list of language that will be disabled
+	additional_vim_regex_highlighting = true,
+	},
+	indent = { enable = true, disable = { "yaml" } },
+	rainbow = {
+	-- Setting colors
 	enable=true,
 	extended_modes = true,
 	max_file_line = nil
-  },
-  autopairs = {
+	},
+	autopairs = {
 		enable = true,
+	},
+	autotag = {
+		enable = true,
+		disable = { "xml" },
 	},
 	playground = {
 		enable = true,
@@ -42,6 +46,6 @@ configs.setup {
 		},
 	  },
 	context_commentstring = {
-    enable = true
-  }
+	enable = true
+	}
 }
