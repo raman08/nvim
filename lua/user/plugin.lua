@@ -116,10 +116,12 @@ return packer.startup(function(use)
 	-- Git
 	use "lewis6991/gitsigns.nvim"
 	use "f-person/git-blame.nvim"
+	use "tpope/vim-fugitive"
 	-- use "mattn/vim-gist"
 	-- use "mattn/webapi-vim"
+
 	-- use "rudylee/nvim-gist"
-	use "tpope/vim-fugitive"
+
 	-- File Tree
 	use "kyazdani42/nvim-tree.lua" -- File Tree
 	use "kyazdani42/nvim-web-devicons" -- File Tree Icons
@@ -131,15 +133,18 @@ return packer.startup(function(use)
 	}
 
 	-- Nvim Dap --
-	use "mfussenegger/nvim-dap"
-	use "theHamsta/nvim-dap-virtual-text"
-	use "rcarriga/nvim-dap-ui"
-	use "Pocco81/DAPInstall.nvim"
+	-- use "mfussenegger/nvim-dap"
+	-- use "theHamsta/nvim-dap-virtual-text"
+	-- use "rcarriga/nvim-dap-ui"
+	-- use "Pocco81/DAPInstall.nvim"
 
 	-- Compititve programming --
 	use "searleser97/cpbooster.vim"
 	use 'MunifTanjim/nui.nvim'        -- it's a dependency
 	use 'xeluxee/competitest.nvim'
+
+	-- Debugging Applications --
+	use "puremourning/vimspector"
 
 	-- use "ianding1/leetcode.vim"
 	-- Automatically set up your configuration after cloning packer.nvim
