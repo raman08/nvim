@@ -2,6 +2,7 @@ local fn = vim.fn
 
 -- Automatically install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+
 if fn.empty(fn.glob(install_path)) > 0 then
 	PACKER_BOOTSTRAP = fn.system {
 		"git",
@@ -68,6 +69,9 @@ return packer.startup(function(use)
 		run = "cd app && npm install",
 		ft = "markdown",
 	}
+	use "andymass/vim-matchup"
+	use "folke/todo-comments.nvim"
+
 	-- Cmp Plugins
 	use 'hrsh7th/nvim-cmp' -- Completion Client
 	use 'hrsh7th/cmp-buffer' -- Buffer Completion
@@ -107,13 +111,15 @@ return packer.startup(function(use)
 	use "nvim-treesitter/playground" -- TreeSitter playground
 	use "JoosepAlviste/nvim-ts-context-commentstring" -- Setting Comment Based On curser location
 	use "windwp/nvim-ts-autotag"
+	use "romgrk/nvim-treesitter-context"
 
 	-- Git
 	use "lewis6991/gitsigns.nvim"
 	use "f-person/git-blame.nvim"
-	use "mattn/vim-gist"
-	use "mattn/webapi-vim"
-
+	-- use "mattn/vim-gist"
+	-- use "mattn/webapi-vim"
+	-- use "rudylee/nvim-gist"
+	use "tpope/vim-fugitive"
 	-- File Tree
 	use "kyazdani42/nvim-tree.lua" -- File Tree
 	use "kyazdani42/nvim-web-devicons" -- File Tree Icons
@@ -129,6 +135,13 @@ return packer.startup(function(use)
 	use "theHamsta/nvim-dap-virtual-text"
 	use "rcarriga/nvim-dap-ui"
 	use "Pocco81/DAPInstall.nvim"
+
+	-- Compititve programming --
+	use "searleser97/cpbooster.vim"
+	use 'MunifTanjim/nui.nvim'        -- it's a dependency
+	use 'xeluxee/competitest.nvim'
+
+	-- use "ianding1/leetcode.vim"
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then

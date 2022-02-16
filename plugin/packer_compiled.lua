@@ -139,6 +139,16 @@ _G.packer_plugins = {
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["competitest.nvim"] = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/competitest.nvim",
+    url = "https://github.com/xeluxee/competitest.nvim"
+  },
+  ["cpbooster.vim"] = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/cpbooster.vim",
+    url = "https://github.com/searleser97/cpbooster.vim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -190,6 +200,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/nlsp-settings.nvim",
     url = "https://github.com/tamago324/nlsp-settings.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["null-ls.nvim"] = {
     loaded = true,
@@ -245,6 +260,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-treesitter-context"] = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
+    url = "https://github.com/romgrk/nvim-treesitter-context"
   },
   ["nvim-ts-autotag"] = {
     loaded = true,
@@ -323,6 +343,11 @@ _G.packer_plugins = {
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["todo-comments.nvim"] = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",
+    url = "https://github.com/folke/todo-comments.nvim"
+  },
   ["toggleterm.nvim"] = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
@@ -343,20 +368,20 @@ _G.packer_plugins = {
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/vim-code-dark",
     url = "https://github.com/tomasiser/vim-code-dark"
   },
-  ["vim-gist"] = {
+  ["vim-fugitive"] = {
     loaded = true,
-    path = "/home/raman/.local/share/nvim/site/pack/packer/start/vim-gist",
-    url = "https://github.com/mattn/vim-gist"
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-illuminate"] = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/vim-illuminate",
     url = "https://github.com/RRethy/vim-illuminate"
   },
-  ["webapi-vim"] = {
+  ["vim-matchup"] = {
     loaded = true,
-    path = "/home/raman/.local/share/nvim/site/pack/packer/start/webapi-vim",
-    url = "https://github.com/mattn/webapi-vim"
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/vim-matchup",
+    url = "https://github.com/andymass/vim-matchup"
   },
   ["which-key.nvim"] = {
     loaded = true,
@@ -370,8 +395,8 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType php ++once lua require("packer.load")({'phpactor'}, { ft = "php" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType php ++once lua require("packer.load")({'phpactor'}, { ft = "php" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end
