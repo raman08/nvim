@@ -104,6 +104,7 @@ return packer.startup(function(use)
 	use "nvim-telescope/telescope.nvim" -- Telescope
 	use "nvim-telescope/telescope-media-files.nvim" -- View Media in Telescope
 	use { "nvim-telescope/telescope-file-browser.nvim" }
+	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
 	-- TreeSitter
 	use {"nvim-treesitter/nvim-treesitter", run=":TSUpdate"} -- TreeSitter

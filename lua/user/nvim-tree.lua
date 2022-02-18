@@ -65,12 +65,12 @@ nvim_tree.setup {
 	},
 	update_focused_file = {
 		enable = true,
-		update_cwd = true,
+		update_cwd = false,
 		ignore_list = {},
 	},
 	filters = {
 		dotfiles = false,
-		custom = {},
+		custom = {'.git', 'node_modules'},
 	},
 	git = {
 		enable = true,
@@ -93,6 +93,7 @@ nvim_tree.setup {
 		},
 		number = false,
 		relativenumber = false,
+		signcolumn = auto,
 	},
 	trash = {
 		cmd = "trash",
