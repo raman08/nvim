@@ -61,8 +61,8 @@ require('competitest').setup {
 	save_all_files = false,
 	compile_directory = ".",
 	compile_command = {
-		c = { exec = "gcc", args = { "-Wall", "$(FNAME)", "-o", "$(FNOEXT)" } },
-		cpp = { exec = "g++", args = { "-Wall", "$(FNAME)", "-o", "$(FNOEXT)" } },
+		c = { exec = "gcc", args = { "-Wall","-g", "$(FNAME)", "-o", "$(FNOEXT)" } },
+		cpp = { exec = "g++", args = { "-Wall","-g", "$(FNAME)", "-o", "$(FNOEXT)" } },
 		rust = { exec = "rustc", args = { "$(FNAME)" } },
 		java = { exec = "javac", args = { "$(FNAME)" } },
 	},
@@ -78,11 +78,11 @@ require('competitest').setup {
 	maximum_time = 5000,
 	output_compare_method = "squish",
 
-	testcases_directory = ".",
+	testcases_directory = "./test",
 	input_name = "input",
 	output_name = "output",
 	testcases_files_format = "$(FNOEXT)_$(INOUT)$(TCNUM).txt",
-	testcases_use_single_file = false,
+	testcases_use_single_file = true,
 	testcases_single_file_format = "$(FNOEXT).testcases",
 
 	companion_port = 27121,

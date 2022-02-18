@@ -13,6 +13,7 @@ null_ls.setup({
 	sources = {
 		formatting.prettier.with({ extra_args = {"--single-quote", "--jsx-single-quote", "--tab-width", "4", "--use-tabs", "--arrow-parens", "avoid"}}),
 		formatting.phpcsfixer,
+		formatting.clang_format.with({extra_args = {"--style=file"}})
 		-- formatting.uncrustify
 		-- formatting.black.with { extra_args = { "--fast" } },
 		-- formatting.stylua,

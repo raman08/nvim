@@ -21,7 +21,7 @@ M.setup = function()
 			active = signs,
 		},
 		update_in_insert = true,
-		underline = true,
+		underline = false,
 		severity_sort = true,
 		float = {
 			focusable = true,
@@ -81,7 +81,7 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-	if client.name == "tsserver" or client.name =="html" then
+	if client.name == "tsserver" or client.name =="html" or client.name == "clangd" then
 		client.resolved_capabilities.document_formatting = false
 	end
 	lsp_keymaps(bufnr)
@@ -90,6 +90,7 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.offsetEncoding = { "utf-16" }
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then

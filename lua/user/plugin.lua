@@ -145,7 +145,11 @@ return packer.startup(function(use)
 
 	-- Debugging Applications --
 	use "puremourning/vimspector"
+	
 
+
+	-- Wakatimw for coding activity --
+	use "wakatime/vim-wakatime"	
 	-- use "ianding1/leetcode.vim"
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
