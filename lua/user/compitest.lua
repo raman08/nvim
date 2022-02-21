@@ -1,4 +1,11 @@
-require('competitest').setup {
+local competitest, cmp = pcall(require, "competitest")
+
+if not competitest then
+	return
+end
+
+
+competitest.setup {
 	local_config_file_name = "competitest.lua",
 
 	floating_border = "rounded",

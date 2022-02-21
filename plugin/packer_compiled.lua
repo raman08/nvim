@@ -135,13 +135,17 @@ _G.packer_plugins = {
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["competitest.nvim"] = {
-    loaded = true,
-    path = "/home/raman/.local/share/nvim/site/pack/packer/start/competitest.nvim",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/opt/competitest.nvim",
     url = "https://github.com/xeluxee/competitest.nvim"
   },
   ["cpbooster.vim"] = {
-    loaded = true,
-    path = "/home/raman/.local/share/nvim/site/pack/packer/start/cpbooster.vim",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/opt/cpbooster.vim",
     url = "https://github.com/searleser97/cpbooster.vim"
   },
   ["friendly-snippets"] = {
@@ -159,6 +163,11 @@ _G.packer_plugins = {
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
+  ["gv.vim"] = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/gv.vim",
+    url = "https://github.com/junegunn/gv.vim"
+  },
   ["impatient.nvim"] = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/impatient.nvim",
@@ -173,6 +182,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
     url = "https://github.com/ray-x/lsp_signature.nvim"
+  },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
+    url = "https://github.com/glepnir/lspsaga.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -343,6 +357,11 @@ _G.packer_plugins = {
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
   },
+  undotree = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/undotree",
+    url = "https://github.com/mbbill/undotree"
+  },
   ["vim-bbye"] = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/vim-bbye",
@@ -392,6 +411,7 @@ vim.cmd [[au!]]
 time([[Defining lazy-load filetype autocommands]], true)
 vim.cmd [[au FileType php ++once lua require("packer.load")({'phpactor'}, { ft = "php" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType cpp c ++once lua require("packer.load")({'competitest.nvim', 'cpbooster.vim'}, { ft = "cpp c" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

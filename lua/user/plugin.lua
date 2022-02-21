@@ -72,6 +72,8 @@ return packer.startup(function(use)
 	use "andymass/vim-matchup"
 	use "folke/todo-comments.nvim"
 
+	use "mbbill/undotree"
+
 	-- Cmp Plugins
 	use 'hrsh7th/nvim-cmp' -- Completion Client
 	use 'hrsh7th/cmp-buffer' -- Buffer Completion
@@ -93,7 +95,7 @@ return packer.startup(function(use)
 	use "jose-elias-alvarez/null-ls.nvim" -- For Formatting and Linting
 	use {"phpactor/phpactor", run="composer install --no-dev -o", ft="php"} -- Php Support for Nvim
     use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
-
+	use "glepnir/lspsaga.nvim"
     use "filipdutescu/renamer.nvim"
     use "simrat39/symbols-outline.nvim"
 	use "ray-x/lsp_signature.nvim"
@@ -120,7 +122,7 @@ return packer.startup(function(use)
 	use "tpope/vim-fugitive"
 	-- use "mattn/vim-gist"
 	-- use "mattn/webapi-vim"
-
+	use "junegunn/gv.vim"
 	-- use "rudylee/nvim-gist"
 
 	-- File Tree
@@ -140,17 +142,16 @@ return packer.startup(function(use)
 	-- use "Pocco81/DAPInstall.nvim"
 
 	-- Compititve programming --
-	use "searleser97/cpbooster.vim"
-	use 'MunifTanjim/nui.nvim'        -- it's a dependency
-	use 'xeluxee/competitest.nvim'
+	use {"searleser97/cpbooster.vim", ft='cpp c'}
+	use {'xeluxee/competitest.nvim', requires={'MunifTanjim/nui.nvim', opt=true }, ft='cpp c'}
 
 	-- Debugging Applications --
 	use "puremourning/vimspector"
-	
 
 
 	-- Wakatimw for coding activity --
-	use "wakatime/vim-wakatime"	
+	use "wakatime/vim-wakatime"
+
 	-- use "ianding1/leetcode.vim"
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
