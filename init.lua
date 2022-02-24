@@ -27,6 +27,7 @@ require "user.git-blame"
 require "user.compitest"
 require "user.vimspector"
 require "user.todo-comments"
+require "user.asyncrun"
 
 -- require "user.dap"
 -- require "user.gist"

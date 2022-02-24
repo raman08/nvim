@@ -1,6 +1,6 @@
-local competitest, cmp = pcall(require, "competitest")
+local status_ok, competitest= pcall(require, "competitest")
 
-if not competitest then
+if not status_ok then
 	return
 end
 

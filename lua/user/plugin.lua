@@ -135,16 +135,12 @@ return packer.startup(function(use)
 	  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
 
-	-- Nvim Dap --
-	-- use "mfussenegger/nvim-dap"
-	-- use "theHamsta/nvim-dap-virtual-text"
-	-- use "rcarriga/nvim-dap-ui"
-	-- use "Pocco81/DAPInstall.nvim"
 
 	-- Compititve programming --
-	use {"searleser97/cpbooster.vim", ft='cpp c'}
-	use {'xeluxee/competitest.nvim', requires={'MunifTanjim/nui.nvim', opt=true }, ft='cpp c'}
-
+	use {"searleser97/cpbooster.vim"}
+	use {'xeluxee/competitest.nvim', requires={'MunifTanjim/nui.nvim', opt=true }}
+	use'skywind3000/asynctasks.vim'
+	use 'skywind3000/asyncrun.vim'
 	-- Debugging Applications --
 	use "puremourning/vimspector"
 
@@ -152,7 +148,19 @@ return packer.startup(function(use)
 	-- Wakatimw for coding activity --
 	use "wakatime/vim-wakatime"
 
+	-- firenvim
+	use {
+		'glacambre/firenvim',
+		run = function() vim.fn['firenvim#install'](0) end
+	}
 	-- use "ianding1/leetcode.vim"
+
+	-- Nvim Dap --
+	-- use "mfussenegger/nvim-dap"
+	-- use "theHamsta/nvim-dap-virtual-text"
+	-- use "rcarriga/nvim-dap-ui"
+	-- use "Pocco81/DAPInstall.nvim"
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
