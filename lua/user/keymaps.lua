@@ -1,11 +1,11 @@
-local opts = { noremap = true, silent = true }
+local opts = {noremap = true, silent = true}
 
-local term_opts = { silent = true }
+local term_opts = {silent = true}
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
---Remap space as leader key
+-- Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -71,7 +71,9 @@ keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Telescope --
-keymap("n", "<C-p>", "<cmd> lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({previewer = false}))<cr>",opts)
+keymap("n", "<C-p>",
+       "<cmd> lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({previewer = false}))<cr>",
+       opts)
 
 -- Bbye --
-keymap("n", "<Leader>q", ":Bdelete<CR>",opts)
+keymap("n", "<Leader>q", ":Bdelete<CR>", opts)

@@ -1,5 +1,6 @@
 require "user.options"
 require "user.keymaps"
+require "user.autocommands"
 require "user.plugin"
 require "user.colorscheme"
 require "user.cmp"
@@ -35,7 +36,4 @@ require "user.asyncrun"
 -- require "user.leetcode"
 -- require "user.quickscope"
 
-if (vim.g.vscode) then
-	require "user.vscode"
-end
-
+if (vim.g.vscode) then require "user.vscode" end
