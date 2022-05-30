@@ -2,11 +2,11 @@ local status_ok, renamer = pcall(require, "renamer")
 if not status_ok then return end
 
 vim.api.nvim_set_keymap("i", "<F2>",
-                        '<cmd>lua require("renamer").rename({empty = true})<cr>',
+                        "<cmd>lua require(\"renamer\").rename({empty = true})<cr>",
                         {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("n", "<F2>",
-                        '<cmd>lua require("renamer").rename({empty = true})<cr>',
+                        "<cmd>lua require(\"renamer\").rename({empty = true})<cr>",
                         {noremap = true, silent = true})
 
 local mappings_utils = require("renamer.mappings.utils")
@@ -30,6 +30,6 @@ renamer.setup({
         ["<c-b>"] = mappings_utils.set_cursor_to_word_start,
         ["<c-c>"] = mappings_utils.clear_line,
         ["<c-u>"] = mappings_utils.undo,
-        ["<c-r>"] = mappings_utils.redo
-    }
+        ["<c-r>"] = mappings_utils.redo,
+    },
 })

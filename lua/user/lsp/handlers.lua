@@ -6,7 +6,7 @@ M.setup = function()
         {name = "DiagnosticSignError", text = icons.diagnostics.Error},
         {name = "DiagnosticSignWarn", text = icons.diagnostics.Warning},
         {name = "DiagnosticSignHint", text = icons.diagnostics.Hint},
-        {name = "DiagnosticSignInfo", text = icons.diagnostics.Information}
+        {name = "DiagnosticSignInfo", text = icons.diagnostics.Information},
     }
 
     for _, sign in ipairs(signs) do
@@ -28,8 +28,8 @@ M.setup = function()
             border = "rounded",
             source = "always",
             header = "",
-            prefix = ""
-        }
+            prefix = "",
+        },
     }
 
     vim.diagnostic.config(config)
@@ -78,10 +78,10 @@ local function lsp_keymaps(bufnr)
     -- 	opts
     -- )
     vim.api.nvim_buf_set_keymap(bufnr, "n", "[d",
-                                '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>',
+                                "<cmd>lua vim.diagnostic.goto_prev({ border = \"rounded\" })<CR>",
                                 opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "]d",
-                                '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>',
+                                "<cmd>lua vim.diagnostic.goto_next({ border = \"rounded\" })<CR>",
                                 opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
     vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]

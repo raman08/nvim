@@ -17,7 +17,7 @@ local diff = {
     "diff",
     colored = false,
     symbols = {added = " ", modified = " ", removed = " "}, -- changes diff symbols
-    cond = hide_in_width
+    cond = hide_in_width,
 }
 
 local mode = {"mode", fmt = function(str) return "-- " .. str .. " --" end}
@@ -49,9 +49,13 @@ lualine.setup({
         component_separators = {left = "", right = ""},
         section_separators = {left = "", right = ""},
         disabled_filetypes = {
-            "dashboard", "NvimTree", "Outline", "alpha", "toggleterm"
+            "dashboard",
+            "NvimTree",
+            "Outline",
+            "alpha",
+            "toggleterm",
         },
-        always_divide_middle = true
+        always_divide_middle = true,
     },
     sections = {
         lualine_a = {branch},
@@ -60,7 +64,7 @@ lualine.setup({
         -- lualine_x = { "encoding", "fileformat", "filetype" },
         lualine_x = {diff, spaces, "encoding", filetype},
         lualine_y = {location},
-        lualine_z = {}
+        lualine_z = {},
     },
     inactive_sections = {
         lualine_a = {},
@@ -68,8 +72,8 @@ lualine.setup({
         lualine_c = {"filename"},
         lualine_x = {"location"},
         lualine_y = {},
-        lualine_z = {}
+        lualine_z = {},
     },
     tabline = {},
-    extensions = {}
+    extensions = {},
 })

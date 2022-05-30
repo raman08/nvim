@@ -4,7 +4,7 @@ if not status_ok then return end
 local actions = require "telescope.actions"
 local icons = require("user.icons")
 
-telescope.load_extension('media_files')
+telescope.load_extension("media_files")
 
 telescope.setup {
     defaults = {
@@ -45,7 +45,7 @@ telescope.setup {
                 ["<M-q>"] = actions.send_selected_to_qflist +
                     actions.open_qflist,
                 ["<C-l>"] = actions.complete_tag,
-                ["<C-_>"] = actions.which_key -- keys from pressing <C-/>
+                ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
             },
 
             n = {
@@ -80,9 +80,9 @@ telescope.setup {
                 ["<PageUp>"] = actions.results_scrolling_up,
                 ["<PageDown>"] = actions.results_scrolling_down,
 
-                ["?"] = actions.which_key
-            }
-        }
+                ["?"] = actions.which_key,
+            },
+        },
     },
     pickers = {
         -- Default configuration for builtin pickers goes here:
@@ -103,7 +103,7 @@ telescope.setup {
             -- filetypes whitelist
             -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
             filetypes = {"png", "webp", "jpg", "jpeg"},
-            find_cmd = "rg" -- find command (defaults to `fd`)
+            find_cmd = "rg", -- find command (defaults to `fd`)
         },
         file_browser = {
             -- theme = "ivy",
@@ -117,24 +117,24 @@ telescope.setup {
                 },
                 ["n"] = {
                     -- your custom normal mode mappings
-                }
-            }
+                },
+            },
         },
         fzf = {
             fuzzy = true, -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
             override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case" -- or "ignore_case" or "respect_case"
+            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
         },
         ["ui-select"] = {
             require("telescope.themes").get_dropdown {
-                previewer = false
+                previewer = false,
                 -- even more opts
-            }
-        }
-    }
+            },
+        },
+    },
 }
 
 -- telescope.load_extension "ui-select"
 telescope.load_extension "file_browser"
-telescope.load_extension('fzf')
+telescope.load_extension("fzf")

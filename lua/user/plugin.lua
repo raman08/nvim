@@ -5,8 +5,12 @@ local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
     PACKER_BOOTSTRAP = fn.system {
-        "git", "clone", "--depth", "1",
-        "https://github.com/wbthomason/packer.nvim", install_path
+        "git",
+        "clone",
+        "--depth",
+        "1",
+        "https://github.com/wbthomason/packer.nvim",
+        install_path,
     }
     print "Installing packer close and reopen Neovim..."
     vim.cmd [[packadd packer.nvim]]
@@ -29,8 +33,8 @@ packer.init {
     display = {
         open_fn = function()
             return require("packer.util").float {border = "rounded"}
-        end
-    }
+        end,
+    },
 }
 
 -- Install your plugins here
@@ -41,7 +45,7 @@ return packer.startup(function(use)
     use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
     use "folke/tokyonight.nvim" -- Defalut theme
-    use 'tomasiser/vim-code-dark' -- Color Theme
+    use "tomasiser/vim-code-dark" -- Color Theme
 
     use "windwp/nvim-autopairs" -- Auto Complete Bracket
     use "numToStr/Comment.nvim" -- Comment Helper
@@ -50,10 +54,10 @@ return packer.startup(function(use)
     use "moll/vim-bbye"
     use "akinsho/toggleterm.nvim" -- Open Program in nvim
     use "ahmedkhalf/project.nvim" -- Project Management Made easy
-    use 'lewis6991/impatient.nvim' -- Improve Loadup Time
+    use "lewis6991/impatient.nvim" -- Improve Loadup Time
     use "lukas-reineke/indent-blankline.nvim" -- Show Intend lines
-    use 'goolord/alpha-nvim' -- Nvim Greeter
-    use 'antoinemadec/FixCursorHold.nvim' -- fix some unknow issue
+    use "goolord/alpha-nvim" -- Nvim Greeter
+    use "antoinemadec/FixCursorHold.nvim" -- fix some unknow issue
     use "folke/which-key.nvim"
     -- use "unblevable/quick-scope" -- Quickly jump to chracters
     use "norcalli/nvim-colorizer.lua" -- Color the Color
@@ -61,7 +65,7 @@ return packer.startup(function(use)
     use {
         "iamcco/markdown-preview.nvim",
         run = "cd app && npm install",
-        ft = "markdown"
+        ft = "markdown",
     }
     use "andymass/vim-matchup"
     use "folke/todo-comments.nvim"
@@ -69,14 +73,14 @@ return packer.startup(function(use)
     use "mbbill/undotree"
 
     -- Cmp Plugins
-    use 'hrsh7th/nvim-cmp' -- Completion Client
-    use 'hrsh7th/cmp-buffer' -- Buffer Completion
-    use 'hrsh7th/cmp-path' -- Path Completion
-    use 'hrsh7th/cmp-cmdline' -- Comandline Completion
+    use "hrsh7th/nvim-cmp" -- Completion Client
+    use "hrsh7th/cmp-buffer" -- Buffer Completion
+    use "hrsh7th/cmp-path" -- Path Completion
+    use "hrsh7th/cmp-cmdline" -- Comandline Completion
     use "saadparwaiz1/cmp_luasnip" -- Snippets Completion
     use "hrsh7th/cmp-nvim-lsp" -- LSP Completion
     use "hrsh7th/cmp-nvim-lua" -- LUA Completion
-    use 'karb94/neoscroll.nvim' -- Use for custom scroll animation
+    use "karb94/neoscroll.nvim" -- Use for custom scroll animation
     use "hrsh7th/cmp-emoji"
 
     -- Snippets
@@ -101,7 +105,7 @@ return packer.startup(function(use)
     use "nvim-telescope/telescope.nvim" -- Telescope
     use "nvim-telescope/telescope-media-files.nvim" -- View Media in Telescope
     use {"nvim-telescope/telescope-file-browser.nvim"}
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+    use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
 
     -- TreeSitter
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"} -- TreeSitter
@@ -126,18 +130,18 @@ return packer.startup(function(use)
 
     -- LuaLine
     use {
-        'nvim-lualine/lualine.nvim',
-        requires = {'kyazdani42/nvim-web-devicons', opt = true}
+        "nvim-lualine/lualine.nvim",
+        requires = {"kyazdani42/nvim-web-devicons", opt = true},
     }
 
     -- Compititve programming --
     use {"searleser97/cpbooster.vim"}
     use {
-        'xeluxee/competitest.nvim',
-        requires = {'MunifTanjim/nui.nvim', opt = true}
+        "xeluxee/competitest.nvim",
+        requires = {"MunifTanjim/nui.nvim", opt = true},
     }
-    use 'skywind3000/asynctasks.vim'
-    use 'skywind3000/asyncrun.vim'
+    use "skywind3000/asynctasks.vim"
+    use "skywind3000/asyncrun.vim"
 
     -- Debugging Applications --
     use "puremourning/vimspector"

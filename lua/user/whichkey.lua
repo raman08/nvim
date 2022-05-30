@@ -7,7 +7,7 @@ local setup = {
         registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
             enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-            suggestions = 20 -- how many suggestions should be shown in the list?
+            suggestions = 20, -- how many suggestions should be shown in the list?
         },
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
         -- No actual key bindings are created
@@ -18,8 +18,8 @@ local setup = {
             windows = true, -- default bindings on <c-w>
             nav = true, -- misc bindings to work with windows
             z = true, -- bindings for folds, spelling and others prefixed with z
-            g = true -- bindings for prefixed with g
-        }
+            g = true, -- bindings for prefixed with g
+        },
     },
     -- add operators that will trigger motion and text object completion
     -- to enable all native operators, set the preset / operators plugin above
@@ -34,24 +34,24 @@ local setup = {
     icons = {
         breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
         separator = "➜", -- symbol used between a key and it's label
-        group = "+" -- symbol prepended to a group
+        group = "+", -- symbol prepended to a group
     },
     popup_mappings = {
         scroll_down = "<c-d>", -- binding to scroll down inside the popup
-        scroll_up = "<c-u>" -- binding to scroll up inside the popup
+        scroll_up = "<c-u>", -- binding to scroll up inside the popup
     },
     window = {
         border = "rounded", -- none, single, double, shadow
         position = "bottom", -- bottom, top
         margin = {1, 0, 1, 0}, -- extra window margin [top, right, bottom, left]
         padding = {2, 2, 2, 2}, -- extra window padding [top, right, bottom, left]
-        winblend = 0
+        winblend = 0,
     },
     layout = {
         height = {min = 4, max = 25}, -- min and max height of the columns
         width = {min = 20, max = 50}, -- min and max width of the columns
         spacing = 3, -- spacing between columns
-        align = "center" -- align columns left, center or right
+        align = "center", -- align columns left, center or right
     },
     ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
     hidden = {"<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
@@ -63,8 +63,8 @@ local setup = {
         -- this is mostly relevant for key maps that start with a native binding
         -- most people should not need to change this
         i = {"j", "k"},
-        v = {"j", "k"}
-    }
+        v = {"j", "k"},
+    },
 }
 
 local opts = {
@@ -73,18 +73,18 @@ local opts = {
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = true -- use `nowait` when creating keymaps
+    nowait = true, -- use `nowait` when creating keymaps
 }
 
 local mappings = {
     ["/"] = {
         "<cmd>lua require(\"Comment.api\").toggle_current_linewise()<CR>",
-        "Comment"
+        "Comment",
     },
     ["a"] = {"<cmd>Alpha<cr>", "Alpha"},
     ["b"] = {
         "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-        "Buffers"
+        "Buffers",
     },
     ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
     ["w"] = {"<cmd>w!<CR>", "Save"},
@@ -98,7 +98,7 @@ local mappings = {
     ["F"] = {"<cmd>Telescope live_grep theme=ivy<cr>", "Find Text"},
     ["P"] = {
         "<cmd>lua require('telescope').extensions.projects.projects()<cr>",
-        "Projects"
+        "Projects",
     },
 
     p = {
@@ -107,7 +107,7 @@ local mappings = {
         i = {"<cmd>PackerInstall<cr>", "Install"},
         s = {"<cmd>PackerSync<cr>", "Sync"},
         S = {"<cmd>PackerStatus<cr>", "Status"},
-        u = {"<cmd>PackerUpdate<cr>", "Update"}
+        u = {"<cmd>PackerUpdate<cr>", "Update"},
     },
 
     g = {
@@ -122,7 +122,7 @@ local mappings = {
         s = {"<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk"},
         u = {
             "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-            "Undo Stage Hunk"
+            "Undo Stage Hunk",
         },
         o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
@@ -135,8 +135,8 @@ local mappings = {
             f = {"<cmd>Gist -f<cr>", "Fork"},
             g = {"<cmd>Gist -b<cr>", "Create"},
             l = {"<cmd>Gist -l<cr>", "List"},
-            p = {"<cmd>Gist -b -p<cr>", "Create Private"}
-        }
+            p = {"<cmd>Gist -b -p<cr>", "Create Private"},
+        },
     },
 
     l = {
@@ -145,7 +145,7 @@ local mappings = {
         d = {"<cmd>TroubleToggle<cr>", "Diagnostics"},
         w = {
             "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-            "Workspace Diagnostics"
+            "Workspace Diagnostics",
         },
         F = {"<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat"},
         f = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"},
@@ -159,9 +159,9 @@ local mappings = {
         s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
         S = {
             "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-            "Workspace Symbols"
+            "Workspace Symbols",
         },
-        R = {"<cmd>TroubleToggle lsp_references<cr>", "References"}
+        R = {"<cmd>TroubleToggle lsp_references<cr>", "References"},
     },
 
     s = {
@@ -173,7 +173,7 @@ local mappings = {
         r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
         R = {"<cmd>Telescope registers<cr>", "Registers"},
         k = {"<cmd>Telescope keymaps<cr>", "Keymaps"},
-        C = {"<cmd>Telescope commands<cr>", "Commands"}
+        C = {"<cmd>Telescope commands<cr>", "Commands"},
     },
 
     t = {
@@ -184,8 +184,8 @@ local mappings = {
         p = {"<cmd>lua _PYTHON_TOGGLE()<cr>", "Python"},
         f = {"<cmd>ToggleTerm direction=float<cr>", "Float"},
         h = {"<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal"},
-        v = {"<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical"}
-    }
+        v = {"<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical"},
+    },
 }
 
 local vopts = {
@@ -194,13 +194,13 @@ local vopts = {
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = true -- use `nowait` when creating keymaps
+    nowait = true, -- use `nowait` when creating keymaps
 }
 local vmappings = {
     ["/"] = {
         "<ESC><CMD>lua require(\"Comment.api\").toggle_linewise_op(vim.fn.visualmode())<CR>",
-        "Comment"
-    }
+        "Comment",
+    },
 }
 
 which_key.setup(setup)

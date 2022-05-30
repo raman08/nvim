@@ -8,7 +8,7 @@ local warning_orange = "#ff8800"
 local info_yellow = "#FFCC66"
 local hint_blue = "#4FC1FF"
 local perf_purple = "#7C3AED"
-local note_green = '#10B981'
+local note_green = "#10B981"
 
 todo_comments.setup {
     signs = true, -- show icons in the signs column
@@ -18,7 +18,7 @@ todo_comments.setup {
         FIX = {
             icon = icons.ui.Bug, -- icon used for the sign, and in search results
             color = error_red, -- can be a hex color, or a named color (see below)
-            alt = {"FIXME", "BUG", "FIXIT", "ISSUE", "ERROR"} -- a set of other keywords that all map to this FIX keywords
+            alt = {"FIXME", "BUG", "FIXIT", "ISSUE", "ERROR"}, -- a set of other keywords that all map to this FIX keywords
             -- signs = false, -- configure signs for some keywords individually
         },
         TODO = {icon = icons.ui.Check, color = hint_blue, alt = {"TIP"}},
@@ -26,14 +26,14 @@ todo_comments.setup {
         WARN = {
             icon = icons.diagnostics.Warning,
             color = warning_orange,
-            alt = {"WARNING", "XXX"}
+            alt = {"WARNING", "XXX"},
         },
         PERF = {
             icon = icons.ui.Dashboard,
             color = perf_purple,
-            alt = {"OPTIM", "PERFORMANCE", "OPTIMIZE"}
+            alt = {"OPTIM", "PERFORMANCE", "OPTIMIZE"},
         },
-        NOTE = {icon = icons.ui.Note, color = note_green, alt = {"INFO"}}
+        NOTE = {icon = icons.ui.Note, color = note_green, alt = {"INFO"}},
     },
     -- merge_keywords = true, -- when true, custom keywords will be merged with the defaults
     -- highlighting of the line containing the todo comment
@@ -48,7 +48,7 @@ todo_comments.setup {
         pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlightng (vim regex)
         comments_only = true, -- uses treesitter to match keywords in comments only
         max_line_len = 400, -- ignore lines longer than this
-        exclude = {} -- list of file types to exclude highlighting
+        exclude = {}, -- list of file types to exclude highlighting
     },
     -- list of named colors where we try to extract the guifg from the
     -- list of hilight groups or use the hex color if hl not found as a fallback
@@ -62,12 +62,15 @@ todo_comments.setup {
     search = {
         command = "rg",
         args = {
-            "--color=never", "--no-heading", "--with-filename", "--line-number",
-            "--column"
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
         },
         -- regex that will be used to match keywords.
         -- don't replace the (KEYWORDS) placeholder
-        pattern = [[\b(KEYWORDS):]] -- ripgrep regex
+        pattern = [[\b(KEYWORDS):]], -- ripgrep regex
         -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
-    }
+    },
 }

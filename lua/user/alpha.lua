@@ -8,7 +8,7 @@ dashboard.section.header.val = {
     [[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
     [[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
     [[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-    [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]]
+    [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
 }
 
 dashboard.section.buttons.val = {
@@ -20,7 +20,7 @@ dashboard.section.buttons.val = {
     dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
     dashboard.button("c", "  Configuration",
                      ":e ~/.config/nvim/init.lua <CR>"),
-    dashboard.button("q", "  Quit Neovim", ":qa<CR>")
+    dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 }
 
 local function footer()

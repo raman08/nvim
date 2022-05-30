@@ -10,15 +10,15 @@ vim.g.nvim_tree_icons = {
         renamed = "➜",
         deleted = "",
         untracked = "U",
-        ignored = "◌"
+        ignored = "◌",
     },
     folder = {
         default = "",
         open = "",
         empty = "",
         empty_open = "",
-        symlink = ""
-    }
+        symlink = "",
+    },
 }
 
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
@@ -41,11 +41,11 @@ nvim_tree.setup {
     update_to_buf_dir = {enable = true, auto_open = true},
     diagnostics = {
         enable = true,
-        icons = {hint = "", info = "", warning = "", error = ""}
+        icons = {hint = "", info = "", warning = "", error = ""},
     },
     system_open = {cmd = nil, args = {}},
     update_focused_file = {enable = true, update_cwd = false, ignore_list = {}},
-    filters = {dotfiles = false, custom = {'.git', 'node_modules'}},
+    filters = {dotfiles = false, custom = {".git", "node_modules"}},
     git = {enable = true, ignore = true, timeout = 500},
     view = {
         width = 30,
@@ -58,12 +58,12 @@ nvim_tree.setup {
             list = {
                 {key = {"l", "<CR>", "o"}, cb = tree_cb "edit"},
                 {key = "h", cb = tree_cb "close_node"},
-                {key = "v", cb = tree_cb "vsplit"}
-            }
+                {key = "v", cb = tree_cb "vsplit"},
+            },
         },
         number = false,
         relativenumber = false,
-        signcolumn = auto
+        signcolumn = auto,
     },
     trash = {cmd = "trash", require_confirm = true},
     quit_on_open = 0,
@@ -75,6 +75,6 @@ nvim_tree.setup {
         folders = 1,
         files = 1,
         folder_arrows = 1,
-        tree_width = 30
-    }
+        tree_width = 30,
+    },
 }

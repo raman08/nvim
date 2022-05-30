@@ -15,7 +15,7 @@ vim.g.symbols_outline = {
         hover_symbol = "<C-space>",
         toggle_preview = "K",
         rename_symbol = "r",
-        code_actions = "a"
+        code_actions = "a",
     },
     lsp_blacklist = {},
     symbol_blacklist = {},
@@ -30,7 +30,7 @@ vim.g.symbols_outline = {
         Field = {icon = icons.kind.Field, hl = "CmpItemKindField"},
         Constructor = {
             icon = icons.kind.Constructor,
-            hl = "CmpItemKindConstructor"
+            hl = "CmpItemKindConstructor",
         },
         Enum = {icon = icons.kind.Enum, hl = "CmpItemKindEnum"},
         Interface = {icon = icons.kind.Interface, hl = "CmpItemKindInterface"},
@@ -46,14 +46,14 @@ vim.g.symbols_outline = {
         Null = {icon = "NULL", hl = "TSKeyword"},
         EnumMember = {
             icon = icons.kind.EnumMember,
-            hl = "CmpItemKindEnumMember"
+            hl = "CmpItemKindEnumMember",
         },
         Struct = {icon = icons.kind.Struct, hl = "CmpItemKindStruct"},
         Event = {icon = icons.kind.Event, hl = "CmpItemKindEvent"},
         Operator = {icon = icons.kind.Operator, hl = "CmpItemKindOperator"},
         TypeParameter = {
             icon = icons.kind.TypeParameter,
-            hl = "CmpItemKindTypeParameter"
-        }
-    }
+            hl = "CmpItemKindTypeParameter",
+        },
+    },
 }

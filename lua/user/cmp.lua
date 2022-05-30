@@ -20,7 +20,7 @@ cmp.setup {
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
-        end
+        end,
     },
     mapping = {
         ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -31,7 +31,7 @@ cmp.setup {
         ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
         ["<C-e>"] = cmp.mapping {
             i = cmp.mapping.abort(),
-            c = cmp.mapping.close()
+            c = cmp.mapping.close(),
         },
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
@@ -57,7 +57,7 @@ cmp.setup {
             else
                 fallback()
             end
-        end, {"i", "s"})
+        end, {"i", "s"}),
     },
     formatting = {
         fields = {"kind", "abbr", "menu"},
@@ -71,20 +71,24 @@ cmp.setup {
                 luasnip = "[Snippet]",
                 buffer = "[Buffer]",
                 path = "[Path]",
-                emoji = "[Emoji]"
+                emoji = "[Emoji]",
             })[entry.source.name]
             return vim_item
-        end
+        end,
     },
     sources = {
-        {name = "nvim_lsp"}, {name = "nvim_lua"}, {name = "luasnip"},
-        {name = "buffer"}, {name = "path"}, {name = "emoji"}
+        {name = "nvim_lsp"},
+        {name = "nvim_lua"},
+        {name = "luasnip"},
+        {name = "buffer"},
+        {name = "path"},
+        {name = "emoji"},
     },
     confirm_opts = {behavior = cmp.ConfirmBehavior.Replace, select = false},
     window = {
         documentation = {
-            border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"}
-        }
+            border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"},
+        },
     },
-    experimental = {ghost_text = true, native_menu = false}
+    experimental = {ghost_text = true, native_menu = false},
 }

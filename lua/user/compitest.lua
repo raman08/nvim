@@ -14,8 +14,8 @@ competitest.setup {
             focus_next = {"j", "<down>", "<Tab>"},
             focus_prev = {"k", "<up>", "<S-Tab>"},
             close = {"<esc>", "<C-c>", "q", "Q"},
-            submit = {"<cr>"}
-        }
+            submit = {"<cr>"},
+        },
     },
     editor_ui = {
         popup_width = 0.4,
@@ -25,13 +25,13 @@ competitest.setup {
         normal_mode_mappings = {
             switch_window = {"<C-h>", "<C-l>", "<C-i>"},
             save_and_close = "<C-s>",
-            cancel = {"q", "Q"}
+            cancel = {"q", "Q"},
         },
         insert_mode_mappings = {
             switch_window = {"<C-h>", "<C-l>", "<C-i>"},
             save_and_close = "<C-s>",
-            cancel = "<C-q>"
-        }
+            cancel = "<C-q>",
+        },
     },
     runner_ui = {
         total_width = 0.8,
@@ -50,15 +50,15 @@ competitest.setup {
             view_output = {"a", "A"},
             view_stdout = {"o", "O"},
             view_stderr = {"e", "E"},
-            close = {"q", "Q"}
+            close = {"q", "Q"},
         },
         viewer = {
             width = 0.5,
             height = 0.5,
             show_nu = true,
             show_rnu = false,
-            close_mappings = {"q", "Q"}
-        }
+            close_mappings = {"q", "Q"},
+        },
     },
 
     save_current_file = true,
@@ -67,14 +67,14 @@ competitest.setup {
     compile_command = {
         c = {
             exec = "gcc",
-            args = {"-Wall", "-g", "$(FNAME)", "-o", "$(FNOEXT)"}
+            args = {"-Wall", "-g", "$(FNAME)", "-o", "$(FNOEXT)"},
         },
         cpp = {
             exec = "g++",
-            args = {"-Wall", "-g", "$(FNAME)", "-o", "$(FNOEXT)"}
+            args = {"-Wall", "-g", "$(FNAME)", "-o", "$(FNOEXT)"},
         },
         rust = {exec = "rustc", args = {"$(FNAME)"}},
-        java = {exec = "javac", args = {"$(FNAME)"}}
+        java = {exec = "javac", args = {"$(FNAME)"}},
     },
     running_directory = ".",
     run_command = {
@@ -82,7 +82,7 @@ competitest.setup {
         cpp = {exec = "./$(FNOEXT)"},
         rust = {exec = "./$(FNOEXT)"},
         python = {exec = "python", args = {"$(FNAME)"}},
-        java = {exec = "java", args = {"$(FNOEXT)"}}
+        java = {exec = "java", args = {"$(FNOEXT)"}},
     },
     multiple_testing = -1,
     maximum_time = 5000,
@@ -96,5 +96,5 @@ competitest.setup {
     testcases_single_file_format = "$(FNOEXT).testcases",
 
     companion_port = 27121,
-    receive_print_message = true
+    receive_print_message = true,
 }

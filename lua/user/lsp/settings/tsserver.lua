@@ -1,5 +1,1 @@
-return {
-	format = {
-		enable = false
-	},
-}
+return {format = {enable = false}}

@@ -11,14 +11,30 @@ null_ls.setup({
     sources = {
         formatting.prettier.with({
             extra_args = {
-                "--single-quote", "--jsx-single-quote", "--tab-width", "4",
-                "--use-tabs", "--arrow-parens", "avoid"
-            }
-        }), formatting.phpcsfixer,
-        formatting.clang_format.with({extra_args = {"--style=file"}}),
-        formatting.lua_format
+                "--single-quote",
+                "--jsx-single-quote",
+                "--tab-width",
+                "4",
+                "--use-tabs",
+                "--arrow-parens",
+                "avoid",
+            },
+        }),
+        formatting.phpcsfixer,
+        formatting.clang_format.with({
+            extra_args = {"--style=file"},
+        }),
+        formatting.lua_format.with({
+            extra_args = {
+                "--chop-down-kv-table",
+                "--extra-sep-at-table-end",
+                "--single-quote-to-double-quote",
+                "--spaces-around-equals-in-field",
+                "--chop-down-table",
+            },
+        }),
         -- formatting.uncrustify
         -- formatting.black.with { extra_args = { "--fast" } },
         -- formatting.stylua,
-    }
+    },
 })
