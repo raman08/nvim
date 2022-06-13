@@ -154,7 +154,7 @@ return packer.startup(function(use)
     --     'glacambre/firenvim',
     --     run = function() vim.fn['firenvim#install'](0) end
     -- }
-
+use "ianding1/leetcode.vim"
     -- use "ianding1/leetcode.vim"
 
     -- Nvim Dap --

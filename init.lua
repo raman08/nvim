@@ -29,7 +29,7 @@ require "user.compitest"
 require "user.vimspector"
 require "user.todo-comments"
 require "user.asyncrun"
-
+require "user.leetcode"
 -- require "user.dap"
 -- require "user.gist"
 -- require "user.ts-context"
