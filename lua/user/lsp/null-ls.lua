@@ -21,9 +21,7 @@ null_ls.setup({
             },
         }),
         formatting.phpcsfixer,
-        formatting.clang_format.with({
-            extra_args = {"--style=file"},
-        }),
+        formatting.clang_format.with({extra_args = {"--style=file"}}),
         formatting.lua_format.with({
             extra_args = {
                 "--chop-down-kv-table",

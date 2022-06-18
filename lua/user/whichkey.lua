@@ -88,6 +88,7 @@ local mappings = {
     },
     ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
     ["w"] = {"<cmd>w!<CR>", "Save"},
+
     -- ["q"] = { "<cmd>q!<CR>", "Quit" },
     -- ["q"] = {'<cmd><lua require("user.functions").smart_quit()<CR>', "Quit"},
     -- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
@@ -113,7 +114,6 @@ local mappings = {
 
     g = {
         name = "Git",
-        g = {"<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit"},
         j = {"<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk"},
         k = {"<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk"},
         l = {"<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame"},
@@ -129,15 +129,6 @@ local mappings = {
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
         c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
         d = {"<cmd>Gitsigns diffthis HEAD<cr>", "Diff"},
-        G = {
-            name = "Gist",
-            a = {"<cmd>Gist -b -a<cr>", "Create Anon"},
-            d = {"<cmd>Gist -d<cr>", "Delete"},
-            f = {"<cmd>Gist -f<cr>", "Fork"},
-            g = {"<cmd>Gist -b<cr>", "Create"},
-            l = {"<cmd>Gist -l<cr>", "List"},
-            p = {"<cmd>Gist -b -p<cr>", "Create Private"},
-        },
     },
 
     l = {
@@ -176,17 +167,6 @@ local mappings = {
         k = {"<cmd>Telescope keymaps<cr>", "Keymaps"},
         C = {"<cmd>Telescope commands<cr>", "Commands"},
     },
-
-    t = {
-        name = "Terminal",
-        n = {"<cmd>lua _NODE_TOGGLE()<cr>", "Node"},
-        u = {"<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU"},
-        t = {"<cmd>lua _HTOP_TOGGLE()<cr>", "Htop"},
-        p = {"<cmd>lua _PYTHON_TOGGLE()<cr>", "Python"},
-        f = {"<cmd>ToggleTerm direction=float<cr>", "Float"},
-        h = {"<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal"},
-        v = {"<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical"},
-    },
 }
 
 local vopts = {
@@ -197,6 +177,7 @@ local vopts = {
     noremap = true, -- use `noremap` when creating keymaps
     nowait = true, -- use `nowait` when creating keymaps
 }
+
 local vmappings = {
     ["/"] = {
         "<ESC><CMD>lua require(\"Comment.api\").toggle_linewise_op(vim.fn.visualmode())<CR>",

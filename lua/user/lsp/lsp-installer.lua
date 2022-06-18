@@ -2,6 +2,7 @@ local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 if not status_ok then return end
 
 local servers = {
+	"sumneko_lua",
 	"bashls",
     "cssmodules_ls",
 	"eslint",
@@ -12,22 +13,20 @@ local servers = {
     "jsonls",
 	"clangd",
 	"cssls",
-    "sumneko_lua",
     "tsserver",
 }
 
 local settings = {
     ensure_installed = servers,
-    -- automatic_installation = false,
     ui = {
-        -- icons = {
-        --   -- server_installed = "◍",
-        --   -- server_pending = "◍",
-        --   -- server_uninstalled = "◍",
-        --   -- server_installed = "✓",
-        --   -- server_pending = "➜",
-        --   -- server_uninstalled = "✗",
-        -- },
+        icons = {
+          -- server_installed = "◍",
+          -- server_pending = "◍",
+          -- server_uninstalled = "◍",
+          server_installed = "✓",
+          server_pending = "➜",
+          server_uninstalled = "✗",
+        },
         keymaps = {
             toggle_server_expand = "<CR>",
             install_server = "i",
@@ -40,8 +39,8 @@ local settings = {
     },
 
     log_level = vim.log.levels.INFO,
-    -- max_concurrent_installers = 4,
-    -- install_root_dir = path.concat { vim.fn.stdpath "data", "lsp_servers" },
+    max_concurrent_installers = 4,
+--    install_root_dir = path.concat { vim.fn.stdpath "data", "lsp_servers" },
 }
 
 lsp_installer.setup(settings)

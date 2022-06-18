@@ -74,11 +74,6 @@ _G.packer_plugins = {
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
-  ["FixCursorHold.nvim"] = {
-    loaded = true,
-    path = "/home/raman/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
-    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
-  },
   LuaSnip = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -302,11 +297,6 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/home/raman/.local/share/nvim/site/pack/packer/opt/phpactor",
     url = "https://github.com/phpactor/phpactor"
-  },
-  playground = {
-    loaded = true,
-    path = "/home/raman/.local/share/nvim/site/pack/packer/start/playground",
-    url = "https://github.com/nvim-treesitter/playground"
   },
   ["plenary.nvim"] = {
     loaded = true,

@@ -5,7 +5,6 @@ local icons = require "user.icons"
 
 local error_red = "#F44747"
 local warning_orange = "#ff8800"
-local info_yellow = "#FFCC66"
 local hint_blue = "#4FC1FF"
 local perf_purple = "#7C3AED"
 local note_green = "#10B981"

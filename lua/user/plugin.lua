@@ -44,6 +44,7 @@ return packer.startup(function(use)
     use "wbthomason/packer.nvim" -- Have packer manage itself
     use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
+
     use "folke/tokyonight.nvim" -- Defalut theme
     use "tomasiser/vim-code-dark" -- Color Theme
 
@@ -52,21 +53,22 @@ return packer.startup(function(use)
 
     use "akinsho/bufferline.nvim" -- BufferLine
     use "moll/vim-bbye"
+
     use "akinsho/toggleterm.nvim" -- Open Program in nvim
     use "ahmedkhalf/project.nvim" -- Project Management Made easy
     use "lewis6991/impatient.nvim" -- Improve Loadup Time
     use "lukas-reineke/indent-blankline.nvim" -- Show Intend lines
     use "goolord/alpha-nvim" -- Nvim Greeter
-    use "antoinemadec/FixCursorHold.nvim" -- fix some unknow issue
+
     use "folke/which-key.nvim"
-    -- use "unblevable/quick-scope" -- Quickly jump to chracters
     use "norcalli/nvim-colorizer.lua" -- Color the Color
-    -- use "rcarriga/nvim-notify"
+
     use {
         "iamcco/markdown-preview.nvim",
         run = "cd app && npm install",
         ft = "markdown",
     }
+
     use "andymass/vim-matchup"
     use "folke/todo-comments.nvim"
 
@@ -99,7 +101,6 @@ return packer.startup(function(use)
     use "ray-x/lsp_signature.nvim"
     use "b0o/SchemaStore.nvim"
     use "fatih/vim-go"
-    -- use "RRethy/vim-illuminate"
 
     -- Telescope
     use "nvim-telescope/telescope.nvim" -- Telescope
@@ -110,7 +111,6 @@ return packer.startup(function(use)
     -- TreeSitter
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"} -- TreeSitter
     use "p00f/nvim-ts-rainbow" -- Rainbow Color Bracket
-    use "nvim-treesitter/playground" -- TreeSitter playground
     use "JoosepAlviste/nvim-ts-context-commentstring" -- Setting Comment Based On curser location
     use "windwp/nvim-ts-autotag"
     use "romgrk/nvim-treesitter-context"
@@ -119,10 +119,7 @@ return packer.startup(function(use)
     use "lewis6991/gitsigns.nvim"
     use "f-person/git-blame.nvim"
     use "tpope/vim-fugitive"
-    -- use "mattn/vim-gist"
-    -- use "mattn/webapi-vim"
     use "junegunn/gv.vim"
-    -- use "rudylee/nvim-gist"
 
     -- File Tree
     use "kyazdani42/nvim-tree.lua" -- File Tree
@@ -142,6 +139,7 @@ return packer.startup(function(use)
     }
     use "skywind3000/asynctasks.vim"
     use "skywind3000/asyncrun.vim"
+	use "ianding1/leetcode.vim"
 
     -- Debugging Applications --
     use "puremourning/vimspector"
@@ -149,13 +147,6 @@ return packer.startup(function(use)
     -- Wakatimw for coding activity --
     use "wakatime/vim-wakatime"
 
-    -- firenvim
-    -- use {
-    --     'glacambre/firenvim',
-    --     run = function() vim.fn['firenvim#install'](0) end
-    -- }
-use "ianding1/leetcode.vim"
-    -- use "ianding1/leetcode.vim"
 
     -- Nvim Dap --
     -- use "mfussenegger/nvim-dap"
