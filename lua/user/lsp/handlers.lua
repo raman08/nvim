@@ -80,8 +80,6 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-    local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-    if not status_cmp_ok then return end
 
     if client.name == "tsserver" then
         client.resolved_capabilities.document_formatting = false
@@ -103,17 +101,21 @@ M.on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = false
     end
 
-    M.capabilities = vim.lsp.protocol.make_client_capabilities()
-    M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-	M.capabilities.offsetEncoding = {"utf-16"}
-    M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
-
     lsp_keymaps(bufnr)
 
     local status_ok, illuminate = pcall(require, "illuminate")
     if not status_ok then return end
     illuminate.on_attach(client)
 end
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.offsetEncoding = {"utf-16"}
+
+local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status_ok then return end
+
+M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 function M.enable_format_on_save()
     vim.cmd [[
