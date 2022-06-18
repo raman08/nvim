@@ -90,7 +90,8 @@ local mappings = {
     ["w"] = {"<cmd>w!<CR>", "Save"},
 
     -- ["q"] = { "<cmd>q!<CR>", "Quit" },
-    -- ["q"] = {'<cmd><lua require("user.functions").smart_quit()<CR>', "Quit"},
+    -- ["q"] = {"<cmd><lua require(\"user.functions\").smart_quit()<CR>", "Quit"},
+
     -- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
     ["h"] = {"<cmd>nohlsearch<CR>", "No Highlight"},
     -- ["f"] = {

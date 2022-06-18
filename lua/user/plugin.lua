@@ -132,7 +132,6 @@ return packer.startup(function(use)
     }
 
     -- Compititve programming --
-    use {"searleser97/cpbooster.vim"}
     use {
         "xeluxee/competitest.nvim",
         requires = {"MunifTanjim/nui.nvim", opt = true},
