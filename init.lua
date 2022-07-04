@@ -30,13 +30,15 @@ require "user.vimspector"
 require "user.todo-comments"
 require "user.asyncrun"
 require "user.leetcode"
+require "user.auto-session"
+require "user.session-lens"
 
+-- require "user.twilight"
 -- require "user.dap"
 -- require "user.functions"
 -- require "user.session-manager"
 -- require "user.gist"
 -- require "user.ts-context"
--- require "user.leetcode"
 -- require "user.quickscope"
 
 if (vim.g.vscode) then require "user.vscode" end

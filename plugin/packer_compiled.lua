@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/asynctasks.vim",
     url = "https://github.com/skywind3000/asynctasks.vim"
   },
+  ["auto-session"] = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/auto-session",
+    url = "https://github.com/rmagatti/auto-session"
+  },
   ["bufferline.nvim"] = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
@@ -143,11 +148,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/competitest.nvim",
     url = "https://github.com/xeluxee/competitest.nvim"
-  },
-  ["cpbooster.vim"] = {
-    loaded = true,
-    path = "/home/raman/.local/share/nvim/site/pack/packer/start/cpbooster.vim",
-    url = "https://github.com/searleser97/cpbooster.vim"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -318,6 +318,11 @@ _G.packer_plugins = {
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/renamer.nvim",
     url = "https://github.com/filipdutescu/renamer.nvim"
   },
+  ["session-lens"] = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/session-lens",
+    url = "https://github.com/rmagatti/session-lens"
+  },
   ["symbols-outline.nvim"] = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
@@ -358,6 +363,11 @@ _G.packer_plugins = {
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
   },
+  ["twilight.nvim"] = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/twilight.nvim",
+    url = "https://github.com/folke/twilight.nvim"
+  },
   undotree = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/undotree",
@@ -377,11 +387,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
-  },
-  ["vim-go"] = {
-    loaded = true,
-    path = "/home/raman/.local/share/nvim/site/pack/packer/start/vim-go",
-    url = "https://github.com/fatih/vim-go"
   },
   ["vim-matchup"] = {
     loaded = true,
@@ -410,8 +415,8 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType php ++once lua require("packer.load")({'phpactor'}, { ft = "php" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType php ++once lua require("packer.load")({'phpactor'}, { ft = "php" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

@@ -100,7 +100,7 @@ return packer.startup(function(use)
     use "simrat39/symbols-outline.nvim"
     use "ray-x/lsp_signature.nvim"
     use "b0o/SchemaStore.nvim"
-    use "fatih/vim-go"
+    -- use "fatih/vim-go"
 
     -- Telescope
     use "nvim-telescope/telescope.nvim" -- Telescope
@@ -138,7 +138,7 @@ return packer.startup(function(use)
     }
     use "skywind3000/asynctasks.vim"
     use "skywind3000/asyncrun.vim"
-	use "ianding1/leetcode.vim"
+    use "ianding1/leetcode.vim"
 
     -- Debugging Applications --
     use "puremourning/vimspector"
@@ -146,12 +146,18 @@ return packer.startup(function(use)
     -- Wakatimw for coding activity --
     use "wakatime/vim-wakatime"
 
+    -- Session Management
+    use "rmagatti/auto-session"
+    use "rmagatti/session-lens"
 
     -- Nvim Dap --
     -- use "mfussenegger/nvim-dap"
     -- use "theHamsta/nvim-dap-virtual-text"
     -- use "rcarriga/nvim-dap-ui"
     -- use "Pocco81/DAPInstall.nvim"
+
+    -- MISC
+    use "folke/twilight.nvim"
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
