@@ -1,5 +1,4 @@
 local status_ok, competitest = pcall(require, "competitest")
-
 if not status_ok then return end
 
 competitest.setup {

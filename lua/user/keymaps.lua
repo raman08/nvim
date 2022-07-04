@@ -79,3 +79,7 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 
 -- Bbye --
 keymap("n", "<Leader>q", ":Bdelete<CR>", opts)
+
+-- Compititve Programming --
+keymap("n", "<leader>cc", ":CompetiTestRun<CR>", opts)
+keymap("n", "<leader>cr", ":CompetiTestReceive<CR>", opts)

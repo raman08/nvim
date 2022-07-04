@@ -43,15 +43,19 @@ M.setup = function()
 
 end
 
--- local function lsp_highlight_document(client)
---     -- Set autocommands conditional on server_capabilities
---     if client.resolved_capabilities.document_highlight then
---         local status_ok, illuminate = pcall(require, "illuminate")
---         if not status_ok then return end
---
---         illuminate.on_attach(client)
---     end
--- end
+local function lsp_highlight_document(client)
+    -- Set autocommands conditional on server_capabilities
+    if client.resolved_capabilities.document_highlight then
+        print("Client Has capabilities")
+        local status_ok, illuminate = pcall(require, "illuminate")
+        if not status_ok then
+            print("Problem with illuminate")
+            return
+        end
+
+        illuminate.on_attach(client)
+    end
+end
 
 local function lsp_keymaps(bufnr)
     local opts = {noremap = true, silent = true}
@@ -81,6 +85,11 @@ end
 
 M.on_attach = function(client, bufnr)
 
+    -- local status_ok, illuminate = pcall(require, "illuminate")
+    -- if not status_ok then return end
+    --
+    -- illuminate.on_attach(client)
+
     if client.name == "tsserver" then
         client.resolved_capabilities.document_formatting = false
     end
@@ -102,10 +111,8 @@ M.on_attach = function(client, bufnr)
     end
 
     lsp_keymaps(bufnr)
+    lsp_highlight_document(client)
 
-    local status_ok, illuminate = pcall(require, "illuminate")
-    if not status_ok then return end
-    illuminate.on_attach(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
