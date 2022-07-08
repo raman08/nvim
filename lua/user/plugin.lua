@@ -100,7 +100,7 @@ return packer.startup(function(use)
     use "simrat39/symbols-outline.nvim"
     use "ray-x/lsp_signature.nvim"
     use "b0o/SchemaStore.nvim"
-	use "RRethy/vim-illuminate"
+    use "RRethy/vim-illuminate"
     -- use "fatih/vim-go"
 
     -- Telescope
@@ -121,6 +121,8 @@ return packer.startup(function(use)
     use "f-person/git-blame.nvim"
     use "tpope/vim-fugitive"
     use "junegunn/gv.vim"
+    use "tpope/vim-rhubarb"
+    use "tyru/open-browser.vim"
 
     -- File Tree
     use "kyazdani42/nvim-tree.lua" -- File Tree
