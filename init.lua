@@ -37,6 +37,7 @@ require "user.dressing"
 require "user.illuminate"
 require "user.hop"
 require "user.surround"
+require "user.notify"
 -- require "user.cybu"
 
 -- require "user.leetcode"

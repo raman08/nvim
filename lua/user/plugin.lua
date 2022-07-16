@@ -162,8 +162,8 @@ return packer.startup(function(use)
 
     -- UI Management
     use {"stevearc/dressing.nvim"}
-
-    -- use "ghillb/cybu.nvim"
+    use "rcarriga/nvim-notify"
+    -- use "ghillb/cybu.nvim" -- Buffer in float
     -- Nvim Dap --
     -- use "mfussenegger/nvim-dap"
     -- use "theHamsta/nvim-dap-virtual-text"
