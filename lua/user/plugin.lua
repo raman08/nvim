@@ -62,17 +62,19 @@ return packer.startup(function(use)
     use "nacro90/numb.nvim"
     use "folke/which-key.nvim"
     use "norcalli/nvim-colorizer.lua" -- Color the Color
-    use {"kevinhwang91/nvim-bqf", ft = "qf"}
+    use {"kevinhwang91/nvim-bqf", ft = "qf"} -- Advance quick fix list
 
-    use "MattesGroeger/vim-bookmarks"
+    use "MattesGroeger/vim-bookmarks" -- bookmarks save the life
+
+    use "andymass/vim-matchup"
+    use "folke/todo-comments.nvim"
+
+    -- Markdown Support 
     use {
         "iamcco/markdown-preview.nvim",
         run = "cd app && npm install",
         ft = "markdown",
     }
-
-    use "andymass/vim-matchup"
-    use "folke/todo-comments.nvim"
 
     -- use "mbbill/undotree"
 
@@ -132,7 +134,8 @@ return packer.startup(function(use)
 
     -- LuaLine
     use {
-        "nvim-lualine/lualine.nvim",
+        "christianchiarulli/lualine.nvim",
+        -- "nvim-lualine/lualine.nvim",
         requires = {"kyazdani42/nvim-web-devicons", opt = true},
     }
 
@@ -155,6 +158,8 @@ return packer.startup(function(use)
     use "rmagatti/auto-session"
     use "rmagatti/session-lens"
 
+    -- UI Management
+    use {"stevearc/dressing.nvim"}
     -- Nvim Dap --
     -- use "mfussenegger/nvim-dap"
     -- use "theHamsta/nvim-dap-virtual-text"
