@@ -11,7 +11,7 @@ local no_errors, error_msg = pcall(function()
 
   local time
   local profile_info
-  local should_profile = true
+  local should_profile = false
   if should_profile then
     local hrtime = vim.loop.hrtime
     profile_info = {}
@@ -174,6 +174,11 @@ _G.packer_plugins = {
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/gv.vim",
     url = "https://github.com/junegunn/gv.vim"
   },
+  ["hop.nvim"] = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/hop.nvim",
+    url = "https://github.com/phaazon/hop.nvim"
+  },
   ["impatient.nvim"] = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/impatient.nvim",
@@ -267,6 +272,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/raman/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-surround"] = {
+    loaded = true,
+    path = "/home/raman/.local/share/nvim/site/pack/packer/start/nvim-surround",
+    url = "https://github.com/kylechui/nvim-surround"
   },
   ["nvim-tree.lua"] = {
     loaded = true,

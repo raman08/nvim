@@ -79,7 +79,7 @@ local diagnostics = {
     symbols = {
         error = icons.diagnostics.Error .. " ",
         warn = icons.diagnostics.Warning .. " ",
-		information = icons.diagnostics.Information .. " ",
+        information = icons.diagnostics.Information .. " ",
     },
     colored = false,
     update_in_insert = false,
@@ -300,7 +300,7 @@ lualine.setup({
         -- lualine_x = { "encoding", "fileformat", "filetype" },
         lualine_x = {diff, spaces, filetype},
         lualine_y = {location},
-		lualine_z = {},
+        lualine_z = {},
     },
     inactive_sections = {
         lualine_a = {},

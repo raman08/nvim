@@ -66,8 +66,10 @@ return packer.startup(function(use)
 
     use "MattesGroeger/vim-bookmarks" -- bookmarks save the life
 
+    use "phaazon/hop.nvim"
     use "andymass/vim-matchup"
     use "folke/todo-comments.nvim"
+    use "kylechui/nvim-surround"
 
     -- Markdown Support 
     use {
