@@ -162,6 +162,8 @@ return packer.startup(function(use)
 
     -- UI Management
     use {"stevearc/dressing.nvim"}
+
+    -- use "ghillb/cybu.nvim"
     -- Nvim Dap --
     -- use "mfussenegger/nvim-dap"
     -- use "theHamsta/nvim-dap-virtual-text"
