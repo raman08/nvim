@@ -2,17 +2,17 @@ local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 if not status_ok then return end
 
 local servers = {
-	"sumneko_lua",
-	"bashls",
+    "sumneko_lua",
+    "bashls",
     "cssmodules_ls",
-	"eslint",
+    "eslint",
     "html",
-	"phpactor",
-	"pyright",
-	"yamlls",
+    "phpactor",
+    "pyright",
+    "yamlls",
     "jsonls",
-	"clangd",
-	"cssls",
+    "clangd",
+    "cssls",
     "tsserver",
 }
 
@@ -20,12 +20,12 @@ local settings = {
     ensure_installed = servers,
     ui = {
         icons = {
-          -- server_installed = "◍",
-          -- server_pending = "◍",
-          -- server_uninstalled = "◍",
-          server_installed = "✓",
-          server_pending = "➜",
-          server_uninstalled = "✗",
+            -- server_installed = "◍",
+            -- server_pending = "◍",
+            -- server_uninstalled = "◍",
+            server_installed = "✓",
+            server_pending = "➜",
+            server_uninstalled = "✗",
         },
         keymaps = {
             toggle_server_expand = "<CR>",
@@ -40,7 +40,7 @@ local settings = {
 
     log_level = vim.log.levels.INFO,
     max_concurrent_installers = 4,
---    install_root_dir = path.concat { vim.fn.stdpath "data", "lsp_servers" },
+    --    install_root_dir = path.concat { vim.fn.stdpath "data", "lsp_servers" },
 }
 
 lsp_installer.setup(settings)
@@ -74,6 +74,11 @@ for _, server in pairs(servers) do
     if server == "tsserver" then
         local tsserver_options = require "user.lsp.settings.tsserver"
         opts = vim.tbl_deep_extend("force", tsserver_options, opts)
+    end
+
+    if server == "emmet_ls" then
+        local emmet_ls_opts = require "user.lsp.settings.emmet_ls"
+        opts = vim.tbl_deep_extend("force", emmet_ls_opts, opts)
     end
 
     if server == "eslint" then

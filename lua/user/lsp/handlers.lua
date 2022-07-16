@@ -35,23 +35,21 @@ M.setup = function()
     vim.diagnostic.config(config)
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-                                                 vim.lsp.handlers.hover,
-                                                 {border = "rounded"})
+                                                 vim.lsp.handlers.hover, {
+            border = "rounded",
+            width = 60,
+        })
 
     vim.lsp.handlers["textDocument/signatureHelp"] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, {border = "rounded"})
+        vim.lsp.with(vim.lsp.handlers.signature_help,
+                     {border = "rounded", width = 60})
 
 end
 
 local function lsp_highlight_document(client)
-    -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
-        print("Client Has capabilities")
         local status_ok, illuminate = pcall(require, "illuminate")
-        if not status_ok then
-            print("Problem with illuminate")
-            return
-        end
+        if not status_ok then return end
 
         illuminate.on_attach(client)
     end
@@ -72,8 +70,8 @@ local function lsp_keymaps(bufnr)
                                 "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gf",
                                 "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca",
-                                "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca",
+    --                             "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "[d",
                                 "<cmd>lua vim.diagnostic.goto_prev({ border = \"rounded\" })<CR>",
                                 opts)
@@ -84,11 +82,6 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-
-    -- local status_ok, illuminate = pcall(require, "illuminate")
-    -- if not status_ok then return end
-    --
-    -- illuminate.on_attach(client)
 
     if client.name == "tsserver" then
         client.resolved_capabilities.document_formatting = false
