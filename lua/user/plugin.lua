@@ -47,26 +47,25 @@ return packer.startup(function(use)
 
     use "windwp/nvim-autopairs" -- Auto Complete Bracket
     use "numToStr/Comment.nvim" -- Comment Helper
+    use "folke/todo-comments.nvim"
 
     use "akinsho/bufferline.nvim" -- BufferLine
     use "moll/vim-bbye"
+    use "lewis6991/impatient.nvim" -- Improve Loadup Time
 
     use "akinsho/toggleterm.nvim" -- Open Program in nvim
     use "ahmedkhalf/project.nvim" -- Project Management Made easy
-    use "lewis6991/impatient.nvim" -- Improve Loadup Time
     use "lukas-reineke/indent-blankline.nvim" -- Show Intend lines
+
     use "goolord/alpha-nvim" -- Nvim Greeter
     use "nacro90/numb.nvim"
     use "folke/which-key.nvim"
-    use "norcalli/nvim-colorizer.lua" -- Color the Color
-    use {"kevinhwang91/nvim-bqf", ft = "qf"} -- Advance quick fix list
 
     use "MattesGroeger/vim-bookmarks" -- bookmarks save the life
 
-    use "phaazon/hop.nvim"
-    use "andymass/vim-matchup"
-    use "folke/todo-comments.nvim"
-    use "kylechui/nvim-surround"
+    use "phaazon/hop.nvim" -- Hop the lines easily
+    use "andymass/vim-matchup" -- Match start and the ending
+    use "kylechui/nvim-surround" -- Pairup easily
 
     -- Markdown Support 
     use {
@@ -74,8 +73,6 @@ return packer.startup(function(use)
         run = "cd app && npm install",
         ft = "markdown",
     }
-
-    -- use "mbbill/undotree"
 
     -- Colorschemes
     use "folke/tokyonight.nvim" -- Defalut theme
@@ -100,25 +97,29 @@ return packer.startup(function(use)
     use "williamboman/nvim-lsp-installer" -- LSP Client installer
     use "jose-elias-alvarez/null-ls.nvim" -- For Formatting and Linting
     use {"phpactor/phpactor", run = "composer install --no-dev -o", ft = "php"} -- Php Support for Nvim
-    use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
     use "glepnir/lspsaga.nvim"
     use "filipdutescu/renamer.nvim"
-    use "simrat39/symbols-outline.nvim"
     use "ray-x/lsp_signature.nvim"
     use "b0o/SchemaStore.nvim"
     use "RRethy/vim-illuminate"
+    use "simrat39/symbols-outline.nvim"
+    use "folke/trouble.nvim"
+    use "j-hui/fidget.nvim"
     -- use "fatih/vim-go"
+    -- use "tamago324/nlsp-settings.nvim" -- language server settings defined in json formate
 
     -- Telescope
     use {"nvim-telescope/telescope.nvim", branch = "0.1.x"} -- Telescope
     use "nvim-telescope/telescope-media-files.nvim" -- View Media in Telescope
     use {"nvim-telescope/telescope-file-browser.nvim"}
     use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
+    use "tom-anders/telescope-vim-bookmarks.nvim"
+    use "lalitmee/browse.nvim"
 
     -- TreeSitter
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"} -- TreeSitter
-    use "p00f/nvim-ts-rainbow" -- Rainbow Color Bracket
     use "JoosepAlviste/nvim-ts-context-commentstring" -- Setting Comment Based On curser location
+    use "p00f/nvim-ts-rainbow" -- Rainbow Color Bracket
     use "windwp/nvim-ts-autotag"
     use "romgrk/nvim-treesitter-context"
 
@@ -126,9 +127,10 @@ return packer.startup(function(use)
     use "lewis6991/gitsigns.nvim"
     use "f-person/git-blame.nvim"
     use "tpope/vim-fugitive"
-    use "junegunn/gv.vim"
     use "tpope/vim-rhubarb"
     use "tyru/open-browser.vim"
+    use "junegunn/gv.vim"
+    use "rhysd/conflict-marker.vim"
 
     -- File Tree
     use "kyazdani42/nvim-tree.lua" -- File Tree
@@ -148,10 +150,7 @@ return packer.startup(function(use)
     }
     use "skywind3000/asynctasks.vim"
     use "skywind3000/asyncrun.vim"
-    use "ianding1/leetcode.vim"
-
-    -- Debugging Applications --
-    use "puremourning/vimspector"
+    -- use "ianding1/leetcode.vim"
 
     -- Wakatimw for coding activity --
     use "wakatime/vim-wakatime"
@@ -164,15 +163,21 @@ return packer.startup(function(use)
     use {"stevearc/dressing.nvim"}
     use "rcarriga/nvim-notify"
     use "karb94/neoscroll.nvim"
-    -- use "ghillb/cybu.nvim" -- Buffer in float
+    use "norcalli/nvim-colorizer.lua" -- Color the Color
+    use {"kevinhwang91/nvim-bqf", ft = "qf"} -- Advance quick fix list
+    -- use "ghillb/cybu.nvim" -- Buffer List in float
+
+    -- Debugging Applications --
+    use "puremourning/vimspector"
     -- Nvim Dap --
     -- use "mfussenegger/nvim-dap"
     -- use "theHamsta/nvim-dap-virtual-text"
     -- use "rcarriga/nvim-dap-ui"
     -- use "Pocco81/DAPInstall.nvim"
 
-    -- MISC
-    use "folke/twilight.nvim"
+    -- Graveyard
+    -- use "folke/twilight.nvim"
+    -- use "mbbill/undotree"
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
