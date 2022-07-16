@@ -31,6 +31,8 @@ require "user.todo-comments"
 require "user.asyncrun"
 require "user.auto-session"
 require "user.session-lens"
+require "user.numb"
+require "user.bookmark"
 
 -- require "user.leetcode"
 -- require "user.twilight"

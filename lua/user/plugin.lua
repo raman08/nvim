@@ -59,10 +59,12 @@ return packer.startup(function(use)
     use "lewis6991/impatient.nvim" -- Improve Loadup Time
     use "lukas-reineke/indent-blankline.nvim" -- Show Intend lines
     use "goolord/alpha-nvim" -- Nvim Greeter
-
+    use "nacro90/numb.nvim"
     use "folke/which-key.nvim"
     use "norcalli/nvim-colorizer.lua" -- Color the Color
+    use {"kevinhwang91/nvim-bqf", ft = "qf"}
 
+    use "MattesGroeger/vim-bookmarks"
     use {
         "iamcco/markdown-preview.nvim",
         run = "cd app && npm install",
@@ -72,7 +74,7 @@ return packer.startup(function(use)
     use "andymass/vim-matchup"
     use "folke/todo-comments.nvim"
 
-    use "mbbill/undotree"
+    -- use "mbbill/undotree"
 
     -- Cmp Plugins
     use "hrsh7th/nvim-cmp" -- Completion Client
@@ -104,7 +106,7 @@ return packer.startup(function(use)
     -- use "fatih/vim-go"
 
     -- Telescope
-    use "nvim-telescope/telescope.nvim" -- Telescope
+    use {"nvim-telescope/telescope.nvim", branch = "0.1.x"} -- Telescope
     use "nvim-telescope/telescope-media-files.nvim" -- View Media in Telescope
     use {"nvim-telescope/telescope-file-browser.nvim"}
     use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
