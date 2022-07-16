@@ -32,7 +32,7 @@ todo_comments.setup {
             color = perf_purple,
             alt = {"OPTIM", "PERFORMANCE", "OPTIMIZE"},
         },
-        NOTE = {icon = icons.ui.Note, color = note_green, alt = {"INFO"}},
+        NOTE = {icon = icons.ui.Note, color = note_green, alt = {"INFO", "Note"}},
     },
     -- merge_keywords = true, -- when true, custom keywords will be merged with the defaults
     -- highlighting of the line containing the todo comment
@@ -42,7 +42,7 @@ todo_comments.setup {
     highlight = {
         before = "", -- "fg" or "bg" or empty
         -- keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
-        keyword = "fg", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
+        keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
         after = "fg", -- "fg" or "bg" or empty
         pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlightng (vim regex)
         comments_only = true, -- uses treesitter to match keywords in comments only

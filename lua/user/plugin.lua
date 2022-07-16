@@ -45,9 +45,6 @@ return packer.startup(function(use)
     use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
 
-    use "folke/tokyonight.nvim" -- Defalut theme
-    use "tomasiser/vim-code-dark" -- Color Theme
-
     use "windwp/nvim-autopairs" -- Auto Complete Bracket
     use "numToStr/Comment.nvim" -- Comment Helper
 
@@ -80,6 +77,10 @@ return packer.startup(function(use)
 
     -- use "mbbill/undotree"
 
+    -- Colorschemes
+    use "folke/tokyonight.nvim" -- Defalut theme
+    use "tomasiser/vim-code-dark" -- Color Theme
+
     -- Cmp Plugins
     use "hrsh7th/nvim-cmp" -- Completion Client
     use "hrsh7th/cmp-buffer" -- Buffer Completion
@@ -88,7 +89,6 @@ return packer.startup(function(use)
     use "saadparwaiz1/cmp_luasnip" -- Snippets Completion
     use "hrsh7th/cmp-nvim-lsp" -- LSP Completion
     use "hrsh7th/cmp-nvim-lua" -- LUA Completion
-    use "karb94/neoscroll.nvim" -- Use for custom scroll animation
     use "hrsh7th/cmp-emoji"
 
     -- Snippets
@@ -163,6 +163,7 @@ return packer.startup(function(use)
     -- UI Management
     use {"stevearc/dressing.nvim"}
     use "rcarriga/nvim-notify"
+    use "karb94/neoscroll.nvim"
     -- use "ghillb/cybu.nvim" -- Buffer in float
     -- Nvim Dap --
     -- use "mfussenegger/nvim-dap"
