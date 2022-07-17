@@ -1,6 +1,7 @@
 return {
     settings = {
         Lua = {
+            runtime = {version = "LuaJIT"},
             diagnostics = {globals = {"vim"}},
             format = {enable = false},
             workspace = {
@@ -9,6 +10,7 @@ return {
                     [vim.fn.stdpath("config") .. "/lua"] = true,
                 },
             },
+            telemetry = {enable = false},
         },
     },
 }

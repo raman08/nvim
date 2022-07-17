@@ -109,23 +109,25 @@ local m_mappings = {
 }
 
 local mappings = {
-    ["/"] = {
-        "<cmd>lua require(\"Comment.api\").toggle_current_linewise()<CR>",
-        "Comment",
-    },
-    ["a"] = {"<cmd>Alpha<cr>", "Alpha"},
+    ["a"] = {"<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action"},
+
     ["b"] = {
         "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
         "Buffers",
     },
+
     ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
     ["w"] = {"<cmd>w!<CR>", "Save"},
 
     -- ["q"] = { "<cmd>q!<CR>", "Quit" },
     -- ["q"] = {"<cmd><lua require(\"user.functions\").smart_quit()<CR>", "Quit"},
 
-    -- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+    ["c"] = {"<cmd>Bdelete!<CR>", "Close Buffer"},
     ["h"] = {"<cmd>nohlsearch<CR>", "No Highlight"},
+    ["/"] = {
+        "<cmd>lua require(\"Comment.api\").toggle_current_linewise()<CR>",
+        "Comment",
+    },
     -- ["f"] = {
     --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     --   "Find files",
@@ -136,13 +138,70 @@ local mappings = {
         "Projects",
     },
 
-    p = {
-        name = "Packer",
-        c = {"<cmd>PackerCompile<cr>", "Compile"},
-        i = {"<cmd>PackerInstall<cr>", "Install"},
-        s = {"<cmd>PackerSync<cr>", "Sync"},
-        S = {"<cmd>PackerStatus<cr>", "Status"},
-        u = {"<cmd>PackerUpdate<cr>", "Update"},
+    -- TODO: Find what it do?
+    -- ["gy"] = "Link",
+
+    -- p = {
+    --     name = "Packer",
+    --     c = {"<cmd>PackerCompile<cr>", "Compile"},
+    --     i = {"<cmd>PackerInstall<cr>", "Install"},
+    --     s = {"<cmd>PackerSync<cr>", "Sync"},
+    --     S = {"<cmd>PackerStatus<cr>", "Status"},
+    --     u = {"<cmd>PackerUpdate<cr>", "Update"},
+    -- },
+
+    o = {
+        name = "Options",
+        w = {
+            "<cmd>lua require(\"user.functions\").toggle_option(\"wrap\")<cr>",
+            "Wrap",
+        },
+        r = {
+            "<cmd>lua require(\"user.functions\").toggle_option(\"relativenumber\")<cr>",
+            "Relative",
+        },
+        l = {
+            "<cmd>lua require(\"user.functions\").toggle_option(\"cursorline\")<cr>",
+            "Cursorline",
+        },
+        s = {
+            "<cmd>lua require(\"user.functions\").toggle_option(\"spell\")<cr>",
+            "Spell",
+        },
+        t = {
+            "<cmd>lua require(\"user.functions\").toggle_tabline()<cr>",
+            "Tabline",
+        },
+    },
+
+    s = {
+        name = "Session",
+        s = {"<cmd>SaveSession<cr>", "Save"},
+        r = {"<cmd>RestoreSession<cr>", "Restore"},
+        x = {"<cmd>DeleteSession<cr>", "Delete"},
+        f = {"<cmd>Autosession search<cr>", "Find"},
+        d = {"<cmd>Autosession delete<cr>", "Find Delete"},
+    },
+
+    f = {
+        name = "Find",
+        b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
+        c = {"<cmd>Telescope commands<cr>", "Commands"},
+        f = {
+            "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+            "Find files",
+        },
+        t = {"<cmd>Telescope live_grep theme=ivy<cr>", "Find Text"},
+        h = {"<cmd>Telescope help_tags<cr>", "Help"},
+        i = {
+            "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>",
+            "Media",
+        },
+        l = {"<cmd>Telescope resume<cr>", "Last Search"},
+        M = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
+        r = {"<cmd>Telescope oldfiles<cr>", "Recent File"},
+        R = {"<cmd>Telescope registers<cr>", "Registers"},
+        k = {"<cmd>Telescope keymaps<cr>", "Keymaps"},
     },
 
     g = {
@@ -172,34 +231,36 @@ local mappings = {
             "<cmd>Telescope lsp_workspace_diagnostics<cr>",
             "Workspace Diagnostics",
         },
+        f = {"<cmd>lua vim.lsp.buf.formatting()<cr><cr>", "Format"},
         F = {"<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat"},
-        f = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "Format"},
         i = {"<cmd>LspInfo<cr>", "Info"},
+        h = {"<cmd>IlluminationToggle<cr>", "Toggle Doc HL"},
         I = {"<cmd>LspInstallInfo<cr>", "Installer Info"},
-        j = {"<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "Next Diagnostic"},
-        k = {"<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Prev Diagnostic"},
+        j = {
+            "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",
+            "Next Diagnostic",
+        },
+        k = {
+            "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>",
+            "Prev Diagnostic",
+        },
         l = {"<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action"},
+        o = {"<cmd>SymbolsOutline<cr>", "Outline"},
         q = {"<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix"},
         r = {"<cmd>lua vim.lsp.buf.rename()<cr>", "Rename"},
+        R = {"<cmd>TroubleToggle lsp_references<cr>", "References"},
         s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
         S = {
             "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
             "Workspace Symbols",
         },
-        R = {"<cmd>TroubleToggle lsp_references<cr>", "References"},
+        t = {
+            "<cmd>lua require(\"user.functions\").toggle_diagnostics()<cr>",
+            "Toggle Diagnostics",
+        },
+        u = {"<cmd>LuaSnipUnlinkCurrent<cr>", "Unlink Snippet"},
     },
 
-    s = {
-        name = "Search",
-        b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
-        c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
-        h = {"<cmd>Telescope help_tags<cr>", "Find Help"},
-        M = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
-        r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
-        R = {"<cmd>Telescope registers<cr>", "Registers"},
-        k = {"<cmd>Telescope keymaps<cr>", "Keymaps"},
-        C = {"<cmd>Telescope commands<cr>", "Commands"},
-    },
 }
 
 local vopts = {
