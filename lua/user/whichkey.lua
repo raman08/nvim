@@ -119,8 +119,8 @@ local mappings = {
     ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
     ["w"] = {"<cmd>w!<CR>", "Save"},
 
-    -- ["q"] = { "<cmd>q!<CR>", "Quit" },
-    -- ["q"] = {"<cmd><lua require(\"user.functions\").smart_quit()<CR>", "Quit"},
+    ["q"] = { "<cmd>q!<CR>", "Quit" },
+    -- ["q"] = {"<cmd>lua require(\"user.functions\").smart_quit()<CR>", "Quit"},
 
     ["c"] = {"<cmd>Bdelete!<CR>", "Close Buffer"},
     ["h"] = {"<cmd>nohlsearch<CR>", "No Highlight"},
@@ -150,29 +150,30 @@ local mappings = {
     --     u = {"<cmd>PackerUpdate<cr>", "Update"},
     -- },
 
-    o = {
-        name = "Options",
-        w = {
-            "<cmd>lua require(\"user.functions\").toggle_option(\"wrap\")<cr>",
-            "Wrap",
-        },
-        r = {
-            "<cmd>lua require(\"user.functions\").toggle_option(\"relativenumber\")<cr>",
-            "Relative",
-        },
-        l = {
-            "<cmd>lua require(\"user.functions\").toggle_option(\"cursorline\")<cr>",
-            "Cursorline",
-        },
-        s = {
-            "<cmd>lua require(\"user.functions\").toggle_option(\"spell\")<cr>",
-            "Spell",
-        },
-        t = {
-            "<cmd>lua require(\"user.functions\").toggle_tabline()<cr>",
-            "Tabline",
-        },
-    },
+	-- ERROR: These don't work 
+    -- o = {
+    --     name = "Options",
+    --     w = {
+    --         "<cmd>lua require(\"user.functions\").toggle_option(\"wrap\")<cr>",
+    --         "Wrap",
+    --     },
+    --     r = {
+    --         "<cmd>lua require(\"user.functions\").toggle_option(\"relativenumber\")<cr>",
+    --         "Relative",
+    --     },
+    --     l = {
+    --         "<cmd>lua require(\"user.functions\").toggle_option(\"cursorline\")<cr>",
+    --         "Cursorline",
+    --     },
+    --     s = {
+    --         "<cmd>lua require(\"user.functions\").toggle_option(\"spell\")<cr>",
+    --         "Spell",
+    --     },
+    --     t = {
+    --         "<cmd>lua require(\"user.functions\").toggle_tabline()<cr>",
+    --         "Tabline",
+    --     },
+    -- },
 
     s = {
         name = "Session",
@@ -261,6 +262,16 @@ local mappings = {
         u = {"<cmd>LuaSnipUnlinkCurrent<cr>", "Unlink Snippet"},
     },
 
+    S = {
+        name = "SnipRun",
+        c = {"<cmd>SnipClose<cr>", "Close"},
+        f = {"<cmd>%SnipRun<cr>", "Run File"},
+        i = {"<cmd>SnipInfo<cr>", "Info"},
+        m = {"<cmd>SnipReplMemoryClean<cr>", "Mem Clean"},
+        r = {"<cmd>SnipReset<cr>", "Reset"},
+        t = {"<cmd>SnipRunToggle<cr>", "Toggle"},
+        x = {"<cmd>SnipTerminate<cr>", "Terminate"},
+    },
 }
 
 local vopts = {
@@ -277,6 +288,7 @@ local vmappings = {
         "<ESC><CMD>lua require(\"Comment.api\").toggle_linewise_op(vim.fn.visualmode())<CR>",
         "Comment",
     },
+    s = {"<esc><cmd>'<,'>SnipRun<cr>", "Run range"},
 }
 
 which_key.setup(setup)

@@ -151,6 +151,7 @@ return packer.startup(function(use)
     use "skywind3000/asynctasks.vim"
     use "skywind3000/asyncrun.vim"
     -- use "ianding1/leetcode.vim"
+    use {"michaelb/sniprun", run = "bash ./install.sh"}
 
     -- Wakatimw for coding activity --
     use "wakatime/vim-wakatime"
@@ -169,6 +170,7 @@ return packer.startup(function(use)
 
     -- Debugging Applications --
     use "puremourning/vimspector"
+
     -- Nvim Dap --
     -- use "mfussenegger/nvim-dap"
     -- use "theHamsta/nvim-dap-virtual-text"
