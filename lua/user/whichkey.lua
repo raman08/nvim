@@ -195,6 +195,12 @@ local mappings = {
         d = {"<cmd>Autosession delete<cr>", "Find Delete"},
     },
 
+    p = {
+        name = "Comptitive Programming",
+        t = {"<cmd>CompetiTestReceive<cr>", "Receive TestCase"},
+        c = {"<cmd>CompetiTestRun<cr>", "Run Program"},
+    },
+
     f = {
         name = "Find",
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
