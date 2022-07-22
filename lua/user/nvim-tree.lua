@@ -9,6 +9,7 @@ local icons = require("user.icons")
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
+    hijack_directories = {enable = true, auto_open = true},
     disable_netrw = true,
     hijack_netrw = true,
     open_on_setup = false,
@@ -17,7 +18,6 @@ nvim_tree.setup {
     open_on_tab = false,
     hijack_cursor = false,
     sync_root_with_cwd = true,
-    hijack_directories = {enable = false, auto_open = true},
     diagnostics = {
         enable = true,
         icons = {
@@ -37,7 +37,7 @@ nvim_tree.setup {
     renderer = {
         add_trailing = false,
         group_empty = false,
-        highlight_git = true,
+        highlight_git = false,
         highlight_opened_files = "none",
         root_folder_modifier = ":t",
         indent_markers = {

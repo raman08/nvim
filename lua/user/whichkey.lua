@@ -116,10 +116,7 @@ local mappings = {
     --     "Buffers",
     -- },
 
-    ["b"] = {
-        "<cmd>JABSOpen<cr>",
-        "Buffers",
-    },
+    ["b"] = {"<cmd>JABSOpen<cr>", "Buffers"},
 
     ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
     ["w"] = {"<cmd>w!<CR>", "Save"},
@@ -141,6 +138,15 @@ local mappings = {
     ["P"] = {
         "<cmd>lua require('telescope').extensions.projects.projects()<cr>",
         "Projects",
+    },
+
+    B = {
+        name = "Browse",
+        i = {"<cmd>BrowseInputSearch<cr>", "Input Search"},
+        b = {"<cmd>Browse<cr>", "Browse"},
+        d = {"<cmd>BrowseDevdocsSearch<cr>", "Devdocs"},
+        f = {"<cmd>BrowseDevdocsFiletypeSearch<cr>", "Devdocs Filetype"},
+        m = {"<cmd>BrowseMdnSearch<cr>", "Mdn"},
     },
 
     -- TODO: Find what it do?
