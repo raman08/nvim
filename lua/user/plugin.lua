@@ -167,6 +167,7 @@ return packer.startup(function(use)
     use "norcalli/nvim-colorizer.lua" -- Color the Color
     use {"kevinhwang91/nvim-bqf", ft = "qf"} -- Advance quick fix list
     -- use "ghillb/cybu.nvim" -- Buffer List in float
+    use "matbme/JABS.nvim"
 
     -- Debugging Applications --
     use "puremourning/vimspector"

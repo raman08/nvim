@@ -40,6 +40,7 @@ require "user.surround"
 require "user.notify"
 require "user.fidget"
 require "user.browse"
+require "user.jabs"
 
 -- require "user.cybu"
 -- require "user.leetcode"

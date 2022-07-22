@@ -1,13 +1,16 @@
 -- Shorten function name
-local keymap = vim.keymap.set
+M = {}
 
-local opts = { silent = true}
+local opts = {silent = true, noremap = true}
+
+local keymap = vim.api.nvim_set_keymap
 
 -- Remap space as leader key
 keymap("n", "<Space>", "", opts)
-
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
+keymap("n", "<C-Space>", "<cmd>WhichKey \\<leader><cr>", opts)
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
@@ -19,10 +22,14 @@ vim.g.mapleader = " "
 -- Normal --
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
+keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
+-- Tabs
+keymap("n", "<m-t>", ":tabnew %<cr>", opts)
+keymap("n", "<m-y>", ":tabclose<cr>", opts)
+keymap("n", "<m-\\>", ":tabonly<cr>", opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -78,8 +85,43 @@ keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 
 -- Bbye --
-keymap("n", "<Leader>q", ":Bdelete<CR>", opts)
+-- keymap("n", "<Leader>q", ":Bdelete<CR>", opts)
+
+-- ALT BINDGS
+keymap("n", "<m-v>", "<cmd>vsplit<cr>", opts)
+-- Comments
 
 -- Compititve Programming --
-keymap("n", "<leader>cc", ":CompetiTestRun<CR>", opts)
-keymap("n", "<leader>cr", ":CompetiTestReceive<CR>", opts)
+keymap("n", "<leader>pt", ":CompetiTestReceive<CR>", opts)
+keymap("n", "<leader>pc", ":CompetiTestRun<CR>", opts)
+
+M.show_documentation = function()
+    local filetype = vim.bo.filetype
+    if vim.tbl_contains({"vim", "help"}, filetype) then
+        vim.cmd("h " .. vim.fn.expand "<cword>")
+    elseif vim.tbl_contains({"man"}, filetype) then
+        vim.cmd("Man " .. vim.fn.expand "<cword>")
+    elseif vim.fn.expand "%:t" == "Cargo.toml" then
+        require("crates").show_popup()
+    else
+        vim.lsp.buf.hover()
+    end
+end
+
+keymap("n", "K", ":lua require('user.keymaps').show_documentation()<CR>", opts)
+
+keymap("n", "<s-enter>", "<cmd>TodoQuickFix<cr>", opts)
+
+vim.cmd [[
+  function! QuickFixToggle()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+      copen
+    else
+      cclose
+    endif
+  endfunction
+]]
+
+keymap("n", "<m-q>", ":call QuickFixToggle()<cr>", opts)
+
+return M
