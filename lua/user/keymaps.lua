@@ -4,7 +4,7 @@ local keymap = vim.keymap.set
 local opts = { silent = true}
 
 -- Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
+keymap("n", "<Space>", "", opts)
 
 vim.g.mapleader = " "
 

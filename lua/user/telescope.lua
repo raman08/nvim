@@ -11,7 +11,59 @@ telescope.setup {
         prompt_prefix = icons.ui.Telescope .. " ",
         selection_caret = " ",
         path_display = {"smart"},
-        file_ignore_patterns = {"^node_modules/", "^.git/"},
+        file_ignore_patterns = {
+            ".git/",
+            "target/",
+            "docs/",
+            "vendor/*",
+            "%.lock",
+            "__pycache__/*",
+            "%.sqlite3",
+            "%.ipynb",
+            "node_modules/*",
+            -- "%.jpg",
+            -- "%.jpeg",
+            -- "%.png",
+            "%.svg",
+            "%.otf",
+            "%.ttf",
+            "%.webp",
+            ".dart_tool/",
+            ".github/",
+            ".gradle/",
+            ".idea/",
+            ".settings/",
+            ".vscode/",
+            "__pycache__/",
+            "build/",
+            "env/",
+            "gradle/",
+            "node_modules/",
+            "%.pdb",
+            "%.dll",
+            "%.class",
+            "%.exe",
+            "%.cache",
+            "%.ico",
+            "%.pdf",
+            "%.dylib",
+            "%.jar",
+            "%.docx",
+            "%.met",
+            "smalljre_*/*",
+            ".vale/",
+            "%.burp",
+            "%.mp4",
+            "%.mkv",
+            "%.rar",
+            "%.zip",
+            "%.7z",
+            "%.tar",
+            "%.bz2",
+            "%.epub",
+            "%.flac",
+            "%.tar.gz",
+        },
 
         mappings = {
             i = {
@@ -68,6 +120,7 @@ telescope.setup {
                 ["H"] = actions.move_to_top,
                 ["M"] = actions.move_to_middle,
                 ["L"] = actions.move_to_bottom,
+                ["q"] = actions.close,
 
                 ["<Down>"] = actions.move_selection_next,
                 ["<Up>"] = actions.move_selection_previous,
@@ -92,6 +145,15 @@ telescope.setup {
         -- }
         -- Now the picker_config_key will be applied every time you call this
         -- builtin picker
+        live_grep = {theme = "dropdown"},
+        grep_string = {theme = "dropdown"},
+        find_files = {theme = "dropdown", previewer = false},
+        buffers = {
+            theme = "dropdown",
+            previewer = false,
+            initial_mode = "normal",
+        },
+        planets = {show_pluto = true},
     },
     extensions = {
         -- Your extension configuration goes here:
@@ -116,21 +178,9 @@ telescope.setup {
                 },
             },
         },
-        fzf = {
-            fuzzy = true, -- false will only do exact matching
-            override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-        },
-        ["ui-select"] = {
-            require("telescope.themes").get_dropdown {
-                previewer = false,
-                -- even more opts
-            },
-        },
     },
 }
 
 -- telescope.load_extension "ui-select"
 telescope.load_extension "file_browser"
-telescope.load_extension("fzf")
+-- telescope.load_extension("fzf")
