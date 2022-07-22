@@ -119,7 +119,7 @@ local mappings = {
     ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
     ["w"] = {"<cmd>w!<CR>", "Save"},
 
-    ["q"] = { "<cmd>q!<CR>", "Quit" },
+    ["q"] = {"<cmd>q!<CR>", "Quit"},
     -- ["q"] = {"<cmd>lua require(\"user.functions\").smart_quit()<CR>", "Quit"},
 
     ["c"] = {"<cmd>Bdelete!<CR>", "Close Buffer"},
@@ -150,7 +150,7 @@ local mappings = {
     --     u = {"<cmd>PackerUpdate<cr>", "Update"},
     -- },
 
-	-- ERROR: These don't work 
+    -- ERROR: These don't work 
     -- o = {
     --     name = "Options",
     --     w = {
@@ -227,6 +227,10 @@ local mappings = {
     l = {
         name = "LSP",
         a = {"<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action"},
+        c = {
+            "<cmd>lua require('user.lsp').server_capabilities()<cr>",
+            "Get Capabilities",
+        },
         d = {"<cmd>TroubleToggle<cr>", "Diagnostics"},
         w = {
             "<cmd>Telescope lsp_workspace_diagnostics<cr>",
