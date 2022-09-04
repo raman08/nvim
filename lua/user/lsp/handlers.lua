@@ -1,7 +1,16 @@
 local M = {}
 
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
+
+local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status_cmp_ok then return end
+
+M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
+
 M.setup = function()
     local icons = require "user.icons"
+
     local signs = {
         {name = "DiagnosticSignError", text = icons.diagnostics.Error},
         {name = "DiagnosticSignWarn", text = icons.diagnostics.Warning},
@@ -17,6 +26,7 @@ M.setup = function()
     local config = {
         -- disable virtual text
         virtual_text = true,
+        virtual_lines = false,
         -- show signs
         signs = {active = signs},
         update_in_insert = true,
@@ -26,7 +36,7 @@ M.setup = function()
             focusable = true,
             style = "minimal",
             border = "rounded",
-            source = "always",
+            source = "if_many",
             header = "",
             prefix = "",
         },
@@ -37,12 +47,14 @@ M.setup = function()
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
                                                  vim.lsp.handlers.hover, {
             border = "rounded",
-            width = 60,
+            -- width = 60,
         })
 
     vim.lsp.handlers["textDocument/signatureHelp"] =
-        vim.lsp.with(vim.lsp.handlers.signature_help,
-                     {border = "rounded", width = 60})
+        vim.lsp.with(vim.lsp.handlers.signature_help, {
+            border = "rounded",
+            -- width = 60
+        })
 
 end
 
@@ -84,7 +96,8 @@ end
 M.on_attach = function(client, bufnr)
 
     if client.name == "tsserver" then
-        client.resolved_capabilities.document_formatting = false
+        -- client.resolved_capabilities.document_formatting = false
+        require("lsp-inlayhints").on_attach(client, bufnr)
     end
 
     if client.name == "sumneko_lua" then
@@ -111,11 +124,6 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.offsetEncoding = {"utf-16"}
-
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then return end
-
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 function M.enable_format_on_save()
     vim.cmd [[
