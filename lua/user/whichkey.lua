@@ -109,14 +109,14 @@ local m_mappings = {
 }
 
 local mappings = {
-    ["a"] = {"<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action"},
+    -- ["a"] = {"<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action"},
 
     -- ["b"] = {
     --     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     --     "Buffers",
     -- },
 
-    ["b"] = {"<cmd>JABSOpen<cr>", "Buffers"},
+    ["b"] = {"<cmd>Telescope buffers<cr>", "Buffers"},
 
     ["e"] = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
     ["w"] = {"<cmd>w!<CR>", "Save"},

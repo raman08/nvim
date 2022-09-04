@@ -9,6 +9,11 @@ local compare = require "cmp.config.compare"
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
+local function contains(t, value)
+    for _, v in pairs(t) do if v == value then return true end end
+    return false
+end
+
 -- local check_backspace = function()
 --     local col = vim.fn.col "." - 1
 --     return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
@@ -26,12 +31,20 @@ local icons = require "user.icons"
 
 local kind_icons = icons.kind
 
-vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg = "#6CC644"})
-vim.api.nvim_set_hl(0, "CmpItemKindTabnine", {fg = "#CA42F0"})
+-- vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg = "#6CC644"})
+-- vim.api.nvim_set_hl(0, "CmpItemKindTabnine", {fg = "#CA42F0"})
 vim.api.nvim_set_hl(0, "CmpItemKindEmoji", {fg = "#FDE030"})
 vim.api.nvim_set_hl(0, "CmpItemKindCrate", {fg = "#F64D00"})
 
+vim.g.cmp_active = true
+
 cmp.setup {
+    enabled = function()
+        local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+        if buftype == "prompt" then return false end
+        return vim.g.cmp_active
+    end,
+    preselect = cmp.PreselectMode.None,
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -105,12 +118,35 @@ cmp.setup {
         end,
     },
     sources = {
-        {name = "nvim_lsp"},
-        {name = "nvim_lua"},
-        {name = "luasnip"},
-        {name = "buffer"},
-        {name = "path"},
-        {name = "emoji"},
+        {
+            name = "nvim_lsp",
+            filter = function(entry, ctx)
+                local kind =
+                    require("cmp.types.lsp").CompletionItemKind[entry:get_kind()]
+                if kind == "Snippet" and ctx.prev_context.filetype == "java" then
+                    return true
+                end
+
+                if kind == "Text" then return true end
+            end,
+            group_index = 2,
+        },
+
+        {name = "nvim_lua", group_index = 2},
+        {name = "luasnip", group_index = 2},
+        {
+            name = "buffer",
+            ---@diagnostic disable-next-line: unused-local
+            filter = function(entry, ctx)
+                if not contains(buffer_fts, ctx.prev_context.filetype) then
+                    return true
+                end
+            end,
+
+            group_index = 2,
+        },
+        {name = "path", group_index = 2},
+        {name = "emoji", group_index = 2},
     },
     sorting = {
         priority_weight = 2,

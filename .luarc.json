@@ -5,6 +5,7 @@
         "require",
         "pcall",
         "ipairs",
-        "path"
+        "path",
+        "buffer_fts"
     ]
 }
