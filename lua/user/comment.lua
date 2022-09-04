@@ -6,9 +6,9 @@ if not status_ok_1 then return end
 
 comment.setup {
 
-    -- padding = true,
-    -- sticky = true,
-    -- ignore = "^$",
+    padding = true,
+    sticky = true,
+    ignore = "^$",
 
     pre_hook = function(ctx)
         local line_start = (ctx.srow or ctx.range.srow) - 1
