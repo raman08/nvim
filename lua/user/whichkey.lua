@@ -127,7 +127,7 @@ local mappings = {
     ["c"] = {"<cmd>Bdelete!<CR>", "Close Buffer"},
     ["h"] = {"<cmd>nohlsearch<CR>", "No Highlight"},
     ["/"] = {
-        "<cmd>lua require(\"Comment.api\").toggle_current_linewise()<CR>",
+        "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>",
         "Comment",
     },
     -- ["f"] = {
@@ -306,7 +306,7 @@ local vopts = {
 
 local vmappings = {
     ["/"] = {
-        "<ESC><CMD>lua require(\"Comment.api\").toggle_linewise_op(vim.fn.visualmode())<CR>",
+        "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
         "Comment",
     },
     s = {"<esc><cmd>'<,'>SnipRun<cr>", "Run range"},

@@ -66,6 +66,7 @@ return packer.startup(function(use)
     use "phaazon/hop.nvim" -- Hop the lines easily
     use "andymass/vim-matchup" -- Match start and the ending
     use "kylechui/nvim-surround" -- Pairup easily
+    use "manzeloth/live-server" -- For live server
 
     -- Markdown Support 
     use {
@@ -73,6 +74,9 @@ return packer.startup(function(use)
         run = "cd app && npm install",
         ft = "markdown",
     }
+
+    -- Pug Support
+    use {"digitaltoad/vim-pug"}
 
     -- Colorschemes
     use "folke/tokyonight.nvim" -- Defalut theme
