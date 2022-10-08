@@ -3,8 +3,8 @@ if not status_ok then return end
 
 local setup = {
     plugins = {
-        marks = true, -- shows a list of your marks on ' and `
-        registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+        marks = false, -- shows a list of your marks on ' and `
+        registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
             enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
             suggestions = 20, -- how many suggestions should be shown in the list?
@@ -56,7 +56,7 @@ local setup = {
     ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
     hidden = {"<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
     show_help = true, -- show help message on the command line when the popup is visible
-    -- triggers = "auto", -- automatically setup triggers
+    triggers = "auto", -- automatically setup triggers
     -- triggers = {"<leader>"} -- or specify a list manually
     triggers_blacklist = {
         -- list of mode / prefixes that should never be hooked by WhichKey
@@ -79,6 +79,15 @@ local opts = {
 local m_opts = {
     mode = "n", -- NORMAL mode
     prefix = "m",
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = true, -- use `nowait` when creating keymaps
+}
+
+local vopts = {
+    mode = "v", -- VISUAL mode
+    prefix = "<leader>",
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
@@ -122,7 +131,7 @@ local mappings = {
     ["w"] = {"<cmd>w!<CR>", "Save"},
 
     ["q"] = {"<cmd>q!<CR>", "Quit"},
-    -- ["q"] = {"<cmd>lua require(\"user.functions\").smart_quit()<CR>", "Quit"},
+    -- ["q"] = {"<cmd>lua require('user.functions').smart_quit()<CR>", "Quit"},
 
     ["c"] = {"<cmd>Bdelete!<CR>", "Close Buffer"},
     ["h"] = {"<cmd>nohlsearch<CR>", "No Highlight"},
@@ -130,10 +139,6 @@ local mappings = {
         "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>",
         "Comment",
     },
-    -- ["f"] = {
-    --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-    --   "Find files",
-    -- },
     ["F"] = {"<cmd>Telescope live_grep theme=ivy<cr>", "Find Text"},
     ["P"] = {
         "<cmd>lua require('telescope').extensions.projects.projects()<cr>",
@@ -195,18 +200,18 @@ local mappings = {
         d = {"<cmd>Autosession delete<cr>", "Find Delete"},
     },
 
-    p = {
-        name = "Comptitive Programming",
-        t = {"<cmd>CompetiTestReceive<cr>", "Receive TestCase"},
-        c = {"<cmd>CompetiTestRun<cr>", "Run Program"},
-    },
+    -- p = {
+    --     name = "Comptitive Programming",
+    --     t = {"<cmd>CompetiTestReceive<cr>", "Receive TestCase"},
+    --     c = {"<cmd>CompetiTestRun<cr>", "Run Program"},
+    -- },
 
     f = {
         name = "Find",
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
         c = {"<cmd>Telescope commands<cr>", "Commands"},
         f = {
-            "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+            "<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
             "Find files",
         },
         t = {"<cmd>Telescope live_grep theme=ivy<cr>", "Find Text"},
@@ -238,7 +243,11 @@ local mappings = {
         o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
         c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
-        d = {"<cmd>Gitsigns diffthis HEAD<cr>", "Diff"},
+        C = {
+            "<cmd>Telescope git_bcommits<cr>",
+            "Checkout commit(for current file)",
+        },
+        d = {"<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff"},
     },
 
     l = {
@@ -249,15 +258,10 @@ local mappings = {
             "Get Capabilities",
         },
         d = {"<cmd>TroubleToggle<cr>", "Diagnostics"},
-        w = {
-            "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-            "Workspace Diagnostics",
-        },
-        f = {"<cmd>lua vim.lsp.buf.formatting()<cr><cr>", "Format"},
+        f = {"<cmd>lua vim.lsp.buf.format({ async=true })<cr><cr>", "Format"},
         F = {"<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat"},
         i = {"<cmd>LspInfo<cr>", "Info"},
-        h = {"<cmd>IlluminationToggle<cr>", "Toggle Doc HL"},
-        I = {"<cmd>LspInstallInfo<cr>", "Installer Info"},
+        I = {"<cmd>Mason<cr>", "Mason Info"},
         j = {
             "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",
             "Next Diagnostic",
@@ -267,9 +271,9 @@ local mappings = {
             "Prev Diagnostic",
         },
         l = {"<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action"},
+        r = {"<cmd>lua vim.lsp.buf.rename()<cr>", "Rename"},
         o = {"<cmd>SymbolsOutline<cr>", "Outline"},
         q = {"<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix"},
-        r = {"<cmd>lua vim.lsp.buf.rename()<cr>", "Rename"},
         R = {"<cmd>TroubleToggle lsp_references<cr>", "References"},
         s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
         S = {
@@ -293,15 +297,6 @@ local mappings = {
         t = {"<cmd>SnipRunToggle<cr>", "Toggle"},
         x = {"<cmd>SnipTerminate<cr>", "Terminate"},
     },
-}
-
-local vopts = {
-    mode = "v", -- VISUAL mode
-    prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
 }
 
 local vmappings = {

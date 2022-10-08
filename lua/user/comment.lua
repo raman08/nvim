@@ -5,7 +5,6 @@ local status_ok_1, _ = pcall(require, "lsp-inlayhints")
 if not status_ok_1 then return end
 
 comment.setup {
-
     padding = true,
     sticky = true,
     ignore = "^$",

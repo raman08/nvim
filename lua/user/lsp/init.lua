@@ -15,18 +15,13 @@ M.server_capabilities = function()
         prompt = "Select client:",
         format_item = function(item) return "capabilites for: " .. item end,
     }, function(choice)
-        -- print(active_client_map[choice])
-        -- print(vim.inspect(
-        --           vim.lsp.get_active_clients()[active_client_map[choice]]
-        --               .server_capabilities.executeCommandProvider))
         vim.pretty_print(vim.lsp.get_active_clients()[active_client_map[choice]]
                              .server_capabilities)
-        -- print(vim.inspect(vim.lsp.get_active_clients()[active_client_map[choice]]))
     end)
 end
 
 require "user.lsp.lsp-signature"
-require "user.lsp.lsp-installer"
+require "user.lsp.mason"
 require("user.lsp.handlers").setup()
 require "user.lsp.null-ls"
 

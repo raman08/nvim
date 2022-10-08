@@ -86,7 +86,6 @@ nvim_tree.setup {
     git = {enable = true, ignore = true, timeout = 500, show_on_dirs = true},
     view = {
         width = 30,
-        height = 30,
         hide_root_folder = false,
         side = "left",
         -- auto_resize = true,

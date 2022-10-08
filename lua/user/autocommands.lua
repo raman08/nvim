@@ -54,6 +54,13 @@ vim.api.nvim_create_autocmd({"BufEnter"}, {
     end,
 })
 
+vim.cmd(
+    "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
+
+vim.api.nvim_create_autocmd({"VimResized"}, {
+    callback = function() vim.cmd("tabdo wincmd =") end,
+})
+
 vim.api.nvim_create_autocmd({"BufEnter"}, {
     pattern = {"term://*"},
     callback = function()
@@ -63,14 +70,8 @@ vim.api.nvim_create_autocmd({"BufEnter"}, {
     end,
 })
 
-vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
-
--- vim.api.nvim_create_autocmd({"VimResized"}, {
---     callback = function() vim.cmd "tabdo wincmd =" end,
--- })
-
 vim.api.nvim_create_autocmd({"CmdWinEnter"},
-                            {callback = function() vim.cmd "quit" end})
+                            {callback = function() vim.cmd("quit") end})
 
 -- Fixes Autocomment
 vim.api.nvim_create_autocmd({"BufWinEnter"}, {
@@ -91,6 +92,15 @@ vim.api.nvim_create_autocmd({"VimEnter"}, {
 vim.api.nvim_create_autocmd({"BufWinEnter"}, {
     pattern = {"*"},
     callback = function() vim.cmd "checktime" end,
+})
+
+vim.api.nvim_create_autocmd({"BufWritePost"}, {
+    pattern = {"*.java"},
+    callback = function() vim.lsp.codelens.refresh() end,
+})
+
+vim.api.nvim_create_autocmd({"VimEnter"}, {
+    callback = function() vim.cmd("hi link illuminatedWord LspReferenceText") end,
 })
 
 vim.api.nvim_create_autocmd({"CursorHold"}, {

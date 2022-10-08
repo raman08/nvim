@@ -35,6 +35,9 @@ packer.init {
             return require("packer.util").float {border = "rounded"}
         end,
     },
+    git = {
+        clone_timeout = 300, -- Timeout, in seconds, for git clones
+    },
 }
 
 -- Install your plugins here
@@ -42,11 +45,12 @@ return packer.startup(function(use)
     -- My plugins here
 
     use "wbthomason/packer.nvim" -- Have packer manage itself
-    use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
+    use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
 
     use "windwp/nvim-autopairs" -- Auto Complete Bracket
     use "numToStr/Comment.nvim" -- Comment Helper
+    use "JoosepAlviste/nvim-ts-context-commentstring" -- Setting Comment Based On curser location
     use "folke/todo-comments.nvim"
 
     use "akinsho/bufferline.nvim" -- BufferLine
@@ -68,15 +72,9 @@ return packer.startup(function(use)
     use "kylechui/nvim-surround" -- Pairup easily
     use "manzeloth/live-server" -- For live server
 
-    -- Markdown Support 
-    use {
-        "iamcco/markdown-preview.nvim",
-        run = "cd app && npm install",
-        ft = "markdown",
-    }
-
-    -- Pug Support
-    use {"digitaltoad/vim-pug"}
+    -- File Tree
+    use "kyazdani42/nvim-tree.lua" -- File Tree
+    use "kyazdani42/nvim-web-devicons" -- File Tree Icons
 
     -- Colorschemes
     use "folke/tokyonight.nvim" -- Defalut theme
@@ -86,11 +84,11 @@ return packer.startup(function(use)
     use "hrsh7th/nvim-cmp" -- Completion Client
     use "hrsh7th/cmp-buffer" -- Buffer Completion
     use "hrsh7th/cmp-path" -- Path Completion
-    use "hrsh7th/cmp-cmdline" -- Comandline Completion
     use "saadparwaiz1/cmp_luasnip" -- Snippets Completion
     use "hrsh7th/cmp-nvim-lsp" -- LSP Completion
     use "hrsh7th/cmp-nvim-lua" -- LUA Completion
-    use "hrsh7th/cmp-emoji"
+    use "hrsh7th/cmp-cmdline" -- Comandline Completion
+    use "hrsh7th/cmp-emoji" -- Emoji Completion
 
     -- Snippets
     use "L3MON4D3/LuaSnip" -- Snippets Engine
@@ -98,31 +96,26 @@ return packer.startup(function(use)
 
     -- LSP
     use "neovim/nvim-lspconfig" -- Nvim Lsp
-    use "williamboman/nvim-lsp-installer" -- LSP Client installer
+    use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
     use "jose-elias-alvarez/null-ls.nvim" -- For Formatting and Linting
     use {"phpactor/phpactor", run = "composer install --no-dev -o", ft = "php"} -- Php Support for Nvim
-    use "glepnir/lspsaga.nvim"
     use "filipdutescu/renamer.nvim"
     use "ray-x/lsp_signature.nvim"
     use "b0o/SchemaStore.nvim"
     use "RRethy/vim-illuminate"
-    use "simrat39/symbols-outline.nvim"
     use "folke/trouble.nvim"
     use "j-hui/fidget.nvim"
-    -- use "fatih/vim-go"
-    -- use "tamago324/nlsp-settings.nvim" -- language server settings defined in json formate
 
     -- Telescope
-    use {"nvim-telescope/telescope.nvim", branch = "0.1.x"} -- Telescope
+    use {"nvim-telescope/telescope.nvim"} -- Telescope
     use "nvim-telescope/telescope-media-files.nvim" -- View Media in Telescope
     use {"nvim-telescope/telescope-file-browser.nvim"}
     use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
-    use "tom-anders/telescope-vim-bookmarks.nvim"
     use "lalitmee/browse.nvim"
 
     -- TreeSitter
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"} -- TreeSitter
-    use "JoosepAlviste/nvim-ts-context-commentstring" -- Setting Comment Based On curser location
     use "p00f/nvim-ts-rainbow" -- Rainbow Color Bracket
     use "windwp/nvim-ts-autotag"
     use "romgrk/nvim-treesitter-context"
@@ -135,30 +128,6 @@ return packer.startup(function(use)
     use "tyru/open-browser.vim"
     use "junegunn/gv.vim"
     use "rhysd/conflict-marker.vim"
-
-    -- File Tree
-    use "kyazdani42/nvim-tree.lua" -- File Tree
-    use "kyazdani42/nvim-web-devicons" -- File Tree Icons
-
-    -- LuaLine
-    use {
-        "christianchiarulli/lualine.nvim",
-        -- "nvim-lualine/lualine.nvim",
-        requires = {"kyazdani42/nvim-web-devicons", opt = true},
-    }
-
-    -- Compititve programming --
-    use {
-        "xeluxee/competitest.nvim",
-        requires = {"MunifTanjim/nui.nvim", opt = true},
-    }
-    use "skywind3000/asynctasks.vim"
-    use "skywind3000/asyncrun.vim"
-    -- use "ianding1/leetcode.vim"
-    use {"michaelb/sniprun", run = "bash ./install.sh"}
-
-    -- Wakatimw for coding activity --
-    use "wakatime/vim-wakatime"
 
     -- Session Management
     use "rmagatti/auto-session"
@@ -173,13 +142,38 @@ return packer.startup(function(use)
     -- use "ghillb/cybu.nvim" -- Buffer List in float
     use "matbme/JABS.nvim"
 
-    -- Debugging Applications --
-    use "puremourning/vimspector"
+    -- Markdown Support 
+    use {
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && npm install",
+        ft = "markdown",
+    }
 
-    -- Nvim Dap --
-    -- use "mfussenegger/nvim-dap"
+    -- Pug Support
+    use {"digitaltoad/vim-pug"}
+
+    -- LuaLine
+    use {
+        "nvim-lualine/lualine.nvim",
+        -- "nvim-lualine/lualine.nvim",
+    }
+
+    -- Compititve programming --
+    use {
+        "xeluxee/competitest.nvim",
+        requires = {"MunifTanjim/nui.nvim", opt = true},
+    }
+    use {"michaelb/sniprun", run = "bash ./install.sh"}
+
+    -- Wakatimw for coding activity --
+    use "wakatime/vim-wakatime"
+
+    -- Debugging Applications --
+    -- use "puremourning/vimspector"
+    use "mfussenegger/nvim-dap"
+    use "rcarriga/nvim-dap-ui"
+
     -- use "theHamsta/nvim-dap-virtual-text"
-    -- use "rcarriga/nvim-dap-ui"
     -- use "Pocco81/DAPInstall.nvim"
 
     -- Graveyard
