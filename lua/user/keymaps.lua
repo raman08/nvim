@@ -1,7 +1,7 @@
 -- Shorten function name
 M = {}
 
-local opts = {silent = true, noremap = true}
+local opts = { silent = true, noremap = true }
 
 local keymap = vim.api.nvim_set_keymap
 
@@ -57,7 +57,7 @@ keymap("v", ">", ">gv", opts)
 -- Move text up and down
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-keymap("v", "p", "\"_dP", opts)
+keymap("v", "p", '"_dP', opts)
 
 -- Visual Block --
 -- Move text up and down
@@ -76,9 +76,12 @@ keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", opts)
 
 -- Telescope --
-keymap("n", "<C-p>",
-       "<cmd> lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({previewer = false}))<cr>",
-       opts)
+keymap(
+	"n",
+	"<C-p>",
+	"<cmd> lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({previewer = false}))<cr>",
+	opts
+)
 
 keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
@@ -96,23 +99,23 @@ keymap("n", "<leader>pt", ":CompetiTestReceive<CR>", opts)
 keymap("n", "<leader>pc", ":CompetiTestRun<CR>", opts)
 
 M.show_documentation = function()
-    local filetype = vim.bo.filetype
-    if vim.tbl_contains({"vim", "help"}, filetype) then
-        vim.cmd("h " .. vim.fn.expand "<cword>")
-    elseif vim.tbl_contains({"man"}, filetype) then
-        vim.cmd("Man " .. vim.fn.expand "<cword>")
-    elseif vim.fn.expand "%:t" == "Cargo.toml" then
-        require("crates").show_popup()
-    else
-        vim.lsp.buf.hover()
-    end
+	local filetype = vim.bo.filetype
+	if vim.tbl_contains({ "vim", "help" }, filetype) then
+		vim.cmd("h " .. vim.fn.expand("<cword>"))
+	elseif vim.tbl_contains({ "man" }, filetype) then
+		vim.cmd("Man " .. vim.fn.expand("<cword>"))
+	elseif vim.fn.expand("%:t") == "Cargo.toml" then
+		require("crates").show_popup()
+	else
+		vim.lsp.buf.hover()
+	end
 end
 
 keymap("n", "K", ":lua require('user.keymaps').show_documentation()<CR>", opts)
 
 keymap("n", "<s-enter>", "<cmd>TodoQuickFix<cr>", opts)
 
-vim.cmd [[
+vim.cmd([[
   function! QuickFixToggle()
     if empty(filter(getwininfo(), 'v:val.quickfix'))
       copen
@@ -120,7 +123,7 @@ vim.cmd [[
       cclose
     endif
   endfunction
-]]
+]])
 
 keymap("n", "<m-q>", ":call QuickFixToggle()<cr>", opts)
 

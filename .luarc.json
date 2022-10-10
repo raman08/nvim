@@ -1,11 +1,11 @@
 {
-    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-    "Lua.diagnostics.globals": [
-        "vim",
-        "require",
-        "pcall",
-        "ipairs",
-        "path",
-        "buffer_fts"
-    ]
+	"$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+	"Lua.diagnostics.globals": [
+		"vim",
+		"require",
+		"pcall",
+		"ipairs",
+		"path",
+		"buffer_fts"
+	]
 }
