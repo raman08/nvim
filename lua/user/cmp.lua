@@ -1,5 +1,4 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
-
 if not cmp_status_ok then
 	return
 end
@@ -98,6 +97,7 @@ cmp.setup({
 	}),
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
+		max_width = 0,
 		format = function(entry, vim_item)
 			-- Kind icons
 			vim_item.kind = kind_icons[vim_item.kind]
@@ -134,8 +134,10 @@ cmp.setup({
 				end
 
 				if kind == "Text" then
-					return true
+					return false
 				end
+
+				return true
 			end,
 			group_index = 2,
 		},
@@ -182,6 +184,23 @@ cmp.setup({
 			-- border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"},
 			border = "rounded",
 			winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+		},
+	},
+	cmdline = {
+		enable = true,
+		options = {
+			{
+				type = ":",
+				sources = {
+					{ name = "path" },
+				},
+			},
+			{
+				type = { "/", "?" },
+				sources = {
+					{ name = "buffer" },
+				},
+			},
 		},
 	},
 	experimental = { ghost_text = true },

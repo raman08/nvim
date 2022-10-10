@@ -11,8 +11,6 @@ require("user.autopairs")
 require("user.comment")
 require("user.gitsigns")
 require("user.nvim-tree")
--- require "user.nvim-web-devicons"
--- require "user.bufferline"
 require("user.lualine")
 require("user.toggleterm")
 require("user.project")
@@ -43,6 +41,8 @@ require("user.dap")
 require("user.lir")
 require("user.winbar")
 require("user.cybu")
+require("user.navic")
+require("user.neoscroll")
 
 -- require "user.leetcode"
 -- require "user.twilight"
@@ -53,3 +53,5 @@ require("user.cybu")
 -- require "user.quickscope"
 -- require "user.compitest"
 -- require "user.vimspector"
+-- require "user.nvim-web-devicons"
+-- require "user.bufferline"

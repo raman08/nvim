@@ -5,6 +5,31 @@ end
 
 local icons = require("user.icons")
 
+local winbar_filetype_exclude = {
+	"help",
+	"startify",
+	"dashboard",
+	"packer",
+	"neo-tree",
+	"neogitstatus",
+	"NvimTree",
+	"Trouble",
+	"alpha",
+	"lir",
+	"Outline",
+	"spectre_panel",
+	"toggleterm",
+	"DressingSelect",
+	"Jaq",
+	"harpoon",
+	"dap-repl",
+	"dap-terminal",
+	"dapui_console",
+	"lab",
+	"Markdown",
+	"",
+}
+
 navic.setup({
 	icons = {
 		File = " ",

@@ -1,9 +1,9 @@
-local status_ok, npairs = pcall(require, "nvim-autopairs")
+local status_ok, autopairs = pcall(require, "nvim-autopairs")
 if not status_ok then
 	return
 end
 
-npairs.setup({
+autopairs.setup({
 	check_ts = true,
 	ts_config = {
 		lua = { "string", "source" },
@@ -22,6 +22,16 @@ npairs.setup({
 		highlight = "PmenuSel",
 		highlight_grey = "LineNr",
 	},
+})
+
+require("nvim-treesitter.configs").setup({ autopairs = { enable = true } })
+
+local Rule = require("nvim-autopairs.rule")
+local ts_conds = require("nvim-autopairs.ts-conds")
+
+autopairs.add_rules({
+	Rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({ "string", "comment" })),
+	Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node({ "function" })),
 })
 
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")

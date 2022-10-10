@@ -1,15 +1,17 @@
 M = {}
+
 local status_ok, lualine = pcall(require, "lualine")
 if not status_ok then
 	return
 end
 
--- local lualine_scheme = "darkplus_dark"
+local lualine_scheme = "onedark"
 -- local lualine_scheme = "pywal"
 --
--- local status_theme_ok, theme = pcall(require,
---                                      "lualine.themes." .. lualine_scheme)
--- if not status_theme_ok then return end
+local status_theme_ok, theme = pcall(require, "lualine.themes." .. lualine_scheme)
+if not status_theme_ok then
+	return
+end
 
 local function contains(t, value)
 	for _, v in pairs(t) do
@@ -32,7 +34,22 @@ local yellow = "#DCDCAA"
 local yellow_orange = "#D7BA7D"
 local purple = "#C586C0"
 
-local sl_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
+if lualine_scheme == "darkplus_dark" then
+	-- gray = "#3e3e3e"
+	gray = "#303030"
+	dark_gray = "#303030"
+	red = "#bf616a"
+	blue = "#5e81ac"
+	indent = "#A3BE8C"
+	green = "#A3BE8C"
+	cyan = "#88c0d0"
+	orange = "#C68A75"
+	yellow = "#DCDCAA"
+	yellow_orange = "#D7BA7D"
+	purple = "#B48EAD"
+end
+
+-- local sl_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
 -- local sl_hl_sep = vim.api.nvim_get_hl_by_name("StatusLineSeparator", true)
 
 vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = dark_gray })
@@ -79,29 +96,45 @@ local mode_color = {
 	t = red,
 }
 
--- local left_pad = {
---     function() return " " end,
---     padding = 0,
---     color = function() return {fg = gray} end,
--- }
---
--- local right_pad = {
---     function() return " " end,
---     padding = 0,
---     color = function() return {fg = dark_gray} end,
--- }
---
--- local left_pad_alt = {
---     function() return " " end,
---     padding = 0,
---     color = function() return {fg = gray} end,
--- }
---
--- local right_pad_alt = {
---     function() return " " end,
---     padding = 0,
---     color = function() return {fg = gray} end,
--- }
+local left_pad = {
+	function()
+		return " "
+	end,
+	padding = 0,
+	color = function()
+		return { fg = gray }
+	end,
+}
+
+local right_pad = {
+	function()
+		return " "
+	end,
+	padding = 0,
+	color = function()
+		return { fg = dark_gray }
+	end,
+}
+
+local left_pad_alt = {
+	function()
+		return " "
+	end,
+	padding = 0,
+	color = function()
+		return { fg = gray }
+	end,
+}
+
+local right_pad_alt = {
+	function()
+		return " "
+	end,
+	padding = 0,
+	color = function()
+		return { fg = gray }
+	end,
+}
 
 local mode = {
 	-- mode component
@@ -114,7 +147,7 @@ local mode = {
 		-- auto change color according to neovims mode
 		return { bg = mode_color[vim.fn.mode()] }
 	end,
-	padding = 1,
+	padding = 0,
 }
 
 local hide_in_width_60 = function()
@@ -137,7 +170,7 @@ local diagnostics = {
 		error = "%#SLError#" .. icons.diagnostics.Error .. "%*" .. " ",
 		warn = "%#SLWarning#" .. icons.diagnostics.Warning .. "%*" .. " ",
 	},
-	colored = true,
+	colored = false,
 	update_in_insert = false,
 	always_visible = true,
 	padding = 1,
@@ -203,7 +236,7 @@ local filetype = {
 		end
 	end,
 	icons_enabled = false,
-	padding = 0,
+	padding = 1,
 }
 
 local branch = {
@@ -221,9 +254,9 @@ local branch = {
 		return str
 	end,
 }
+
 local progress = {
 	"progress",
-	---@diagnostic disable-next-line: unused-local
 	fmt = function(str)
 		-- return "▊"
 		return hl_str("", "SLSep") .. hl_str("%P/%L", "SLProgress") .. hl_str(" ", "SLSep")
@@ -301,8 +334,8 @@ local spaces = {
 		return hl_str(" ", "SLSep") .. hl_str(" " .. shiftwidth .. space, "SLIndent") .. hl_str("", "SLSep")
 	end,
 	padding = 0,
-	separator = "%#SLSeparator#" .. " │" .. "%*",
-	cond = hide_in_width_100,
+	-- separator = "%#SLSeparator#" .. " │" .. "%*",
+	-- cond = hide_in_width_100,
 }
 local lanuage_server = {
 	function()
@@ -417,11 +450,14 @@ lualine.setup({
 		always_divide_middle = true,
 	},
 	sections = {
-		-- lualine_a = {left_pad, mode, branch, right_pad},
+		-- lualine_a = { left_pad, mode, branch, right_pad },
 		lualine_a = { mode, branch },
+		-- lualine_b = { left_pad_alt, diagnostics, right_pad_alt },
 		lualine_b = { diagnostics },
 		lualine_c = { current_signature },
-		-- lualine_x = { "encoding", "fileformat", "filetype" },
+		-- lualine_x = { diff, spaces, "encoding", filetype },
+		-- lualine_x = { diff, lanuage_server, spaces, filetype },
+		-- lualine_x = { lanuage_server, spaces, filetype },
 		lualine_x = { lanuage_server, spaces, filetype },
 		lualine_y = {},
 		lualine_z = { location, progress },

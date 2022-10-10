@@ -143,7 +143,7 @@ return packer.startup(function(use)
 	use("karb94/neoscroll.nvim")
 	use("norcalli/nvim-colorizer.lua") -- Color the Color
 	use({ "kevinhwang91/nvim-bqf", ft = "qf" }) -- Advance quick fix list
-	-- use "ghillb/cybu.nvim" -- Buffer List in float
+	use "ghillb/cybu.nvim" -- Buffer List in float
 	use("matbme/JABS.nvim")
 
 	-- Markdown Support
