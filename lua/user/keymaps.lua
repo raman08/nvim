@@ -95,8 +95,8 @@ keymap("n", "<m-v>", "<cmd>vsplit<cr>", opts)
 -- Comments
 
 -- Compititve Programming --
-keymap("n", "<leader>pt", ":CompetiTestReceive<CR>", opts)
-keymap("n", "<leader>pc", ":CompetiTestRun<CR>", opts)
+-- keymap("n", "<leader>pt", ":CompetiTestReceive<CR>", opts)
+-- keymap("n", "<leader>pc", ":CompetiTestRun<CR>", opts)
 
 M.show_documentation = function()
 	local filetype = vim.bo.filetype

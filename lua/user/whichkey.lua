@@ -210,7 +210,6 @@ local mappings = {
 
 	f = {
 		name = "Find",
-		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
 		c = { "<cmd>Telescope commands<cr>", "Commands" },
 		f = {
 			"<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
