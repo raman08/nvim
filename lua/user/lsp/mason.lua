@@ -1,4 +1,4 @@
-local servers = {
+local ensure_servers = {
 	"sumneko_lua",
 	"bashls",
 	"cssmodules_ls",
@@ -11,8 +11,15 @@ local servers = {
 	"clangd",
 	"cssls",
 	"tsserver",
-	"stylua",
 }
+
+local servers = {
+
+}
+
+for _, v in ipairs(ensure_servers) do
+	table.insert(servers, v)
+end
 
 local settings = {
 	ui = {
@@ -29,7 +36,7 @@ local settings = {
 
 require("mason").setup(settings)
 require("mason-lspconfig").setup({
-	ensure_installed = servers,
+	ensure_installed = ensure_servers,
 	automatic_installation = true,
 })
 

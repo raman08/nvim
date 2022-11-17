@@ -119,3 +119,4 @@ dap.listeners.after.event_initialized["dapui_config"] = function()
 end
 
 require("user.dap.cpp")
+require("user.dap.js-ts")

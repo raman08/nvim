@@ -98,8 +98,8 @@ return packer.startup(function(use)
 	use("rafamadriz/friendly-snippets") -- A bunch of community driven Snippets
 
 	-- LSP
-	use("neovim/nvim-lspconfig") -- Nvim Lsp
 	use("williamboman/mason.nvim")
+	use("neovim/nvim-lspconfig") -- Nvim Lsp
 	use("williamboman/mason-lspconfig.nvim")
 	use("jose-elias-alvarez/null-ls.nvim") -- For Formatting and Linting
 	use({ "phpactor/phpactor", run = "composer install --no-dev -o", ft = "php" }) -- Php Support for Nvim
@@ -110,6 +110,7 @@ return packer.startup(function(use)
 	use("folke/trouble.nvim")
 	use("j-hui/fidget.nvim")
 	use("SmiteshP/nvim-navic") -- For breadcrums
+	use("jose-elias-alvarez/typescript.nvim")
 
 	-- Telescope
 	use({ "nvim-telescope/telescope.nvim" }) -- Telescope
@@ -143,7 +144,7 @@ return packer.startup(function(use)
 	use("karb94/neoscroll.nvim")
 	use("norcalli/nvim-colorizer.lua") -- Color the Color
 	use({ "kevinhwang91/nvim-bqf", ft = "qf" }) -- Advance quick fix list
-	use "ghillb/cybu.nvim" -- Buffer List in float
+	use("ghillb/cybu.nvim") -- Buffer List in float
 	use("matbme/JABS.nvim")
 
 	-- Markdown Support
@@ -176,6 +177,7 @@ return packer.startup(function(use)
 	-- use "puremourning/vimspector"
 	use("mfussenegger/nvim-dap")
 	use("rcarriga/nvim-dap-ui")
+	use("mxsdev/nvim-dap-vscode-js")
 
 	-- use "theHamsta/nvim-dap-virtual-text"
 	-- use "Pocco81/DAPInstall.nvim"
