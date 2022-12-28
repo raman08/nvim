@@ -26,8 +26,9 @@ null_ls.setup({
 		formatting.phpcsfixer,
 		formatting.clang_format.with({ extra_args = { "--style=file" } }),
 		-- formatting.uncrustify
-		-- formatting.black.with { extra_args = { "--fast" } },
+		formatting.black.with({ extra_args = { "--fast" } }),
 		formatting.stylua,
 		require("typescript.extensions.null-ls.code-actions"),
+		formatting.shfmt,
 	},
 })

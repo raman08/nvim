@@ -13,9 +13,7 @@ local ensure_servers = {
 	"tsserver",
 }
 
-local servers = {
-
-}
+local servers = {}
 
 for _, v in ipairs(ensure_servers) do
 	table.insert(servers, v)
