@@ -3,20 +3,6 @@ if not status_dap_ok then
 	return
 end
 
--- setup clangd
--- customize clangd by changing the flags below
-local clangd_flags = {
-	"--background-index",
-	"--fallback-style=google",
-	"--all-scopes-completion",
-	"--clang-tidy",
-	"--log=error",
-	"--completion-style=detailed",
-	"--pch-storage=disk",
-	"--folding-ranges",
-	"--enable-config",
-}
-
 dap.adapters.codelldb = {
 	type = "server",
 	port = "${port}",

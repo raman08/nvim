@@ -27,7 +27,6 @@ dashboard.section.buttons.val = {
 	dashboard.button("t", icons.ui.List .. "  Find text", ":Telescope live_grep <CR>"),
 	dashboard.button("s", icons.ui.SignIn .. "  Find Session", ":SearchSession<CR>"),
 	dashboard.button("c", icons.ui.Gear .. "  Config", ":e ~/.config/nvim/init.lua <CR>"),
-	dashboard.button("u", icons.ui.CloudDownload .. "  Update", ":PackerSync<CR>"),
 	dashboard.button("q", icons.diagnostics.Error .. "  Quit", ":qa<CR>"),
 }
 
