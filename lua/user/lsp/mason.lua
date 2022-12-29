@@ -4,7 +4,6 @@ local ensure_servers = {
 	"cssmodules_ls",
 	"eslint",
 	"html",
-	"phpactor",
 	"pyright",
 	"yamlls",
 	"jsonls",

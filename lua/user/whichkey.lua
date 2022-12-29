@@ -147,15 +147,6 @@ local mappings = {
 		"Projects",
 	},
 
-	B = {
-		name = "Browse",
-		i = { "<cmd>BrowseInputSearch<cr>", "Input Search" },
-		b = { "<cmd>Browse<cr>", "Browse" },
-		d = { "<cmd>BrowseDevdocsSearch<cr>", "Devdocs" },
-		f = { "<cmd>BrowseDevdocsFiletypeSearch<cr>", "Devdocs Filetype" },
-		m = { "<cmd>BrowseMdnSearch<cr>", "Mdn" },
-	},
-
 	-- TODO: Find what it do?
 	-- ["gy"] = "Link",
 
@@ -169,6 +160,7 @@ local mappings = {
 	-- },
 
 	-- ERROR: These don't work
+
 	-- o = {
 	--     name = "Options",
 	--     w = {
@@ -213,7 +205,7 @@ local mappings = {
 		c = { "<cmd>Telescope commands<cr>", "Commands" },
 		f = {
 			"<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-			"Find files",
+			"Git files",
 		},
 		F = {
 			"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
