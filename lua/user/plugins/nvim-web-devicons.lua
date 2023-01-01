@@ -5,6 +5,9 @@ end
 
 nvim_web_devicons.set_icon({
 	sh = { icon = "", color = "#1DC123", cterm_color = "59", name = "Sh" },
+	lock = { icon = "", name = "Lock", color = "#c4c720" },
+	out = { icon = "", name = "Out", color = "#abb2bf" },
+	ttf = { icon = "", name = "TrueTypeFont", "#abb2bf" },
 	[".gitattributes"] = {
 		icon = "",
 		color = "#e24329",
@@ -41,4 +44,5 @@ nvim_web_devicons.set_icon({
 		cterm_color = "59",
 		name = "Diff",
 	},
+	["robots.txt"] = { icon = "ﮧ", name = "Robots", "#abb2bf" },
 })
