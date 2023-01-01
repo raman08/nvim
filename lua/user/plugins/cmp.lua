@@ -146,8 +146,7 @@ cmp.setup({
 		{ name = "luasnip", group_index = 2 },
 		{
 			name = "buffer",
-			---@diagnostic disable-next-line: unused-local
-			filter = function(entry, ctx)
+			filter = function(_, ctx)
 				if not contains(buffer_fts, ctx.prev_context.filetype) then
 					return true
 				end

@@ -126,7 +126,7 @@ local mappings = {
 	--     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 	--     "Buffers",
 	-- },
-
+	["y"] = { ":%y+<cr>", "Yank All Text" },
 	["b"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
 
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
@@ -147,43 +147,30 @@ local mappings = {
 		"Projects",
 	},
 
-	-- TODO: Find what it do?
-	-- ["gy"] = "Link",
+	p = {
+		name = "Plugin",
+		c = { ":Lazy clean<cr>", "Clean" },
+		C = { ":Lazy check<cr>", "Check" },
+		d = { ":Lazy debug<cr>", "Debug" },
+		i = { ":Lazy install<cr>", "Install" },
+		s = { ":Lazy sync<cr>", "Sync" },
+		l = { ":Lazy log<cr>", "Log" },
+		h = { ":Lazy home<cr>", "Home" },
+		H = { ":Lazy help<cr>", "Help" },
+		p = { ":Lazy profile<cr>", "Profile" },
+		u = { ":Lazy update<cr>", "Update" },
+	},
 
-	-- p = {
-	--     name = "Packer",
-	--     c = {"<cmd>PackerCompile<cr>", "Compile"},
-	--     i = {"<cmd>PackerInstall<cr>", "Install"},
-	--     s = {"<cmd>PackerSync<cr>", "Sync"},
-	--     S = {"<cmd>PackerStatus<cr>", "Status"},
-	--     u = {"<cmd>PackerUpdate<cr>", "Update"},
-	-- },
-
-	-- ERROR: These don't work
-
-	-- o = {
-	--     name = "Options",
-	--     w = {
-	--         "<cmd>lua require(\"user.functions\").toggle_option(\"wrap\")<cr>",
-	--         "Wrap",
-	--     },
-	--     r = {
-	--         "<cmd>lua require(\"user.functions\").toggle_option(\"relativenumber\")<cr>",
-	--         "Relative",
-	--     },
-	--     l = {
-	--         "<cmd>lua require(\"user.functions\").toggle_option(\"cursorline\")<cr>",
-	--         "Cursorline",
-	--     },
-	--     s = {
-	--         "<cmd>lua require(\"user.functions\").toggle_option(\"spell\")<cr>",
-	--         "Spell",
-	--     },
-	--     t = {
-	--         "<cmd>lua require(\"user.functions\").toggle_tabline()<cr>",
-	--         "Tabline",
-	--     },
-	-- },
+	n = {
+		name = "Neovim",
+		r = { ":Reload<cr>", "Core Reload " },
+		c = { ":e $MYVIMRC<cr>", "Configuration" },
+		s = { ":StartupTime<cr>", "StartupTime" },
+		i = { ":Inspect<cr>", "Inspect" }, -- only available on neovim 0.9
+		u = { ":Update<cr>", "Update" },
+		h = { ":checkhealth<cr>", "Health" },
+		v = { ":version<cr>", "Version" },
+	},
 
 	s = {
 		name = "Session",
@@ -193,12 +180,6 @@ local mappings = {
 		f = { "<cmd>Autosession search<cr>", "Find" },
 		d = { "<cmd>Autosession delete<cr>", "Find Delete" },
 	},
-
-	-- p = {
-	--     name = "Comptitive Programming",
-	--     t = {"<cmd>CompetiTestReceive<cr>", "Receive TestCase"},
-	--     c = {"<cmd>CompetiTestRun<cr>", "Run Program"},
-	-- },
 
 	f = {
 		name = "Find",

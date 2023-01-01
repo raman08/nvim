@@ -28,11 +28,11 @@ M.server_capabilities = function()
 	end)
 end
 
-require("user.lsp.lsp-signature")
-require("user.lsp.mason")
-require("user.lsp.handlers").setup()
-require("user.lsp.null-ls")
-require("user.lsp.settings.typescript")
+require("user.plugins.lsp.mason")
+require("user.plugins.lsp.lsp-signature")
+require("user.plugins.lsp.handlers").setup()
+require("user.plugins.lsp.null-ls")
+require("user.plugins.lsp.settings.typescript")
 
 local l_status_ok, lsp_lines = pcall(require, "lsp_lines")
 if not l_status_ok then

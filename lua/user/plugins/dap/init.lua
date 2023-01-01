@@ -118,5 +118,5 @@ dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()
 end
 
-require("user.dap.cpp")
-require("user.dap.js-ts")
+require("user.plugins.dap.cpp")
+require("user.plugins.dap.js-ts")

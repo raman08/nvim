@@ -33,64 +33,60 @@ local plugins = {
 	},
 
 	{
-		"windwp/nvim-autopairs",
-		config = function()
-			require("user.autopairs")
-		end,
-	},
-
-	{
 		"folke/todo-comments.nvim",
 		config = function()
-			require("user.todo-comments")
+			require("user.plugins.todo-comments")
 		end,
 	},
 	{
 		"akinsho/toggleterm.nvim",
 		config = function()
-			require("user.toggleterm")
+			require("user.plugins.toggleterm")
 		end,
 	},
 	{
 		"ahmedkhalf/project.nvim",
 		config = function()
-			require("user.project")
+			require("user.plugins.project")
 		end,
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()
-			require("user.indentline")
+			require("user.plugins.indentline")
 		end,
 	},
 	{
 		"goolord/alpha-nvim",
 		config = function()
-			require("user.alpha")
+			require("user.plugins.alpha")
 		end,
 	},
 	{
 		"nacro90/numb.nvim",
 		config = function()
-			require("user.numb")
+			require("user.plugins.numb")
 		end,
 	},
 	{
 		"folke/which-key.nvim",
+		module = true,
+		cmd = "WhichKey",
+		keys = "<leader>",
 		config = function()
-			require("user.whichkey")
+			require("user.plugins.whichkey")
 		end,
 	},
 	{
 		"MattesGroeger/vim-bookmarks",
 		config = function()
-			require("user.bookmark")
+			require("user.plugins.bookmark")
 		end,
 	},
 	{
 		"phaazon/hop.nvim",
 		config = function()
-			require("user.hop")
+			require("user.plugins.hop")
 		end,
 	},
 
@@ -110,7 +106,7 @@ local plugins = {
 	{
 		"tamago324/lir.nvim",
 		config = function()
-			require("user.lir")
+			require("user.plugins.lir")
 		end,
 	},
 
@@ -147,9 +143,7 @@ local plugins = {
 	-- CMP
 	{
 		"hrsh7th/nvim-cmp",
-		config = function()
-			require("user.cmp")
-		end,
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- Buffer Completion
 			"hrsh7th/cmp-path", -- Path Completion
@@ -158,51 +152,71 @@ local plugins = {
 			"hrsh7th/cmp-nvim-lua", -- LUA Completion
 			"hrsh7th/cmp-cmdline", -- Comandline Completion
 			"hrsh7th/cmp-emoji", -- Emoji Completion
+			"L3MON4D3/LuaSnip", -- Snippet Engine
+			"rafamadriz/friendly-snippets", -- Bunch of Snippets
+			{
+				"windwp/nvim-autopairs",
+				config = function()
+					require("user.plugins.autopairs") -- Auto Pairs
+				end,
+			},
 		},
+		config = function()
+			require("user.plugins.cmp")
+		end,
 	},
 
 	-- LSP
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"williamboman/mason.nvim",
+			{
+				"williamboman/mason.nvim",
+				cmd = {
+					"Mason",
+					"MasonInstall",
+					"MasonUninstall",
+					"MasonUninstallAll",
+					"MasonLog",
+				},
+			},
 			"williamboman/mason-lspconfig.nvim",
+			"jose-elias-alvarez/null-ls.nvim", -- For Formatting and Linting
+			"ray-x/lsp_signature.nvim",
 		},
 
 		config = function()
-			require("user.lsp")
+			require("user.plugins.lsp")
 		end,
 	},
 
-	"jose-elias-alvarez/null-ls.nvim", -- For Formatting and Linting
-	--{ "phpactor/phpactor", run = "composer install --no-dev -o", ft = "php" }, -- Php Support for Nvim
 	{
 		"filipdutescu/renamer.nvim",
 		config = function()
-			require("user.renamer")
+			require("user.plugins.renamer")
 		end,
 	},
-	"ray-x/lsp_signature.nvim",
 	"b0o/SchemaStore.nvim",
 	{
 		"RRethy/vim-illuminate",
 		config = function()
-			require("user.illuminate")
+			require("user.plugins.illuminate")
 		end,
 	},
 	"folke/trouble.nvim",
 	{
 		"j-hui/fidget.nvim",
 		config = function()
-			require("user.fidget")
+			require("user.plugins.fidget")
 		end,
 	},
 	{
 		"SmiteshP/nvim-navic",
 		config = function()
-			require("user.navic")
+			require("user.plugins.navic")
 		end,
 	}, -- For breadcrums
+
 	"jose-elias-alvarez/typescript.nvim",
 
 	-- Debugging
@@ -217,12 +231,14 @@ local plugins = {
 			-- "Pocco81/DAPInstall.nvim"
 		},
 		config = function()
-			require("user.dap")
+			require("user.plugins.dap")
 		end,
 	},
+
 	-- Telescope
 	{
 		"nvim-telescope/telescope.nvim",
+		cmd = "Telescope",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-media-files.nvim",
@@ -230,37 +246,51 @@ local plugins = {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 		config = function()
-			require("user.telescope")
+			require("user.plugins.telescope")
 		end,
 	},
 
 	-- TreeSitter
 	{
 		"nvim-treesitter/nvim-treesitter",
-		config = function()
-			require("user.treesitter")
-		end,
+		event = "BufRead",
+		cmd = {
+			"TSInstall",
+			"TSInstallInfo",
+			"TSUpdate",
+			"TSBufEnable",
+			"TSBufDisable",
+			"TSEnable",
+			"TSDisable",
+			"TSModuleInfo",
+		},
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			"p00f/nvim-ts-rainbow",
 			"windwp/nvim-ts-autotag",
+			"p00f/nvim-ts-rainbow",
 			"nvim-treesitter/nvim-treesitter-context",
-			"nvim-treesitter/playground",
 		},
 		build = ":TSUpdate",
+		config = function()
+			require("user.plugins.treesitter")
+		end,
 	},
 
 	-- Git
-	"lewis6991/gitsigns.nvim",
 	{
-		"f-person/git-blame.nvim",
+		"lewis6991/gitsigns.nvim",
+		event = "BufRead",
 		config = function()
-			require("user.gitblame")
+			require("user.plugins.gitsigns")
 		end,
 	},
+	-- {
+	-- 	"f-person/git-blame.nvim",
+	-- 	config = function()
+	-- 		-- require("user.gitblame")
+	-- 	end,
+	-- },
 	"tpope/vim-fugitive",
-	"tpope/vim-rhubarb",
-	"tyru/open-browser.vim",
 	"junegunn/gv.vim",
 	"rhysd/conflict-marker.vim",
 
@@ -268,13 +298,13 @@ local plugins = {
 	{
 		"rmagatti/auto-session",
 		config = function()
-			require("user.session-manager")
+			require("user.plugins.session-manager")
 		end,
 	},
 	{
 		"rmagatti/session-lens",
 		config = function()
-			require("user.session-lens")
+			require("user.plugins.session-lens")
 		end,
 	},
 
@@ -282,32 +312,35 @@ local plugins = {
 	{
 		"stevearc/dressing.nvim",
 		config = function()
-			require("user.dressing")
+			require("user.plugins.dressing")
 		end,
 	},
 	{
 		"rcarriga/nvim-notify",
 		config = function()
-			require("user.notify")
+			require("user.plugins.notify")
 		end,
 	},
 	{
 		"karb94/neoscroll.nvim",
 		config = function()
-			require("user.neoscroll")
+			require("user.plugins.neoscroll")
 		end,
 	},
 	{
 		"norcalli/nvim-colorizer.lua",
+		event = "BufRead",
 		config = function()
-			require("user.colorized")
+			require("user.plugins.colorized")
 		end,
 	}, -- Color the Color
+
 	{ "kevinhwang91/nvim-bqf", ft = "qf" }, -- Advance quick fix list
+
 	{
 		"ghillb/cybu.nvim",
 		config = function()
-			require("user.cybu")
+			require("user.plugins.cybu")
 		end,
 	}, -- Buffer List in float
 
@@ -318,6 +351,24 @@ local plugins = {
 			require("user.plugins.lualine")
 		end,
 	},
+
+	{
+		"iamcco/markdown-preview.nvim",
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+		ft = "markdown",
+	}, -- Markdown Previewer
+	{
+		"dstein64/vim-startuptime",
+		init = function()
+			vim.g.startuptime_tries = 5
+		end,
+		cmd = "StartupTime",
+		dependencies = {
+			"nvim-lualine/lualine.nvim", -- Just to fix stuck issue on vim-startuptime
+		},
+	}, -- Measure Startup Time
 }
 
 local opts = {
