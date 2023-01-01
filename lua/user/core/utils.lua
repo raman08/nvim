@@ -10,10 +10,6 @@ function _G.reload_core()
 	dofile(vim.env.MYVIMRC)
 end
 
-function _G.format_code()
-	return vim.lsp.buf.format({ async = true })
-end
-
 function _G.set_highlights(highlight)
 	for name, colors in pairs(highlight) do
 		if not vim.tbl_isempty(colors) then
@@ -38,10 +34,6 @@ function _G.update_config()
 	local args = "git -C " .. vim.fn.stdpath("config") .. " pull --ff-only"
 	vim.fn.system(args)
 end
-
-command("Format", function()
-	format_code()
-end, { nargs = "*" })
 
 command("Reload", function()
 	if vim.bo.buftype == "" then
