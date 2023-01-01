@@ -446,7 +446,16 @@ lualine.setup({
 		-- theme = theme,
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
-		disabled_filetypes = { "dashboard", "NvimTree", "Outline", "alpha" },
+		disabled_filetypes = {
+			"dashboard",
+			"NvimTree",
+			"Outline",
+			"alpha",
+			"mason",
+			"help",
+			"TelescopePrompt",
+			"toggleterm",
+		},
 		always_divide_middle = true,
 	},
 	sections = {

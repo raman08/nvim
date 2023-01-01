@@ -313,8 +313,9 @@ local plugins = {
 
 	{
 		"nvim-lualine/lualine.nvim",
+		event = "BufRead",
 		config = function()
-			require("user.lualine")
+			require("user.plugins.lualine")
 		end,
 	},
 }
