@@ -8,6 +8,7 @@ nvim_web_devicons.set_icon({
 	lock = { icon = "", name = "Lock", color = "#c4c720" },
 	out = { icon = "", name = "Out", color = "#abb2bf" },
 	ttf = { icon = "", name = "TrueTypeFont", "#abb2bf" },
+	astro = { icon = "", color = "#FFFFFF", name = "astro" },
 	[".gitattributes"] = {
 		icon = "",
 		color = "#e24329",
