@@ -34,11 +34,4 @@ require("user.plugins.lsp.handlers").setup()
 require("user.plugins.lsp.null-ls")
 require("user.plugins.lsp.settings.typescript")
 
-local l_status_ok, lsp_lines = pcall(require, "lsp_lines")
-if not l_status_ok then
-	return
-end
-
-lsp_lines.setup()
-
 return M

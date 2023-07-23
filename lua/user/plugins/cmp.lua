@@ -8,6 +8,11 @@ if not snip_status_ok then
 	return
 end
 
+local tailwindcss_cmp_status_ok, tailwindcss_cmp = pcall(require, "tailwindcss-colorizer-cmp")
+if not tailwindcss_cmp_status_ok then
+	return
+end
+
 local compare = require("cmp.config.compare")
 
 require("luasnip/loaders/from_vscode").lazy_load()

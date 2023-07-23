@@ -14,20 +14,22 @@ if not lspconfig_status_ok then
 end
 
 local ensure_servers = {
-	"sumneko_lua",
+	"lua_ls",
 	"bashls",
-	"cssmodules_ls",
+	"tsserver",
 	"eslint",
 	"html",
 	"pyright",
 	"yamlls",
 	"jsonls",
 	"clangd",
-	"cssls",
-	"tsserver",
+	"prismals",
+	"tailwindcss",
+	"astro",
 }
 
-local servers = {}
+local servers = {
+}
 
 for _, v in ipairs(ensure_servers) do
 	table.insert(servers, v)

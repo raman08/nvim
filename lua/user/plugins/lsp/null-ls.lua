@@ -14,14 +14,15 @@ null_ls.setup({
 	sources = {
 		formatting.prettier.with({
 			extra_args = {
-				"--single-quote",
-				"--jsx-single-quote",
+				-- "--single-quote",
+				-- "--jsx-single-quote",
 				"--tab-width",
 				"4",
 				"--use-tabs",
 				"--arrow-parens",
 				"avoid",
 			},
+			extra_filetypes = { "astro" },
 		}),
 		formatting.phpcsfixer,
 		formatting.clang_format.with({ extra_args = { "--style=file" }, filetypes = { "cpp", "c" } }),

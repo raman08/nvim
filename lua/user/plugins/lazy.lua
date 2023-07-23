@@ -154,6 +154,7 @@ local plugins = {
 			"hrsh7th/cmp-emoji", -- Emoji Completion
 			"L3MON4D3/LuaSnip", -- Snippet Engine
 			"rafamadriz/friendly-snippets", -- Bunch of Snippets
+			"roobert/tailwindcss-colorizer-cmp.nvim", -- Tailwind Colorizer
 			{
 				"windwp/nvim-autopairs",
 				config = function()
@@ -294,19 +295,19 @@ local plugins = {
 	"junegunn/gv.vim",
 	"rhysd/conflict-marker.vim",
 
-	-- Session Management
-	{
-		"rmagatti/auto-session",
-		config = function()
-			require("user.plugins.session-manager")
-		end,
-	},
-	{
-		"rmagatti/session-lens",
-		config = function()
-			require("user.plugins.session-lens")
-		end,
-	},
+	-- -- Session Management
+	-- {
+	-- 	"rmagatti/auto-session",
+	-- 	config = function()
+	-- 		require("user.plugins.session-manager")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"rmagatti/session-lens",
+	-- 	config = function()
+	-- 		require("user.plugins.session-lens")
+	-- 	end,
+	-- },
 
 	-- UI Decorations
 	{
@@ -333,6 +334,7 @@ local plugins = {
 		config = function()
 			require("user.plugins.colorized")
 		end,
+		dependencies = {},
 	}, -- Color the Color
 
 	{ "kevinhwang91/nvim-bqf", ft = "qf" }, -- Advance quick fix list
