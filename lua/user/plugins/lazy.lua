@@ -4,310 +4,21 @@ if not vim.loop.fs_stat(lazypath) then
 		"git",
 		"clone",
 		"--filter=blob:none",
-		"--single-branch",
-		"git@github.com:folke/lazy.nvim.git",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
 		lazypath,
 	})
 end
 
-vim.opt.runtimepath:prepend(lazypath)
+vim.opt.rtp:prepend(lazypath)
+
+local status_ok, lazy = pcall(require, "lazy")
 
 local plugins = {
 	{
 		"nvim-lua/plenary.nvim",
 		module = true,
 	}, -- Lua Functions
-
-	"wakatime/vim-wakatime",
-	"moll/vim-bbye",
-
-	{
-		"numToStr/Comment.nvim", -- Comment Helper
-		dependencies = {
-			"JoosepAlviste/nvim-ts-context-commentstring", -- Setting Comment Based On curser location
-		},
-		config = function()
-			require("user.plugins.comment")
-		end,
-		event = "BufRead",
-	},
-
-	{
-		"folke/todo-comments.nvim",
-		config = function()
-			require("user.plugins.todo-comments")
-		end,
-	},
-	{
-		"akinsho/toggleterm.nvim",
-		config = function()
-			require("user.plugins.toggleterm")
-		end,
-	},
-	{
-		"ahmedkhalf/project.nvim",
-		config = function()
-			require("user.plugins.project")
-		end,
-	},
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("user.plugins.indentline")
-		end,
-	},
-	{
-		"goolord/alpha-nvim",
-		config = function()
-			require("user.plugins.alpha")
-		end,
-	},
-	{
-		"nacro90/numb.nvim",
-		config = function()
-			require("user.plugins.numb")
-		end,
-	},
-	{
-		"folke/which-key.nvim",
-		module = true,
-		cmd = "WhichKey",
-		keys = "<leader>",
-		config = function()
-			require("user.plugins.whichkey")
-		end,
-	},
-	{
-		"MattesGroeger/vim-bookmarks",
-		config = function()
-			require("user.plugins.bookmark")
-		end,
-	},
-	{
-		"phaazon/hop.nvim",
-		config = function()
-			require("user.plugins.hop")
-		end,
-	},
-
-	{
-		"folke/tokyonight.nvim",
-		init = function()
-			require("user.core.colorscheme.tokyonight")
-		end,
-		config = function()
-			-- vim.cmd("colorscheme tokyonight-night")
-			require("user.core.colorscheme")
-		end,
-		lazy = false,
-		priority = 1000,
-	},
-
-	{
-		"tamago324/lir.nvim",
-		config = function()
-			require("user.plugins.lir")
-		end,
-	},
-
-	{
-		"nvim-tree/nvim-tree.lua",
-		module = true,
-		cmd = {
-			"NvimTreeOpen",
-			"NvimTreeToggle",
-			"NvimTreeFocus",
-			"NvimTreeFindFile",
-			"NvimTreeFindFileToggle",
-		},
-		dependencies = {
-			{
-				"nvim-tree/nvim-web-devicons",
-
-				config = function()
-					require("user.plugins.nvim-web-devicons")
-				end,
-			},
-		},
-		config = function()
-			require("user.plugins.nvim-tree")
-		end,
-	},
-
-	-- Snippets
-	{
-		"L3MON4D3/LuaSnip",
-		dependencies = { "rafamadriz/friendly-snippets" },
-	},
-
-	-- CMP
-	{
-		"hrsh7th/nvim-cmp",
-		event = { "InsertEnter", "CmdlineEnter" },
-		dependencies = {
-			"hrsh7th/cmp-buffer", -- Buffer Completion
-			"hrsh7th/cmp-path", -- Path Completion
-			"saadparwaiz1/cmp_luasnip", -- Snippets Completion
-			"hrsh7th/cmp-nvim-lsp", -- LSP Completion
-			"hrsh7th/cmp-nvim-lua", -- LUA Completion
-			"hrsh7th/cmp-cmdline", -- Comandline Completion
-			"hrsh7th/cmp-emoji", -- Emoji Completion
-			"L3MON4D3/LuaSnip", -- Snippet Engine
-			"rafamadriz/friendly-snippets", -- Bunch of Snippets
-			"roobert/tailwindcss-colorizer-cmp.nvim", -- Tailwind Colorizer
-			{
-				"windwp/nvim-autopairs",
-				config = function()
-					require("user.plugins.autopairs") -- Auto Pairs
-				end,
-			},
-		},
-		config = function()
-			require("user.plugins.cmp")
-		end,
-	},
-
-	-- LSP
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			{
-				"williamboman/mason.nvim",
-				cmd = {
-					"Mason",
-					"MasonInstall",
-					"MasonUninstall",
-					"MasonUninstallAll",
-					"MasonLog",
-				},
-			},
-			"williamboman/mason-lspconfig.nvim",
-			"jose-elias-alvarez/null-ls.nvim", -- For Formatting and Linting
-			"ray-x/lsp_signature.nvim",
-		},
-
-		config = function()
-			require("user.plugins.lsp")
-		end,
-	},
-
-	{
-		"filipdutescu/renamer.nvim",
-		config = function()
-			require("user.plugins.renamer")
-		end,
-	},
-	"b0o/SchemaStore.nvim",
-	{
-		"RRethy/vim-illuminate",
-		config = function()
-			require("user.plugins.illuminate")
-		end,
-	},
-	"folke/trouble.nvim",
-	{
-		"j-hui/fidget.nvim",
-		config = function()
-			require("user.plugins.fidget")
-		end,
-	},
-	{
-		"SmiteshP/nvim-navic",
-		config = function()
-			require("user.plugins.navic")
-		end,
-	}, -- For breadcrums
-
-	"jose-elias-alvarez/typescript.nvim",
-
-	-- Debugging
-	{
-
-		"mfussenegger/nvim-dap",
-		dependencies = {
-
-			"rcarriga/nvim-dap-ui",
-			"mxsdev/nvim-dap-vscode-js",
-			-- "theHamsta/nvim-dap-virtual-text",
-			-- "Pocco81/DAPInstall.nvim"
-		},
-		config = function()
-			require("user.plugins.dap")
-		end,
-	},
-
-	-- Telescope
-	{
-		"nvim-telescope/telescope.nvim",
-		cmd = "Telescope",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-media-files.nvim",
-			"nvim-telescope/telescope-file-browser.nvim",
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-		},
-		config = function()
-			require("user.plugins.telescope")
-		end,
-	},
-
-	-- TreeSitter
-	{
-		"nvim-treesitter/nvim-treesitter",
-		event = "BufRead",
-		cmd = {
-			"TSInstall",
-			"TSInstallInfo",
-			"TSUpdate",
-			"TSBufEnable",
-			"TSBufDisable",
-			"TSEnable",
-			"TSDisable",
-			"TSModuleInfo",
-		},
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"windwp/nvim-ts-autotag",
-			"p00f/nvim-ts-rainbow",
-			"nvim-treesitter/nvim-treesitter-context",
-		},
-		build = ":TSUpdate",
-		config = function()
-			require("user.plugins.treesitter")
-		end,
-	},
-
-	-- Git
-	{
-		"lewis6991/gitsigns.nvim",
-		event = "BufRead",
-		config = function()
-			require("user.plugins.gitsigns")
-		end,
-	},
-	-- {
-	-- 	"f-person/git-blame.nvim",
-	-- 	config = function()
-	-- 		-- require("user.gitblame")
-	-- 	end,
-	-- },
-	"tpope/vim-fugitive",
-	"junegunn/gv.vim",
-	"rhysd/conflict-marker.vim",
-
-	-- -- Session Management
-	-- {
-	-- 	"rmagatti/auto-session",
-	-- 	config = function()
-	-- 		require("user.plugins.session-manager")
-	-- 	end,
-	-- },
-	-- {
-	-- 	"rmagatti/session-lens",
-	-- 	config = function()
-	-- 		require("user.plugins.session-lens")
-	-- 	end,
-	-- },
 
 	-- UI Decorations
 	{
@@ -345,7 +56,6 @@ local plugins = {
 			require("user.plugins.cybu")
 		end,
 	}, -- Buffer List in float
-
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "BufRead",
@@ -355,22 +65,247 @@ local plugins = {
 	},
 
 	{
+		"nvim-tree/nvim-tree.lua",
+		module = true,
+		dependencies = {
+			{
+				"nvim-tree/nvim-web-devicons",
+
+				config = function()
+					require("user.plugins.nvim-web-devicons")
+				end,
+			},
+		},
+		config = function()
+			require("user.plugins.nvim-tree")
+		end,
+	},
+
+	{
+		"folke/tokyonight.nvim",
+		init = function()
+			require("user.plugins.tokyonight")
+		end,
+		config = function()
+			require("user.core.colorscheme")
+		end,
+		lazy = false,
+		priority = 1000,
+	},
+
+	-- CMP
+	{
+		"hrsh7th/nvim-cmp",
+		event = { "InsertEnter", "CmdlineEnter" },
+		dependencies = {
+			-- snippets
+			"L3MON4D3/LuaSnip", -- Snippet Engine
+			"rafamadriz/friendly-snippets", -- Bunch of Snippets
+
+			-- buffer
+			"hrsh7th/cmp-buffer", -- Buffer Completion
+
+			-- lsp
+			"hrsh7th/cmp-nvim-lsp", -- LSP Completion
+
+			"hrsh7th/cmp-path", -- Path Completion
+			"saadparwaiz1/cmp_luasnip", -- Snippets Completion
+			"hrsh7th/cmp-nvim-lua", -- LUA Completion
+			"hrsh7th/cmp-cmdline", -- Comandline Completion
+			"hrsh7th/cmp-emoji", -- Emoji Completion
+			{
+				"windwp/nvim-autopairs",
+				config = function()
+					require("user.plugins.autopairs") -- Auto Pairs
+				end,
+			},
+		},
+		config = function()
+			require("user.plugins.cmp")
+		end,
+	},
+
+	-- TreeSitter
+	{
+		"nvim-treesitter/nvim-treesitter",
+		event = "BufRead",
+		cmd = {
+			"TSInstall",
+			"TSInstallInfo",
+			"TSUpdate",
+			"TSBufEnable",
+			"TSBufDisable",
+			"TSEnable",
+			"TSDisable",
+			"TSModuleInfo",
+		},
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"windwp/nvim-ts-autotag",
+			"p00f/nvim-ts-rainbow",
+			"nvim-treesitter/nvim-treesitter-context",
+		},
+		build = ":TSUpdate",
+		config = function()
+			require("user.plugins.treesitter")
+		end,
+	},
+
+	-- LSP --
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			{
+				"williamboman/mason.nvim",
+				cmd = {
+					"Mason",
+					"MasonInstall",
+					"MasonUninstall",
+					"MasonUninstallAll",
+					"MasonLog",
+				},
+			},
+			"williamboman/mason-lspconfig.nvim",
+			"jose-elias-alvarez/null-ls.nvim",
+			"b0o/SchemaStore.nvim",
+		},
+
+		config = function()
+			require("user.plugins.lsp")
+		end,
+	},
+	{
+		"j-hui/fidget.nvim",
+		tag = "legacy",
+		event = "LspAttach",
+		config = function()
+			require("user.plugins.fidget")
+		end,
+	},
+	{
+		"filipdutescu/renamer.nvim",
+		config = function()
+			require("user.plugins.renamer")
+		end,
+	},
+	{
+		"numToStr/Comment.nvim", -- Comment Helper
+		dependencies = {
+			"JoosepAlviste/nvim-ts-context-commentstring", -- Setting Comment Based On curser location
+		},
+		config = function()
+			require("user.plugins.comment")
+		end,
+		event = "BufRead",
+	},
+	{
+		"RRethy/vim-illuminate",
+		config = function()
+			require("user.plugins.illuminate")
+		end,
+	},
+	{
+		"SmiteshP/nvim-navic",
+		config = function()
+			require("user.plugins.navic")
+		end,
+	}, -- For breadcrums
+
+	-- Debugging
+	{
+
+		"mfussenegger/nvim-dap",
+		dependencies = {
+
+			"rcarriga/nvim-dap-ui",
+			"mxsdev/nvim-dap-vscode-js",
+			-- "theHamsta/nvim-dap-virtual-text",
+			-- "Pocco81/DAPInstall.nvim"
+		},
+		config = function()
+			require("user.plugins.dap")
+		end,
+	},
+
+	-- Telescope
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-media-files.nvim",
+			"nvim-telescope/telescope-file-browser.nvim",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		},
+		config = function()
+			require("user.plugins.telescope")
+		end,
+	},
+
+	-- Which Key
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		config = function()
+			require("user.plugins.whichkey")
+		end,
+	},
+
+	-- GIT
+	{
+		"lewis6991/gitsigns.nvim",
+		event = "BufRead",
+		config = function()
+			require("user.plugins.gitsigns")
+		end,
+	},
+	"tpope/vim-fugitive",
+
+	{
+		"akinsho/toggleterm.nvim",
+		config = function()
+			require("user.plugins.toggleterm")
+		end,
+	},
+
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("user.plugins.indentline")
+		end,
+	},
+	{
+		"goolord/alpha-nvim",
+		config = function()
+			require("user.plugins.alpha")
+		end,
+	},
+	{
+		"folke/todo-comments.nvim",
+		config = function()
+			require("user.plugins.todo-comments")
+		end,
+	},
+	{
+		"ahmedkhalf/project.nvim",
+		config = function()
+			require("user.plugins.project")
+		end,
+	},
+
+	-- MISC
+	"wakatime/vim-wakatime",
+	"moll/vim-bbye",
+	{
 		"iamcco/markdown-preview.nvim",
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
 		ft = "markdown",
 	}, -- Markdown Previewer
-	{
-		"dstein64/vim-startuptime",
-		init = function()
-			vim.g.startuptime_tries = 5
-		end,
-		cmd = "StartupTime",
-		dependencies = {
-			"nvim-lualine/lualine.nvim", -- Just to fix stuck issue on vim-startuptime
-		},
-	}, -- Measure Startup Time
 }
 
 local opts = {
@@ -396,6 +331,7 @@ local opts = {
 		colorscheme = { "tokyonight", "dull", "habamax" },
 	},
 	ui = {
+
 		-- a number <1 is a percentage., >1 is a fixed size
 		size = { width = 0.8, height = 0.8 },
 		-- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
@@ -475,9 +411,8 @@ local opts = {
 		skip_if_doc_exists = true,
 	},
 }
-
-local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
+	print("something wrong with lazy")
 	return
 end
 

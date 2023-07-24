@@ -13,27 +13,9 @@ if not lspconfig_status_ok then
 	return
 end
 
-local ensure_servers = {
-	"lua_ls",
-	"bashls",
-	"tsserver",
-	"eslint",
-	"html",
-	"pyright",
-	"yamlls",
-	"jsonls",
-	"clangd",
-	"prismals",
-	"tailwindcss",
-	"astro",
-}
-
 local servers = {
+	"lua_ls",
 }
-
-for _, v in ipairs(ensure_servers) do
-	table.insert(servers, v)
-end
 
 local settings = {
 	ui = {
@@ -49,8 +31,9 @@ local settings = {
 }
 
 mason.setup(settings)
+
 mason_lspconfig.setup({
-	ensure_installed = ensure_servers,
+	ensure_installed = servers,
 	automatic_installation = true,
 })
 

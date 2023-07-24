@@ -24,12 +24,8 @@ null_ls.setup({
 			},
 			extra_filetypes = { "astro" },
 		}),
-		formatting.phpcsfixer,
 		formatting.clang_format.with({ extra_args = { "--style=file" }, filetypes = { "cpp", "c" } }),
-		-- formatting.uncrustify
-		formatting.black.with({ extra_args = { "--fast" } }),
 		formatting.stylua,
 		formatting.shfmt,
-		-- require("typescript.extensions.null-ls.code-actions"),
 	},
 })

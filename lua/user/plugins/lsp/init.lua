@@ -24,14 +24,12 @@ M.server_capabilities = function()
 				vim.lsp.get_active_clients()[active_client_map[choice]].server_capabilities.executeCommandProvider
 			)
 		)
-		vim.pretty_print(vim.lsp.get_active_clients()[active_client_map[choice]].server_capabilities)
+		vim.print(vim.lsp.get_active_clients()[active_client_map[choice]].server_capabilities)
 	end)
 end
 
 require("user.plugins.lsp.mason")
-require("user.plugins.lsp.lsp-signature")
-require("user.plugins.lsp.handlers").setup()
+require("user.plugins.lsp.handlers")
 require("user.plugins.lsp.null-ls")
-require("user.plugins.lsp.settings.typescript")
 
 return M

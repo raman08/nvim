@@ -1,12 +1,13 @@
+local status_dap_ok, dap = pcall(require, "dap")
+if not status_dap_ok then
+	return
+end
+
 local status_ok, icons = pcall(require, "user.icons")
 if not status_ok then
 	return
 end
 
-local status_dap_ok, dap = pcall(require, "dap")
-if not status_dap_ok then
-	return
-end
 
 vim.fn.sign_define("DapBreakpoint", {
 	text = icons.ui.Bug,
@@ -35,7 +36,7 @@ if not status_key_ok then
 end
 
 local opts = {
-	mode = "n", -- NORMAL mode
+	mode = "n",  -- NORMAL mode
 	prefix = "<leader>",
 	buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
 	silent = true, -- use `silent` when creating keymaps
@@ -89,17 +90,17 @@ dapui.setup({
 	layouts = {
 		{
 			elements = {
-				{ id = "scopes", size = 0.33 },
+				{ id = "scopes",      size = 0.33 },
 				{ id = "breakpoints", size = 0.17 },
-				{ id = "stacks", size = 0.25 },
-				{ id = "watches", size = 0.25 },
+				{ id = "stacks",      size = 0.25 },
+				{ id = "watches",     size = 0.25 },
 			},
 			size = 0.33,
 			position = "right",
 		},
 		{
 			elements = {
-				{ id = "repl", size = 0.45 },
+				{ id = "repl",    size = 0.45 },
 				{ id = "console", size = 0.55 },
 			},
 			size = 0.27,
@@ -108,7 +109,7 @@ dapui.setup({
 	},
 	floating = {
 		max_height = 0.9,
-		max_width = 0.5, -- Floats will be treated as percentage of your screen.
+		max_width = 0.5,       -- Floats will be treated as percentage of your screen.
 		border = vim.g.border_chars, -- Border style. Can be 'single', 'double' or 'rounded'
 		mappings = { close = { "q", "<Esc>" } },
 	},

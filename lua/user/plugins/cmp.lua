@@ -8,11 +8,6 @@ if not snip_status_ok then
 	return
 end
 
-local tailwindcss_cmp_status_ok, tailwindcss_cmp = pcall(require, "tailwindcss-colorizer-cmp")
-if not tailwindcss_cmp_status_ok then
-	return
-end
-
 local compare = require("cmp.config.compare")
 
 require("luasnip/loaders/from_vscode").lazy_load()
@@ -100,14 +95,13 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 	}),
+
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
 		max_width = 0,
 		format = function(entry, vim_item)
 			-- Kind icons
 			vim_item.kind = kind_icons[vim_item.kind]
-			-- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
 			if entry.source.name == "emoji" then
 				vim_item.kind = icons.misc.Smiley
 				vim_item.kind_hl_group = "CmpItemKindEmoji"
@@ -129,6 +123,7 @@ cmp.setup({
 			return vim_item
 		end,
 	},
+
 	sources = {
 		{
 			name = "nvim_lsp",

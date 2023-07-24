@@ -14,9 +14,9 @@ M.setup = function()
 
 	local signs = {
 		{ name = "DiagnosticSignError", text = icons.diagnostics.Error },
-		{ name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-		{ name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-		{ name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+		{ name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
+		{ name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
+		{ name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
 	}
 
 	for _, sign in ipairs(signs) do
@@ -82,7 +82,7 @@ local function lsp_keymaps(bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "gf", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
+	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
 end
 
 M.on_attach = function(client, bufnr)
@@ -91,7 +91,7 @@ M.on_attach = function(client, bufnr)
 	--     -- require("lsp-inlayhints").on_attach(client, bufnr)
 	-- end
 
-	if client.name == "sumneko_lua" then
+	if client.name == "lua_ls" then
 		client.server_capabilities.document_formatting = false
 	end
 
@@ -125,7 +125,7 @@ capabilities.offsetEncoding = { "utf-16" }
 function M.enable_format_on_save()
 	vim.cmd([[
 		augroup format_on_save
-			autocmd! 
+			autocmd!
 			autocmd BufWritePre * lua vim.lsp.buf.formatting()
 		augroup end
 	]])

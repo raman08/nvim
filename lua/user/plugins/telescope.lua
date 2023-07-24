@@ -6,7 +6,6 @@ end
 local actions = require("telescope.actions")
 local icons = require("user.icons")
 
-telescope.load_extension("media_files")
 
 telescope.setup({
 	defaults = {
@@ -22,51 +21,13 @@ telescope.setup({
 			"%.sqlite3",
 			"%.ipynb",
 			"node_modules/*",
-			-- "%.jpg",
-			-- "%.jpeg",
-			-- "%.png",
-			-- "%.svg",
-			-- "%.otf",
-			-- "%.ttf",
-			-- "%.webp",
-			-- ".dart_tool/",
-			-- ".github/",
-			-- ".gradle/",
-			".idea/",
-			-- ".settings/",
-			-- ".vscode/",
-			"__pycache__/",
-			-- "build/",
-			"env/",
-			-- "gradle/",
 			"node_modules/",
-			"%.pdb",
-			-- "%.dll",
-			"%.class",
-			-- "%.exe",
-			"%.cache",
-			"%.ico",
-			-- "%.pdf",
-			"%.dylib",
-			-- "%.jar",
-			-- "%.docx",
-			-- "%.met",
-			"smalljre_*/*",
-			".vale/",
-			-- "%.burp",
-			-- "%.mp4",
-			-- "%.mkv",
-			-- "%.rar",
-			-- "%.zip",
-			-- "%.7z",
-			-- "%.tar",
-			-- "%.bz2",
-			-- "%.epub",
-			-- "%.flac",
-			-- "%.tar.gz",
-		},
+			".vscode",
+			"__pycache__/",
 
+		},
 		mappings = {
+
 			i = {
 				["<C-n>"] = actions.cycle_history_next,
 				["<C-p>"] = actions.cycle_history_prev,
@@ -84,12 +45,6 @@ telescope.setup({
 				["<C-x>"] = actions.select_horizontal,
 				["<C-v>"] = actions.select_vertical,
 				["<C-t>"] = actions.select_tab,
-
-				["<C-u>"] = actions.preview_scrolling_up,
-				["<C-d>"] = actions.preview_scrolling_down,
-
-				["<PageUp>"] = actions.results_scrolling_up,
-				["<PageDown>"] = actions.results_scrolling_down,
 
 				["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
 				["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
@@ -130,17 +85,12 @@ telescope.setup({
 				["<PageDown>"] = actions.results_scrolling_down,
 
 				["?"] = actions.which_key,
-			},
-		},
+			}
+		}
 	},
+
+
 	pickers = {
-		-- Default configuration for builtin pickers goes here:
-		-- picker_name = {
-		--   picker_config_key = value,
-		--   ...
-		-- }
-		-- Now the picker_config_key will be applied every time you call this
-		-- builtin picker
 		live_grep = { theme = "dropdown" },
 		grep_string = { theme = "dropdown" },
 		find_files = { theme = "dropdown", previewer = false },
@@ -151,8 +101,8 @@ telescope.setup({
 		},
 		planets = { show_pluto = true },
 	},
+
 	extensions = {
-		-- Your extension configuration goes here:
 		media_files = {
 			-- filetypes whitelist
 			-- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
@@ -174,9 +124,9 @@ telescope.setup({
 				},
 			},
 		},
-	},
+	}
 })
 
--- telescope.load_extension "ui-select"
 telescope.load_extension("file_browser")
 telescope.load_extension("fzf")
+telescope.load_extension("media_files")

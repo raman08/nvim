@@ -41,12 +41,16 @@ nvim_tree.setup({
 		ignore = true,
 		timeout = 500,
 		show_on_dirs = true,
-		show_on_open_dirs = true
+		show_on_open_dirs = true,
+	},
+	update_focused_file = {
+		enable = true,
+		update_root = true,
 	},
 	modified = {
 		enable = true,
 		show_on_dirs = true,
-		show_on_open_dirs = true
+		show_on_open_dirs = true,
 	},
 	filesystem_watchers = {
 		enable = true,
@@ -159,6 +163,6 @@ nvim_tree.setup({
 		confirm = {
 			remove = true,
 			trash = true,
-		}
-	}
+		},
+	},
 })

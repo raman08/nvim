@@ -1,23 +1,13 @@
--- Shorten function name
 M = {}
 
-local opts = { silent = true, noremap = true }
-
+local opts = {silent = true, noremap = true}
 local keymap = vim.api.nvim_set_keymap
 
--- Remap space as leader key
 keymap("n", "<Space>", "", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 keymap("n", "<C-Space>", "<cmd>WhichKey \\<leader><cr>", opts)
--- Modes
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
 
 -- Normal --
 -- Better window navigation
@@ -59,6 +49,9 @@ keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
+-- Paste over currently selected text without yanking it
+keymap("v", "p", '"_dP', opts)
+
 -- Visual Block --
 -- Move text up and down
 keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
@@ -66,14 +59,6 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
--- Nvim-Tree
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
-
--- Terminal --
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", opts)
 
 -- Telescope --
 keymap(
@@ -83,20 +68,6 @@ keymap(
 	opts
 )
 
-keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
-
--- Bbye --
--- keymap("n", "<Leader>q", ":Bdelete<CR>", opts)
-
--- ALT BINDGS
-keymap("n", "<m-v>", "<cmd>vsplit<cr>", opts)
--- Comments
-
--- Compititve Programming --
--- keymap("n", "<leader>pt", ":CompetiTestReceive<CR>", opts)
--- keymap("n", "<leader>pc", ":CompetiTestRun<CR>", opts)
 
 M.show_documentation = function()
 	local filetype = vim.bo.filetype
@@ -111,20 +82,6 @@ M.show_documentation = function()
 	end
 end
 
-keymap("n", "K", ":lua require('user.keymaps').show_documentation()<CR>", opts)
-
-keymap("n", "<s-enter>", "<cmd>TodoQuickFix<cr>", opts)
-
-vim.cmd([[
-  function! QuickFixToggle()
-    if empty(filter(getwininfo(), 'v:val.quickfix'))
-      copen
-    else
-      cclose
-    endif
-  endfunction
-]])
-
-keymap("n", "<m-q>", ":call QuickFixToggle()<cr>", opts)
+keymap("n", "K", ":lua require('user.core.keymaps').show_documentation()<CR>", opts)
 
 return M

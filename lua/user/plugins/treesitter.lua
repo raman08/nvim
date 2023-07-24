@@ -4,20 +4,22 @@ if not status_config_ok then
 end
 
 configs.setup({
-	ensure_installed = "all",
+	ensure_installed = {"c"},
 	sync_install = false,
-	ignore_install = { "" }, -- List of parsers to ignore installing
+
 	matchup = {
 		enable = true, -- mandatory, false will disable the whole extension
 		disable_virtual_text = true,
 		disable = { "html" }, -- optional, list of language that will be disabled
 		-- include_match_words = false
 	},
+
 	highlight = {
 		enable = true, -- false will disable the whole extension
 		disable = { "markdown", "css" }, -- list of language that will be disabled
 		-- additional_vim_regex_highlighting = true,
 	},
+
 	autopairs = { enable = true },
 	indent = { enable = true, disable = { "yaml", "python", "css" } },
 	context_commentstring = { enable = true, enable_autocmd = false },
