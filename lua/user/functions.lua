@@ -104,4 +104,3 @@ function M.smart_quit()
 end
 
 return M
-

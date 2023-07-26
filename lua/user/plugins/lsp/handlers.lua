@@ -5,18 +5,28 @@ if not status_cmp_ok then
 	return
 end
 
+local lsp_lines_ok, lsp_lines = pcall(require, "lsp_lines")
+if not lsp_lines_ok then
+	print("lsp_lines not found")
+	return
+end
+
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
+M.capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}
 
 M.setup = function()
 	local icons = require("user.icons")
 
 	local signs = {
 		{ name = "DiagnosticSignError", text = icons.diagnostics.Error },
-		{ name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
-		{ name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
-		{ name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
+		{ name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
+		{ name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
+		{ name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
 	}
 
 	for _, sign in ipairs(signs) do
@@ -24,7 +34,7 @@ M.setup = function()
 	end
 
 	local config = {
-		virtual_lines = false,
+		virtual_lines = true,
 		virtual_text = true,
 		-- show signs
 		signs = { active = signs },
@@ -50,6 +60,8 @@ M.setup = function()
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 		border = "rounded",
 	})
+
+	lsp_lines.setup()
 end
 
 local function attach_navic(client, bufnr)
@@ -83,6 +95,7 @@ local function lsp_keymaps(bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
+	vim.cmd([[ command! LspLinesToggle execute 'lua require("lsp_lines").toggle()' ]])
 end
 
 M.on_attach = function(client, bufnr)
@@ -110,12 +123,6 @@ M.on_attach = function(client, bufnr)
 	attach_navic(client, bufnr)
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
-
-	local status_ok, illuminate = pcall(require, "illuminate")
-	if not status_ok then
-		return
-	end
-	illuminate.on_attach(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -151,6 +158,6 @@ function M.remove_augroup(name)
 	end
 end
 
-vim.cmd([[ command! LspToggleAutoFormat execute 'lua require("user.lsp.handlers").toggle_format_on_save()' ]])
+vim.cmd([[ command! LspToggleAutoFormat execute 'lua require("user.plugins.lsp.handlers").toggle_format_on_save()' ]])
 
 return M

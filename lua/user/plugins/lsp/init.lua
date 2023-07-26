@@ -29,7 +29,6 @@ M.server_capabilities = function()
 end
 
 require("user.plugins.lsp.mason")
-require("user.plugins.lsp.handlers")
 require("user.plugins.lsp.null-ls")
 
 return M

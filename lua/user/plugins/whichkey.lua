@@ -212,7 +212,7 @@ local mappings = {
 	},
 }
 
-local vmappings = {
+local v_mappings = {
 	["/"] = {
 		"<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
 		"Comment",
@@ -220,9 +220,28 @@ local vmappings = {
 	s = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
 }
 
-local m_mappings = {}
+local m_mappings = {
+	m = {
+		'<cmd>lua require("harpoon.mark").add_file()<cr>',
+		"Harpoon Menu",
+	},
+	b = {
+		'<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>',
+		"Harpoon Menu",
+	},
+	j = {
+
+		'<cmd>lua require("harpoon.ui").nav_prev()<cr>',
+		"Harpoon Prev",
+	},
+	k = {
+
+		'<cmd>lua require("harpoon.ui").nav_next()<cr>',
+		"Harpoon Next",
+	},
+}
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
-which_key.register(vmappings, vopts)
+which_key.register(v_mappings, vopts)
 which_key.register(m_mappings, m_opts)

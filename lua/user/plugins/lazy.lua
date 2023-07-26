@@ -93,6 +93,21 @@ local plugins = {
 		priority = 1000,
 	},
 
+	{
+		"ThePrimeagen/harpoon",
+		config = function()
+			require("user.plugins.harpoon")
+		end,
+	},
+
+	{
+		"phaazon/hop.nvim",
+		branch = "v2",
+		config = function ()
+			require("user.plugins.hop")
+		end
+	},
+
 	-- CMP
 	{
 		"hrsh7th/nvim-cmp",
@@ -173,6 +188,33 @@ local plugins = {
 		config = function()
 			require("user.plugins.lsp")
 		end,
+	},
+	{
+		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+	},
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = {
+			"kevinhwang91/promise-async",
+			{
+				"luukvbaal/statuscol.nvim",
+				config = function()
+					local builtin = require("statuscol.builtin")
+					require("statuscol").setup({
+						relculright = true,
+						segments = {
+							{ text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+							{ text = { "%s" }, click = "v:lua.ScSa" },
+							{ text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+						},
+					})
+				end,
+			},
+		},
+		config = function()
+			require("user.plugins.nvim-ufo")
+		end,
+		event = "BufReadPost",
 	},
 	{
 		"j-hui/fidget.nvim",
