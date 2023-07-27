@@ -58,7 +58,6 @@ local plugins = {
 	}, -- Buffer List in float
 	{
 		"nvim-lualine/lualine.nvim",
-		event = "BufRead",
 		config = function()
 			require("user.plugins.lualine")
 		end,

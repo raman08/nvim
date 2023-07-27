@@ -5,23 +5,8 @@ end
 
 local icons = require("user.icons")
 
-local function contains(t, value)
-	for _, v in pairs(t) do
-		if v == value then
-			return true
-		end
-	end
-	return false
-end
-
-local hide_in_width_60 = function()
-	return vim.o.columns > 60
-end
 local hide_in_width = function()
 	return vim.o.columns > 80
-end
-local hide_in_width_100 = function()
-	return vim.o.columns > 100
 end
 
 M = {}
@@ -104,7 +89,7 @@ lualine.setup({
 			"help",
 			"TelescopePrompt",
 			"toggleterm",
-			"DressingInput"
+			"DressingInput",
 		},
 		globalstatus = true,
 		refresh = {
