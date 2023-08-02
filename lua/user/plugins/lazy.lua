@@ -102,9 +102,9 @@ local plugins = {
 	{
 		"phaazon/hop.nvim",
 		branch = "v2",
-		config = function ()
+		config = function()
 			require("user.plugins.hop")
-		end
+		end,
 	},
 
 	-- CMP
@@ -252,6 +252,10 @@ local plugins = {
 		end,
 	}, -- For breadcrums
 
+	{
+		"jose-elias-alvarez/typescript.nvim",
+	},
+
 	-- Debugging
 	{
 
@@ -264,6 +268,7 @@ local plugins = {
 			-- "Pocco81/DAPInstall.nvim"
 		},
 		config = function()
+			---@diagnostic disable-next-line: different-requires
 			require("user.plugins.dap")
 		end,
 	},

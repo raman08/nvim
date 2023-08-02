@@ -99,11 +99,6 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-	-- if client.name == "tsserver" then
-	--     -- client.serve_capabilities.document_formatting = false
-	--     -- require("lsp-inlayhints").on_attach(client, bufnr)
-	-- end
-
 	if client.name == "lua_ls" then
 		client.server_capabilities.document_formatting = false
 	end
@@ -120,6 +115,11 @@ M.on_attach = function(client, bufnr)
 		client.server_capabilities.document_formatting = false
 	end
 
+	if client.name == "tsserver" then
+		client.serve_capabilities.document_formatting = false
+		vim.lsp.buf.inlayhints(bufnr, true)
+	end
+
 	attach_navic(client, bufnr)
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
@@ -133,7 +133,7 @@ function M.enable_format_on_save()
 	vim.cmd([[
 		augroup format_on_save
 			autocmd!
-			autocmd BufWritePre * lua vim.lsp.buf.formatting()
+			autocmd BufWritePre * lua vim.lsp.buf.format()
 		augroup end
 	]])
 	vim.notify("Enabled format on save")

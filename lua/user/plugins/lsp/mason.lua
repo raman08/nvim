@@ -13,9 +13,14 @@ if not lspconfig_status_ok then
 	return
 end
 
-local servers = {
+local ensure_installed_servers = {
 	"lua_ls",
+	"clangd",
 }
+
+local servers = {}
+
+servers = vim.tbl_extend("keep", ensure_installed_servers, servers);
 
 local settings = {
 	ui = {
@@ -33,7 +38,7 @@ local settings = {
 mason.setup(settings)
 
 mason_lspconfig.setup({
-	ensure_installed = servers,
+	ensure_installed = ensure_installed_servers,
 	automatic_installation = true,
 })
 
