@@ -18,9 +18,11 @@ local ensure_installed_servers = {
 	"clangd",
 }
 
-local servers = {}
+local servers = {
+	"rust_analyser",
+}
 
-servers = vim.tbl_extend("keep", ensure_installed_servers, servers);
+servers = vim.tbl_extend("keep", ensure_installed_servers, servers)
 
 local settings = {
 	ui = {

@@ -46,7 +46,7 @@ local plugins = {
 			require("user.plugins.colorized")
 		end,
 		dependencies = {},
-	}, -- Color the Color
+	},                                   -- Color the Color
 
 	{ "kevinhwang91/nvim-bqf", ft = "qf" }, -- Advance quick fix list
 
@@ -113,7 +113,7 @@ local plugins = {
 		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
 			-- snippets
-			"L3MON4D3/LuaSnip", -- Snippet Engine
+			"L3MON4D3/LuaSnip",    -- Snippet Engine
 			"rafamadriz/friendly-snippets", -- Bunch of Snippets
 
 			-- buffer
@@ -202,8 +202,8 @@ local plugins = {
 					require("statuscol").setup({
 						relculright = true,
 						segments = {
-							{ text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-							{ text = { "%s" }, click = "v:lua.ScSa" },
+							{ text = { builtin.foldfunc },      click = "v:lua.ScFa" },
+							{ text = { "%s" },                  click = "v:lua.ScSa" },
 							{ text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
 						},
 					})
@@ -230,7 +230,7 @@ local plugins = {
 		end,
 	},
 	{
-		"numToStr/Comment.nvim", -- Comment Helper
+		"numToStr/Comment.nvim",                  -- Comment Helper
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring", -- Setting Comment Based On curser location
 		},
@@ -254,6 +254,9 @@ local plugins = {
 
 	{
 		"jose-elias-alvarez/typescript.nvim",
+	},
+	{
+		"simrat39/rust-tools.nvim"
 	},
 
 	-- Debugging
@@ -359,7 +362,7 @@ local opts = {
 		-- defaults for the `Lazy log` command
 		-- log = { "-10" }, -- show the last 10 commits
 		log = { "--since=3 days ago" }, -- show commits from the last 3 days
-		timeout = 300, -- kill processes that take more than 2 minutes
+		timeout = 300,            -- kill processes that take more than 2 minutes
 		url_format = "https://github.com/%s.git",
 	},
 	lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json", -- lockfile generated after running update.
