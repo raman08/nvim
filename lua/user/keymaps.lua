@@ -1,27 +1,19 @@
-M = {}
-
-local opts = {silent = true, noremap = true}
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 keymap("n", "<Space>", "", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-keymap("n", "<C-Space>", "<cmd>WhichKey \\<leader><cr>", opts)
+keymap("n", "<C-Space>", "<cmd>WhichKey \\<space><cr>", opts)
 
--- Normal --
 -- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+keymap("n", "<m-h>", "<C-w>h", opts)
+keymap("n", "<m-j>", "<C-w>j", opts)
+keymap("n", "<m-k>", "<C-w>k", opts)
+keymap("n", "<m-l>", "<C-w>l", opts)
+keymap("n", "<m-tab>", "<c-6>", opts)
 
--- Tabs
-keymap("n", "<m-t>", ":tabnew %<cr>", opts)
-keymap("n", "<m-y>", ":tabclose<cr>", opts)
-keymap("n", "<m-\\>", ":tabonly<cr>", opts)
-
--- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
@@ -35,11 +27,9 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==", opts)
 
--- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
 
--- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
@@ -52,15 +42,12 @@ keymap("v", "p", '"_dP', opts)
 -- Paste over currently selected text without yanking it
 keymap("v", "p", '"_dP', opts)
 
--- Visual Block --
 -- Move text up and down
 keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
-
--- Telescope --
 keymap(
 	"n",
 	"<C-p>",
@@ -68,20 +55,9 @@ keymap(
 	opts
 )
 
+vim.cmd([[:amenu 10.100 mousemenu.Goto\ Definition <cmd>lua vim.lsp.buf.definition()<CR>]])
+vim.cmd([[:amenu 10.110 mousemenu.References <cmd>lua vim.lsp.buf.references()<CR>]])
+-- vim.cmd [[:amenu 10.120 mousemenu.-sep- *]]
 
-M.show_documentation = function()
-	local filetype = vim.bo.filetype
-	if vim.tbl_contains({ "vim", "help" }, filetype) then
-		vim.cmd("h " .. vim.fn.expand("<cword>"))
-	elseif vim.tbl_contains({ "man" }, filetype) then
-		vim.cmd("Man " .. vim.fn.expand("<cword>"))
-	elseif vim.fn.expand("%:t") == "Cargo.toml" then
-		require("crates").show_popup()
-	else
-		vim.lsp.buf.hover()
-	end
-end
-
-keymap("n", "K", ":lua require('user.core.keymaps').show_documentation()<CR>", opts)
-
-return M
+vim.keymap.set("n", "<RightMouse>", "<cmd>:popup mousemenu<CR>")
+vim.keymap.set("n", "<Tab>", "<cmd>:popup mousemenu<CR>")
