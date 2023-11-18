@@ -37,5 +37,8 @@ spec("user.plugins.nvim-ufo")
 spec("user.plugins.renamer")
 spec("user.plugins.todo-comments")
 spec("user.plugins.fugitive")
+spec("user.plugins.colorizer")
+spec("user.plugins.hop")
+
 
 require("user.lazy")
