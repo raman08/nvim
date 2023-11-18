@@ -8,7 +8,7 @@ local M = {
 
 M.servers = {
 	"lua_ls",
-	"cssls",
+	-- "cssls",
 	"html",
 	"tsserver",
 	"astro",

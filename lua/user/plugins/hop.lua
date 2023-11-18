@@ -1,6 +1,6 @@
 local M = {
 	"smoka7/hop.nvim",
-	branch = "v2",
+	-- branch = "v2",
 	event = "VeryLazy",
 }
 

@@ -39,6 +39,6 @@ spec("user.plugins.todo-comments")
 spec("user.plugins.fugitive")
 spec("user.plugins.colorizer")
 spec("user.plugins.hop")
-
+spec("user.plugins.dap")
 
 require("user.lazy")

@@ -1,31 +1,59 @@
 local M = {
 	"lukas-reineke/indent-blankline.nvim",
+	main = "ibl",
 	event = "VeryLazy",
 }
 
 function M.config()
 	local icons = require("user.icons")
 
-	require("indent_blankline").setup({
-		buftype_exclude = { "terminal", "nofile" },
-		filetype_exclude = {
-			"help",
-			"startify",
-			"dashboard",
-			"lazy",
-			"neogitstatus",
-			"NvimTree",
-			"Trouble",
-			"text",
+	require("ibl").setup({
+
+		enabled = true,
+		debounce = 200,
+
+		viewport_buffer = {
+			min = 30,
+			max = 100,
 		},
-		-- char = icons.ui.LineLeft,
-		char = icons.ui.LineMiddle,
-		-- context_char = icons.ui.LineLeft,
-		context_char = icons.ui.LineMiddle,
-		show_trailing_blankline_indent = false,
-		show_first_indent_level = true,
-		use_treesitter = true,
-		show_current_context = true,
+
+		indent = {
+			char = icons.ui.LineMiddle,
+			highlight = { "Function", "Label" },
+			smart_indent_cap = true,
+			priority = 1,
+		},
+
+		whitespace = {
+			highlight = { "Function", "Label" },
+			remove_blankline_trail = true,
+		},
+
+		scope = {
+			enabled = true,
+			show_start = true,
+			show_end = true,
+			injected_languages = false,
+			highlight = { "Function", "Label" },
+			priority = 500,
+		},
+
+		exclude = {
+			filetypes = {
+				"help",
+				"startify",
+				"dashboard",
+				"lazy",
+				"neogitstatus",
+				"NvimTree",
+				"Trouble",
+				"text",
+			},
+			buftypes = {
+				"terminal",
+				"nofile",
+			},
+		},
 	})
 
 	-- indent = { char = icons.ui.LineMiddle },
