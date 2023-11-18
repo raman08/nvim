@@ -62,24 +62,38 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- OPEN NVIM TREE
 local function open_nvim_tree(data)
+	local IGNORED_FT = {
+		"gitcommit",
+		"alpha",
+	}
 
-  -- buffer is a [No Name]
-  local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
+	-- buffer is a real file on the disk
+	-- local real_file = vim.fn.filereadable(data.file) == 1
 
-  -- buffer is a directory
-  local directory = vim.fn.isdirectory(data.file) == 1
+	-- buffer is a [No Name]
+	-- local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
 
-  if not no_name and not directory then
-    return
-  end
+	-- buffer is a directory
+	local directory = vim.fn.isdirectory(data.file) == 1
 
-  -- change to the directory
-  if directory then
-    vim.cmd.cd(data.file)
-  end
+	-- if not real_file and not no_name then
+	-- 	return
+	-- end
 
-  -- open the tree
-  require("nvim-tree.api").tree.open()
+	-- &ft
+	local filetype = vim.bo[data.buf].ft
+
+	if vim.tbl_contains(IGNORED_FT, filetype) then
+		return
+	end
+
+	-- change to the directory
+	if directory then
+		vim.cmd.cd(data.file)
+	end
+
+	-- open the tree but don't focus it
+	require("nvim-tree.api").tree.toggle({ focus = false })
 end
 
--- vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })

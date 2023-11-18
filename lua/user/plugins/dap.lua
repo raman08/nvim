@@ -129,8 +129,8 @@ function M.config()
 		dapui.open()
 	end
 
-	-- require("user.plugins.dap.cpp")
-	-- require("user.plugins.dap.js-ts")
+	require("user.dap.cpp")
+	require("user.dap.js-ts")
 end
 
 return M
