@@ -9,7 +9,7 @@ local M = {
 	},
 }
 
-M.servers = {
+M.lsp_servers = {
 	"lua_ls",
 	"tsserver",
 	"astro",
@@ -50,7 +50,7 @@ function M.config()
 	})
 
 	require("mason-lspconfig").setup({
-		ensure_installed = M.servers,
+		ensure_installed = M.lsp_servers,
 		automatic_installation = true,
 	})
 

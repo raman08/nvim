@@ -9,16 +9,24 @@ local M = {
 }
 
 local function show_documentation()
-	local filetype = vim.bo.filetype
-	if vim.tbl_contains({ "vim", "help" }, filetype) then
-		vim.cmd("h " .. vim.fn.expand("<cword>"))
-	elseif vim.tbl_contains({ "man" }, filetype) then
-		vim.cmd("Man " .. vim.fn.expand("<cword>"))
-	elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
-		require("crates").show_popup()
-	else
-		vim.lsp.buf.hover()
-	end
+	-- local filetype = vim.bo.filetype
+
+	-- print("Is this running?")
+	-- if vim.tbl_contains({ "vim", "help" }, filetype) then
+	-- 	print("notrun")
+	-- 	vim.cmd("h " .. vim.fn.expand("<cword>"))
+	-- elseif vim.tbl_contains({ "man" }, filetype) then
+	-- 	print("notrun")
+	-- 	vim.cmd("Man " .. vim.fn.expand("<cword>"))
+	-- elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+	-- 	print("notrun")
+	-- 	require("crates").show_popup()
+	-- else
+	-- 	print("running?????")
+	-- 	vim.lsp.buf.hover()
+	-- end
+	print("Running hover")
+	vim.lsp.buf.hover()
 end
 
 local function lsp_keymaps(bufnr)
@@ -36,6 +44,7 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
+	print("Running on_attach for "..client)
 	if client.name == "lua_ls" then
 		client.server_capabilities.document_formatting = false
 	end
@@ -90,7 +99,7 @@ function M.config()
 	local lspconfig = require("lspconfig")
 	local icons = require("user.icons")
 
-	local servers = require("user.plugins.mason").servers
+	local servers = require("user.plugins.mason").lsp_servers
 
 	local default_diagnostic_config = {
 		signs = {
@@ -104,7 +113,7 @@ function M.config()
 		},
 
 		virtual_lines = true,
-		virtual_text = false,
+		virtual_text = true,
 		update_in_insert = false,
 		underline = true,
 		severity_sort = true,

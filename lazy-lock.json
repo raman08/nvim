@@ -52,7 +52,7 @@
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "promise-async": { "branch": "main", "commit": "94f6f03c6c1e2aab551aacdf0c1e597a7269abb6" },
   "renamer.nvim": { "branch": "develop", "commit": "1614d466df53899f11dd5395eaac3c09a275c384" },
-  "rustaceanvim": { "branch": "master", "commit": "d747f194a2cae74da47fa665a86edb0a48b8139b" },
+  "rust-tools.nvim": { "branch": "master", "commit": "0cc8adab23117783a0292a0c8a2fbed1005dc645" },
   "schemastore.nvim": { "branch": "main", "commit": "02cbeccdcaa8bc11e849b61a08a11b9b8a5dde7d" },
   "statuscol.nvim": { "branch": "main", "commit": "98d02fc90ebd7c4674ec935074d1d09443d49318" },
   "telescope-file-browser.nvim": { "branch": "master", "commit": "98101b22402cd6d1c7e9a7e0c4718bfc98cb1625" },
