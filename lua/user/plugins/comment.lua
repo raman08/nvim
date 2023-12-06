@@ -1,6 +1,12 @@
 local M = {
 	"numToStr/Comment.nvim",
 	event = "VeryLazy",
+	dependencies = {
+		{
+			"JoosepAlviste/nvim-ts-context-commentstring",
+			event = "VeryLazy",
+		},
+	},
 }
 
 function M.config()
@@ -15,6 +21,8 @@ function M.config()
 		ignore = "^$", --Lines to be ignored while (un)comment
 
 		pre_hook = function(ctx)
+			require("ts_context_commentstring").update_commentstring()
+
 			local U = require("Comment.utils")
 
 			-- Determine whether to use linewise or blockwise commentstring

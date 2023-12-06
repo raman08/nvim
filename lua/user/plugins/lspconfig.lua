@@ -8,18 +8,31 @@ local M = {
 	},
 }
 
+local function show_documentation()
+	local filetype = vim.bo.filetype
+	if vim.tbl_contains({ "vim", "help" }, filetype) then
+		vim.cmd("h " .. vim.fn.expand("<cword>"))
+	elseif vim.tbl_contains({ "man" }, filetype) then
+		vim.cmd("Man " .. vim.fn.expand("<cword>"))
+	elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+		require("crates").show_popup()
+	else
+		vim.lsp.buf.hover()
+	end
+end
+
 local function lsp_keymaps(bufnr)
-	local opts = { noremap = true, silent = true }
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gf", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+	local opts = { noremap = true, silent = true, bufnr = bufnr }
+
+	vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+	vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	vim.keymap.set("n", "K", show_documentation, opts)
+	vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+	vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+	vim.keymap.set("n", "gf", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+	vim.keymap.set("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+	vim.keymap.set("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
-	vim.cmd([[ command! LspLinesToggle execute 'lua require("lsp_lines").toggle()' ]])
 end
 
 M.on_attach = function(client, bufnr)
@@ -54,7 +67,9 @@ function M.common_capabilities()
 	end
 
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 	capabilities.textDocument.completion.completionItem.resolveSupport = {
 		properties = {
 			"documentation",
@@ -62,10 +77,12 @@ function M.common_capabilities()
 			"additionalTextEdits",
 		},
 	}
+
 	capabilities.textDocument.foldingRange = {
 		dynamicRegistration = false,
 		lineFoldingOnly = true,
 	}
+
 	return capabilities
 end
 
@@ -73,28 +90,16 @@ function M.config()
 	local lspconfig = require("lspconfig")
 	local icons = require("user.icons")
 
-	local servers = {
-		"lua_ls",
-		-- "cssls",
-		"html",
-		"tsserver",
-		"astro",
-		"pyright",
-		"bashls",
-		"jsonls",
-		"yamlls",
-		"marksman",
-		"tailwindcss",
-	}
+	local servers = require("user.plugins.mason").servers
 
 	local default_diagnostic_config = {
 		signs = {
 			active = true,
 			values = {
 				{ name = "DiagnosticSignError", text = icons.diagnostics.Error },
-				{ name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-				{ name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-				{ name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+				{ name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
+				{ name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
+				{ name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
 			},
 		},
 
@@ -140,7 +145,12 @@ function M.config()
 			require("neodev").setup({})
 		end
 
+		if server == "rust_analyzer" then
+			goto continue
+		end
+
 		lspconfig[server].setup(opts)
+		::continue::
 	end
 end
 

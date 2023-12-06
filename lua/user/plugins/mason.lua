@@ -1,23 +1,36 @@
 local M = {
-	"williamboman/mason-lspconfig.nvim",
+	"williamboman/mason.nvim",
 	dependencies = {
-		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
 		"nvim-lua/plenary.nvim",
+		"jay-babu/mason-nvim-dap.nvim",
+		-- "jay-babu/mason-null-ls.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 }
 
 M.servers = {
 	"lua_ls",
-	-- "cssls",
-	"html",
 	"tsserver",
 	"astro",
-	"pyright",
-	"bashls",
 	"jsonls",
 	"yamlls",
-	"marksman",
 	"tailwindcss",
+	"rust_analyzer",
+}
+
+local tools_ensure_installed = {
+	"stylua",
+	"prettier",
+	"clang-format",
+}
+
+local dap_ensure_installed = {
+	"python",
+	"cppdbg",
+	"node2",
+	"codelldb",
+	"chrome",
 }
 
 function M.config()
@@ -28,10 +41,27 @@ function M.config()
 		log_level = vim.log.levels.INFO,
 	})
 
+	require("mason-tool-installer").setup({
+		ensure_installed = tools_ensure_installed,
+		auto_update = false,
+		run_on_start = true,
+		start_delay = 3000, -- 3 second delay
+		debounce_hours = 5, -- at least 5 hours between attempts to install/update
+	})
+
 	require("mason-lspconfig").setup({
 		ensure_installed = M.servers,
 		automatic_installation = true,
 	})
+
+	require("mason-nvim-dap").setup({
+		ensure_installed = dap_ensure_installed,
+		automatic_installation = false,
+	})
+
+	-- require("mason-null-ls").setup({
+	-- 	ensure_installed = { "stylua", "jq" }
+	-- })
 end
 
 return M

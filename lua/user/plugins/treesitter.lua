@@ -8,10 +8,6 @@ local M = {
 			event = "VeryLazy",
 		},
 		{
-			"JoosepAlviste/nvim-ts-context-commentstring",
-			event = "VeryLazy",
-		},
-		{
 			"windwp/nvim-ts-autotag",
 			event = "VeryLazy",
 		},
@@ -49,11 +45,6 @@ function M.config()
 		},
 
 		autotag = { enable = true, disable = { "xml", "markdown" } },
-
-		context_commentstring = {
-			enable = true,
-			enable_autocmd = false,
-		},
 
 		autopairs = { enable = true },
 
