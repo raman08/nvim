@@ -16,7 +16,7 @@ function M.config()
 		tools = {
 
 			-- options right now: termopen / quickfix / toggleterm / vimux
-			executor = require("rustaceanvim.executors").toggleterm,
+			-- executor = require("rustaceanvim.executors").toggleterm,
 			-- executor = require("rust-tools").toggleterm,
 
 			-- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
@@ -56,19 +56,19 @@ function M.config()
 				diagnostic = {
 					dynamicRegistration = true,
 				},
-				checkOnSave = {
-					command = "clippy",
-				},
+				-- checkOnSave = {
+				-- 	command = "clippy",
+				-- },
 			},
 		},
 
 		-- debugging stuff
 		dap = {
-			adapter = {
-				type = "executable",
-				command = "lldb-vscode",
-				name = "rt_lldb",
-			},
+			-- adapter = {
+			-- 	type = "executable",
+			-- 	command = "lldb-vscode",
+			-- 	name = "rt_lldb",
+			-- },
 		},
 	}
 
