@@ -16,13 +16,13 @@ M.lsp_servers = {
 	"jsonls",
 	"yamlls",
 	"tailwindcss",
-	"rust_analyzer",
 }
 
 local tools_ensure_installed = {
 	"stylua",
 	"prettier",
 	"clang-format",
+	"rust-analyzer",
 }
 
 local dap_ensure_installed = {

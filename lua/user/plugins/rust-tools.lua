@@ -46,27 +46,28 @@ function M.config()
 			-- all the opts to send to nvim-lspconfig
 			-- these override the defaults set by rust-tools.nvim
 			-- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
-			server = {
-				on_attach = on_attach,
-				capabilities = capabilities,
-				standalone = true,
-				["rust-analyzer"] = {
-					diagnostic = {
-						dynamicRegistration = true,
-					},
-					checkOnSave = {
-						command = "clippy",
-					},
+		},
+
+		server = {
+			on_attach = on_attach,
+			capabilities = capabilities,
+			standalone = true,
+			["rust-analyzer"] = {
+				diagnostic = {
+					dynamicRegistration = true,
+				},
+				checkOnSave = {
+					command = "clippy",
 				},
 			},
+		},
 
-			-- debugging stuff
-			dap = {
-				-- adapter = {
-				-- 	type = "executable",
-				-- 	command = "lldb-vscode",
-				-- 	name = "rt_lldb",
-				-- },
+		-- debugging stuff
+		dap = {
+			adapter = {
+				type = "executable",
+				command = "lldb-vscode",
+				name = "rt_lldb",
 			},
 		},
 	}

@@ -9,42 +9,84 @@ local M = {
 }
 
 local function show_documentation()
-	-- local filetype = vim.bo.filetype
+	local filetype = vim.bo.filetype
 
-	-- print("Is this running?")
-	-- if vim.tbl_contains({ "vim", "help" }, filetype) then
-	-- 	print("notrun")
-	-- 	vim.cmd("h " .. vim.fn.expand("<cword>"))
-	-- elseif vim.tbl_contains({ "man" }, filetype) then
-	-- 	print("notrun")
-	-- 	vim.cmd("Man " .. vim.fn.expand("<cword>"))
-	-- elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
-	-- 	print("notrun")
-	-- 	require("crates").show_popup()
-	-- else
-	-- 	print("running?????")
-	-- 	vim.lsp.buf.hover()
-	-- end
-	print("Running hover")
-	vim.lsp.buf.hover()
+	if vim.tbl_contains({ "vim", "help" }, filetype) then
+		print("notrun")
+		vim.cmd("h " .. vim.fn.expand("<cword>"))
+	elseif vim.tbl_contains({ "man" }, filetype) then
+		print("notrun")
+		vim.cmd("Man " .. vim.fn.expand("<cword>"))
+	elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+		print("notrun")
+		require("crates").show_popup()
+	else
+		vim.lsp.buf.hover()
+	end
 end
 
-local function lsp_keymaps(bufnr)
-	local opts = { noremap = true, silent = true, bufnr = bufnr }
+local keymaps_list = {
+	normal_mode = {
+		-- ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show hover" },
+		["K"] = { show_documentation, "Show hover" },
+		["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto definition" },
+		["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Goto Declaration" },
+		["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "Goto references" },
+		["gi"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation" },
+		["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "show signature help" },
+		["gl"] = {
+			function()
+				local float = vim.diagnostic.config().float
 
-	vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	vim.keymap.set("n", "K", show_documentation, opts)
-	vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	vim.keymap.set("n", "gf", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	vim.keymap.set("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-	vim.keymap.set("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+				if float then
+					local config = type(float) == "table" and float or {}
+					config.scope = "line"
+
+					vim.diagnostic.open_float(config)
+				end
+			end,
+			"Show line diagnostics",
+		},
+	},
+	insert_mode = {},
+	visual_mode = {},
+}
+
+local function lsp_keymaps(bufnr)
+
+	local mappings = {
+		normal_mode = "n",
+		insert_mode = "i",
+		visual_mode = "v",
+	}
+
+	for mode_name, mode_char in pairs(mappings) do
+		for key, remap in pairs(keymaps_list[mode_name]) do
+			local opts = { buffer = bufnr, desc = remap[2], noremap = true, silent = true }
+			vim.keymap.set(mode_char, key, remap[1], opts)
+		end
+	end
+
+
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
 end
 
+-- local function lsp_keymaps(bufnr)
+-- 	print("Keymap initilized")
+-- 	local opts = { noremap = true, silent = true, bufnr = bufnr }
+
+-- 	vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+-- 	vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+-- 	vim.keymap.set("n", "K", show_documentation, opts)
+-- 	vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+-- 	vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+-- 	vim.keymap.set("n", "gf", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+-- 	vim.keymap.set("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+-- 	vim.keymap.set("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+-- end
+
 M.on_attach = function(client, bufnr)
-	print("Running on_attach for "..client)
+
 	if client.name == "lua_ls" then
 		client.server_capabilities.document_formatting = false
 	end
@@ -99,8 +141,6 @@ function M.config()
 	local lspconfig = require("lspconfig")
 	local icons = require("user.icons")
 
-	local servers = require("user.plugins.mason").lsp_servers
-
 	local default_diagnostic_config = {
 		signs = {
 			active = true,
@@ -139,12 +179,14 @@ function M.config()
 
 	require("lspconfig.ui.windows").default_options.border = "rounded"
 
-	for _, server in pairs(servers) do
-		local opts = {
-			on_attach = M.on_attach,
-			capabilities = M.common_capabilities(),
-		}
+	local servers = require("user.plugins.mason").lsp_servers
 
+	local opts = {
+		on_attach = M.on_attach,
+		capabilities = M.common_capabilities(),
+	}
+
+	for _, server in pairs(servers) do
 		local require_ok, settings = pcall(require, "user.lspsettings." .. server)
 		if require_ok then
 			opts = vim.tbl_deep_extend("force", settings, opts)
@@ -155,11 +197,11 @@ function M.config()
 		end
 
 		if server == "rust_analyzer" then
-			goto continue
+			goto continue_rust
 		end
 
 		lspconfig[server].setup(opts)
-		::continue::
+		::continue_rust::
 	end
 end
 
