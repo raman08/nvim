@@ -16,6 +16,7 @@ M.lsp_servers = {
 	"jsonls",
 	"yamlls",
 	"tailwindcss",
+	"bashls"
 }
 
 local tools_ensure_installed = {
