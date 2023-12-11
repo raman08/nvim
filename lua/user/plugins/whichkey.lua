@@ -55,18 +55,6 @@ function M.config()
 			b = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
 			-- b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
 			-- n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
-			e = {
-				"<cmd>BufferLinePickClose<cr>",
-				"Pick which buffer to close",
-			},
-			D = {
-				"<cmd>BufferLineSortByDirectory<cr>",
-				"Sort by directory",
-			},
-			L = {
-				"<cmd>BufferLineSortByExtension<cr>",
-				"Sort by language",
-			},
 		},
 
 		-- NOTE: Check if these can be shifted to the DAP file
@@ -87,18 +75,6 @@ function M.config()
 			q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
 			U = { "<cmd>lua require'dapui'.toggle({reset = true})<cr>", "Toggle UI" },
 		},
-
-		-- n = {
-		-- 	name = "Nostr",
-		-- 	k = { '<cmd>lua require("nostr").generate_keys()<cr>', "Generate Keys" },
-		-- 	a = { '<cmd>lua require("nostr").add_relay()<cr>', "Add Relay" },
-		-- 	r = { '<cmd>lua require("nostr").remove_relay()<cr>', "Remove Relay" },
-		-- 	l = { '<cmd>lua require("nostr").list_relays()<cr>', "List Relays" },
-		-- 	s = { '<cmd>lua require("nostr").set_active_relay()<cr>', "Set Active Relay" },
-		-- 	p = { '<cmd>lua require("nostr").publish_note()<cr>', "Publish Note" },
-		-- 	d = { '<cmd>lua require("nostr").decode()<cr>', "Decode" },
-		-- 	e = { '<cmd>lua require("nostr").encode()<cr>', "Encode" },
-		-- },
 
 		f = {
 			name = "Find",
@@ -171,11 +147,6 @@ function M.config()
 			},
 			e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
 		},
-
-		T = {
-			name = "Treesitter",
-			i = { ":TSConfigInfo<cr>", "Info" },
-		},
 	}
 
 	-- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
@@ -246,15 +217,15 @@ function M.config()
 		layout = {
 			height = { min = 4, max = 25 }, -- min and max height of the columns
 			width = { min = 20, max = 50 }, -- min and max width of the columns
-			spacing = 3, -- spacing between columns
-			align = "center", -- align columns left, center or right
+			spacing = 3,           -- spacing between columns
+			align = "center",      -- align columns left, center or right
 		},
 
-		ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
+		ignore_missing = true,                                                  -- enable this to hide mappings for which you didn't specify a label
 		hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-		show_help = true, -- show help message on the command line when the popup is visible
-		show_keys = true, -- show the currently pressed key and its label as a message in the command line
-		triggers = "auto", -- automatically setup triggers
+		show_help = true,                                                       -- show help message on the command line when the popup is visible
+		show_keys = true,                                                       -- show the currently pressed key and its label as a message in the command line
+		triggers = "auto",                                                      -- automatically setup triggers
 		-- triggers = {"<leader>"} -- or specify a list manually
 
 		triggers_blacklist = {

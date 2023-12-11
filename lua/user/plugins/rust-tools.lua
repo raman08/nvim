@@ -9,7 +9,7 @@ local M = {
 }
 
 function M.config()
-	local on_attach = require("user.plugins.lspconfig").on_attach
+	local default_on_attach = require("user.plugins.lspconfig").on_attach
 	local capabilities = require("user.plugins.lspconfig").common_capabilities()
 
 	local opts = {
@@ -40,8 +40,17 @@ function M.config()
 
 				max_height = nil,
 
-				auto_focus = false,
+				auto_focus = true,
 			},
+
+			on_initialized = function()
+				vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
+					pattern = { "*.rs" },
+					callback = function()
+						local _, _ = pcall(vim.lsp.codelens.refresh)
+					end,
+				})
+			end,
 
 			-- all the opts to send to nvim-lspconfig
 			-- these override the defaults set by rust-tools.nvim
@@ -49,16 +58,26 @@ function M.config()
 		},
 
 		server = {
-			on_attach = on_attach,
+			on_attach = function(client, bufnr)
+				default_on_attach(client, bufnr)
+				local rt = require("rust-tools")
+				vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+			end,
 			capabilities = capabilities,
 			standalone = true,
 			["rust-analyzer"] = {
-				diagnostic = {
-					dynamicRegistration = true,
+				imports = {
+					granularity = {
+						group = "module",
+					},
+					prefix = "self",
 				},
-				-- checkOnSave = {
-				-- 	command = "clippy",
-				-- },
+				lens = {
+					enable = true,
+				},
+				checkOnSave = {
+					command = "clippy",
+				},
 			},
 		},
 

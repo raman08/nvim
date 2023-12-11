@@ -12,13 +12,10 @@ local function show_documentation()
 	local filetype = vim.bo.filetype
 
 	if vim.tbl_contains({ "vim", "help" }, filetype) then
-		print("notrun")
 		vim.cmd("h " .. vim.fn.expand("<cword>"))
 	elseif vim.tbl_contains({ "man" }, filetype) then
-		print("notrun")
 		vim.cmd("Man " .. vim.fn.expand("<cword>"))
 	elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
-		print("notrun")
 		require("crates").show_popup()
 	else
 		vim.lsp.buf.hover()
@@ -53,12 +50,12 @@ local keymaps_list = {
 }
 
 local function lsp_keymaps(bufnr)
-
 	local mappings = {
 		normal_mode = "n",
 		insert_mode = "i",
 		visual_mode = "v",
 	}
+
 
 	for mode_name, mode_char in pairs(mappings) do
 		for key, remap in pairs(keymaps_list[mode_name]) do
@@ -66,7 +63,6 @@ local function lsp_keymaps(bufnr)
 			vim.keymap.set(mode_char, key, remap[1], opts)
 		end
 	end
-
 
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
 end
@@ -86,7 +82,6 @@ end
 -- end
 
 M.on_attach = function(client, bufnr)
-
 	if client.name == "lua_ls" then
 		client.server_capabilities.document_formatting = false
 	end
@@ -111,8 +106,14 @@ M.on_attach = function(client, bufnr)
 	lsp_keymaps(bufnr)
 end
 
+M.toggle_inlay_hints = function()
+	local bufnr = vim.api.nvim_get_current_buf()
+	vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
+end
+
 function M.common_capabilities()
 	local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+
 	if status_ok then
 		return cmp_nvim_lsp.default_capabilities()
 	end
@@ -120,7 +121,6 @@ function M.common_capabilities()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 	capabilities.textDocument.completion.completionItem.resolveSupport = {
 		properties = {
 			"documentation",
@@ -146,13 +146,13 @@ function M.config()
 			active = true,
 			values = {
 				{ name = "DiagnosticSignError", text = icons.diagnostics.Error },
-				{ name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
-				{ name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
-				{ name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
+				{ name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
+				{ name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
+				{ name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
 			},
 		},
 
-		virtual_lines = true,
+		virtual_lines = false,
 		virtual_text = true,
 		update_in_insert = false,
 		underline = true,
@@ -181,12 +181,12 @@ function M.config()
 
 	local servers = require("user.plugins.mason").lsp_servers
 
-	local opts = {
-		on_attach = M.on_attach,
-		capabilities = M.common_capabilities(),
-	}
-
 	for _, server in pairs(servers) do
+		local opts = {
+			on_attach = M.on_attach,
+			capabilities = M.common_capabilities(),
+		}
+
 		local require_ok, settings = pcall(require, "user.lspsettings." .. server)
 		if require_ok then
 			opts = vim.tbl_deep_extend("force", settings, opts)
