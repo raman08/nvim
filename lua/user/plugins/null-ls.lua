@@ -27,6 +27,7 @@ function M.config()
 				},
 			}),
 			formatting.clang_format,
+			formatting.beautysh,
 			-- null_ls.builtins.diagnostics.eslint,
 			null_ls.builtins.completion.spell,
 		},
