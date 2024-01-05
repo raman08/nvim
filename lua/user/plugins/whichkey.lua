@@ -146,6 +146,10 @@ function M.config()
 				"Workspace Symbols",
 			},
 			e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
+			t = {
+				"<cmd>lua vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled()) <cr>",
+				"Toggle Inlay Hints",
+			},
 		},
 	}
 

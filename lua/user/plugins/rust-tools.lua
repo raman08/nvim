@@ -40,7 +40,7 @@ function M.config()
 
 				max_height = nil,
 
-				auto_focus = true,
+				auto_focus = false,
 			},
 
 			on_initialized = function()
@@ -60,8 +60,8 @@ function M.config()
 		server = {
 			on_attach = function(client, bufnr)
 				default_on_attach(client, bufnr)
-				local rt = require("rust-tools")
-				vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+				vim.keymap.set("n", "K", "<cmd>RustLsp hover actions<cr>", { buffer = bufnr })
+				vim.keymap.set("v", "K", "<cmd>RustLsp hover range<cr>", { buffer = bufnr })
 			end,
 			capabilities = capabilities,
 			standalone = true,
