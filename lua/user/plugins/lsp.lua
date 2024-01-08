@@ -4,6 +4,11 @@ local M = {
 	dependencies = {
 		{
 			"folke/neodev.nvim",
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"nvim-lua/plenary.nvim",
+			"jay-babu/mason-nvim-dap.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 	},
 }
@@ -56,7 +61,6 @@ local function lsp_keymaps(bufnr)
 		visual_mode = "v",
 	}
 
-
 	for mode_name, mode_char in pairs(mappings) do
 		for key, remap in pairs(keymaps_list[mode_name]) do
 			local opts = { buffer = bufnr, desc = remap[2], noremap = true, silent = true }
@@ -67,51 +71,32 @@ local function lsp_keymaps(bufnr)
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format()' ]])
 end
 
--- local function lsp_keymaps(bufnr)
--- 	print("Keymap initilized")
--- 	local opts = { noremap = true, silent = true, bufnr = bufnr }
+local lsp_servers = {
+	"lua_ls",
+	"tsserver",
+	"astro",
+	"jsonls",
+	"yamlls",
+	"tailwindcss",
+	"bashls",
+}
 
--- 	vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
--- 	vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
--- 	vim.keymap.set("n", "K", show_documentation, opts)
--- 	vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
--- 	vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
--- 	vim.keymap.set("n", "gf", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
--- 	vim.keymap.set("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
--- 	vim.keymap.set("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
--- end
+local tools_ensure_installed = {
+	"stylua",
+	"prettier",
+	"clang-format",
+	"rust-analyzer",
+}
 
-M.on_attach = function(client, bufnr)
-	if client.name == "lua_ls" then
-		client.server_capabilities.document_formatting = false
-	end
+local dap_ensure_installed = {
+	"python",
+	"cppdbg",
+	"node2",
+	"codelldb",
+	"chrome",
+}
 
-	if client.name == "eslint" then
-		client.server_capabilities.document_formatting = false
-	end
-
-	if client.name == "html" then
-		client.server_capabilities.document_formatting = false
-	end
-
-	if client.name == "clangd" then
-		client.server_capabilities.document_formatting = false
-	end
-
-	if client.name == "tsserver" then
-		client.serve_capabilities.document_formatting = false
-		vim.lsp.buf.inlayhints(bufnr, true)
-	end
-
-	lsp_keymaps(bufnr)
-end
-
-M.toggle_inlay_hints = function()
-	local bufnr = vim.api.nvim_get_current_buf()
-	vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
-end
-
-function M.common_capabilities()
+local function common_capabilities()
 	local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
 	if status_ok then
@@ -137,10 +122,33 @@ function M.common_capabilities()
 	return capabilities
 end
 
-function M.config()
-	local lspconfig = require("lspconfig")
-	local icons = require("user.icons")
+local on_attach = function(client, bufnr)
+	if client.name == "lua_ls" then
+		client.server_capabilities.document_formatting = false
+	end
 
+	if client.name == "eslint" then
+		client.server_capabilities.document_formatting = false
+	end
+
+	if client.name == "html" then
+		client.server_capabilities.document_formatting = false
+	end
+
+	if client.name == "clangd" then
+		client.server_capabilities.document_formatting = false
+	end
+
+	if client.name == "tsserver" then
+		client.serve_capabilities.document_formatting = false
+		vim.lsp.buf.inlayhints(bufnr, true)
+	end
+
+	lsp_keymaps(bufnr)
+end
+
+function M.config()
+	local icons = require("user.icons")
 	local default_diagnostic_config = {
 		signs = {
 			active = true,
@@ -177,32 +185,58 @@ function M.config()
 	vim.lsp.handlers["textDocument/signatureHelp"] =
 		vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
+	require("mason").setup({
+		ui = {
+			border = "rounded",
+		},
+		log_level = vim.log.levels.INFO,
+	})
+
+	require("mason-tool-installer").setup({
+		ensure_installed = tools_ensure_installed,
+		auto_update = false,
+		run_on_start = true,
+		start_delay = 3000, -- 3 second delay
+		debounce_hours = 5, -- at least 5 hours between attempts to install/update
+	})
+
 	require("lspconfig.ui.windows").default_options.border = "rounded"
 
-	local servers = require("user.plugins.mason").lsp_servers
+	require("mason-lspconfig").setup({
+		ensure_installed = lsp_servers,
+		automatic_installation = true,
 
-	for _, server in pairs(servers) do
-		local opts = {
-			on_attach = M.on_attach,
-			capabilities = M.common_capabilities(),
-		}
+		handlers = {
+			function(server)
+				local lspconfig = require("lspconfig")
+				local opts = {
+					on_attach = on_attach,
+					capabilities = common_capabilities(),
+				}
 
-		local require_ok, settings = pcall(require, "user.lspsettings." .. server)
-		if require_ok then
-			opts = vim.tbl_deep_extend("force", settings, opts)
-		end
+				local require_ok, settings = pcall(require, "user.lspsettings." .. server)
+				if require_ok then
+					opts = vim.tbl_deep_extend("force", settings, opts)
+				end
 
-		if server == "lua_ls" then
-			require("neodev").setup({})
-		end
+				if server == "lua_ls" then
+					require("neodev").setup({})
+				end
 
-		if server == "rust_analyzer" then
-			goto continue_rust
-		end
+				if server == "rust_analyzer" then
+					goto continue_rust
+				end
 
-		lspconfig[server].setup(opts)
-		::continue_rust::
-	end
+				lspconfig[server].setup(opts)
+				::continue_rust::
+			end,
+		},
+	})
+
+	require("mason-nvim-dap").setup({
+		ensure_installed = dap_ensure_installed,
+		automatic_installation = false,
+	})
 end
 
 return M

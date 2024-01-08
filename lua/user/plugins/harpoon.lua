@@ -1,6 +1,7 @@
 local M = {
 	"ThePrimeagen/harpoon",
-	event = "VeryLazy",
+	branch = "harpoon2",
+	dependencies = { "nvim-lua/plenary.nvim" },
 }
 
 function M.config()
@@ -9,14 +10,28 @@ function M.config()
 		return
 	end
 
-	local status_telescope_ok, telescope = pcall(require, "telescope")
-	if not status_telescope_ok then
-		return
+	local conf = require("telescope.config").values
+	local function toggle_telescope(harpoon_files)
+		local file_paths = {}
+		for _, item in ipairs(harpoon_files.items) do
+			table.insert(file_paths, item.value)
+		end
+
+		require("telescope.pickers")
+			.new({}, {
+				prompt_title = "Harpoon",
+				finder = require("telescope.finders").new_table({
+					results = file_paths,
+				}),
+				previewer = conf.file_previewer({}),
+				sorter = conf.generic_sorter({}),
+			})
+			:find()
 	end
 
-	harpoon.setup({})
-
-	telescope.load_extension("harpoon")
+	vim.keymap.set("n", "<C-e>", function()
+		toggle_telescope(harpoon:list())
+	end, { desc = "Open harpoon window" })
 end
 
 return M

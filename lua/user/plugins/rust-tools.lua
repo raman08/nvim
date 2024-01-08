@@ -1,6 +1,5 @@
 local M = {
 	"mrcjkb/rustaceanvim",
-	-- "simrat39/rust-tools.nvim",
 	version = "^3", -- Recommended
 	dependencies = {
 		"neovim/nvim-lspconfig",
@@ -14,12 +13,6 @@ function M.config()
 
 	local opts = {
 		tools = {
-
-			-- options right now: termopen / quickfix / toggleterm / vimux
-			-- executor = require("rustaceanvim.executors").toggleterm,
-			-- executor = require("rust-tools").toggleterm,
-
-			-- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
 			reload_workspace_from_cargo_toml = true,
 
 			-- options same as lsp hover / vim.lsp.util.open_floating_preview()
@@ -35,11 +28,8 @@ function M.config()
 					{ "╰", "FloatBorder" },
 					{ "│", "FloatBorder" },
 				},
-
 				max_width = nil,
-
 				max_height = nil,
-
 				auto_focus = false,
 			},
 
@@ -92,9 +82,6 @@ function M.config()
 	}
 
 	vim.g.rustaceanvim = opts
-
-	-- local rt = require("rust-tools")
-	-- rt.setup(opts)
 end
 
 return M

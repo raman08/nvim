@@ -1,5 +1,5 @@
 local M = {
-	"jose-elias-alvarez/null-ls.nvim",
+	"nvimtools/none-ls.nvim",
 }
 
 function M.config()
@@ -29,7 +29,7 @@ function M.config()
 			formatting.clang_format,
 			formatting.beautysh,
 			-- null_ls.builtins.diagnostics.eslint,
-			null_ls.builtins.completion.spell,
+			-- null_ls.builtins.completion.spell,
 		},
 	})
 end

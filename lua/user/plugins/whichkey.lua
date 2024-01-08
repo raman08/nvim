@@ -163,23 +163,30 @@ function M.config()
 		},
 	}
 
+	local harpoon = require("harpoon")
 	local m_mappings = {
 		m = {
-			'<cmd>lua require("harpoon.mark").add_file()<cr>',
+			function()
+				harpoon:list():append()
+			end,
 			"Harpoon Menu",
 		},
 		b = {
-			'<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>',
+			function()
+				harpoon.ui:toggle_quick_menu(harpoon:list())
+			end,
 			"Harpoon Menu",
 		},
 		j = {
-
-			'<cmd>lua require("harpoon.ui").nav_prev()<cr>',
+			function()
+				harpoon:list():prev()
+			end,
 			"Harpoon Prev",
 		},
 		k = {
-
-			'<cmd>lua require("harpoon.ui").nav_next()<cr>',
+			function()
+				harpoon:list():next()
+			end,
 			"Harpoon Next",
 		},
 	}
@@ -221,15 +228,15 @@ function M.config()
 		layout = {
 			height = { min = 4, max = 25 }, -- min and max height of the columns
 			width = { min = 20, max = 50 }, -- min and max width of the columns
-			spacing = 3,           -- spacing between columns
-			align = "center",      -- align columns left, center or right
+			spacing = 3, -- spacing between columns
+			align = "center", -- align columns left, center or right
 		},
 
-		ignore_missing = true,                                                  -- enable this to hide mappings for which you didn't specify a label
+		ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
 		hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-		show_help = true,                                                       -- show help message on the command line when the popup is visible
-		show_keys = true,                                                       -- show the currently pressed key and its label as a message in the command line
-		triggers = "auto",                                                      -- automatically setup triggers
+		show_help = true, -- show help message on the command line when the popup is visible
+		show_keys = true, -- show the currently pressed key and its label as a message in the command line
+		triggers = "auto", -- automatically setup triggers
 		-- triggers = {"<leader>"} -- or specify a list manually
 
 		triggers_blacklist = {

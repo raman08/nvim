@@ -1,5 +1,8 @@
 local M = {
 	"LunarVim/breadcrumbs.nvim",
+	dependencies = {
+		{ "SmiteshP/nvim-navic" },
+	},
 }
 
 function M.config()

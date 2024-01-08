@@ -88,8 +88,8 @@ function M.config()
 				i = cmp.mapping.abort(),
 				c = cmp.mapping.close(),
 			}),
-			-- Accept currently selected item. If none selected, `select` first item.
 			-- Set `select` to `false` to only confirm explicitly selected items.
+			-- Accept currently selected item. If none selected, `select` first item.
 			["<CR>"] = cmp.mapping.confirm({ select = true }),
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then

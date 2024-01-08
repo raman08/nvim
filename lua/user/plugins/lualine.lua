@@ -1,5 +1,6 @@
 local M = {
 	"nvim-lualine/lualine.nvim",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 }
 
 function M.config()
@@ -16,7 +17,7 @@ function M.config()
 	}
 
 	local language_servers = function()
-		local buf_clients = vim.lsp.get_active_clients({ bufnr = 0 })
+		local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
 
 		local null_ls_installed, null_ls = pcall(require, "null-ls")
 
@@ -78,7 +79,7 @@ function M.config()
 			lualine_a = { "mode" },
 			lualine_b = { "branch" },
 			lualine_c = { diff },
-			lualine_x = { "diagnostics", language_servers},
+			lualine_x = { "diagnostics", language_servers },
 			lualine_y = { "filetype" },
 			lualine_z = { "progress" },
 		},
