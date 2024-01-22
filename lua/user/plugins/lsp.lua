@@ -96,7 +96,7 @@ local dap_ensure_installed = {
 	"chrome",
 }
 
-local function common_capabilities()
+M.common_capabilities = function()
 	local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
 	if status_ok then
@@ -122,7 +122,7 @@ local function common_capabilities()
 	return capabilities
 end
 
-local on_attach = function(client, bufnr)
+M.on_attach = function(client, bufnr)
 	if client.name == "lua_ls" then
 		client.server_capabilities.document_formatting = false
 	end
@@ -154,9 +154,9 @@ function M.config()
 			active = true,
 			values = {
 				{ name = "DiagnosticSignError", text = icons.diagnostics.Error },
-				{ name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-				{ name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-				{ name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+				{ name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
+				{ name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
+				{ name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
 			},
 		},
 
@@ -210,8 +210,8 @@ function M.config()
 			function(server)
 				local lspconfig = require("lspconfig")
 				local opts = {
-					on_attach = on_attach,
-					capabilities = common_capabilities(),
+					on_attach = M.on_attach,
+					capabilities = M.common_capabilities(),
 				}
 
 				local require_ok, settings = pcall(require, "user.lspsettings." .. server)

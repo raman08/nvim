@@ -4,34 +4,24 @@ local M = {
 	dependencies = { "nvim-lua/plenary.nvim" },
 }
 
+local function mark_file()
+	local harpoon = require("harpoon")
+	harpoon:list():append()
+	vim.notify("󱡅  marked file")
+end
+
 function M.config()
-	local status_harpoon_ok, harpoon = pcall(require, "harpoon")
-	if not status_harpoon_ok then
-		return
-	end
+	local keymap = vim.keymap.set
+	local opts = { noremap = true, silent = true }
 
-	local conf = require("telescope.config").values
-	local function toggle_telescope(harpoon_files)
-		local file_paths = {}
-		for _, item in ipairs(harpoon_files.items) do
-			table.insert(file_paths, item.value)
-		end
+	local harpoon = require("harpoon")
 
-		require("telescope.pickers")
-			.new({}, {
-				prompt_title = "Harpoon",
-				finder = require("telescope.finders").new_table({
-					results = file_paths,
-				}),
-				previewer = conf.file_previewer({}),
-				sorter = conf.generic_sorter({}),
-			})
-			:find()
-	end
+	harpoon:setup()
 
-	vim.keymap.set("n", "<C-e>", function()
-		toggle_telescope(harpoon:list())
-	end, { desc = "Open harpoon window" })
+	keymap("n", "<s-m>", mark_file, opts)
+	keymap("n", "<TAB>", function()
+		harpoon.ui:toggle_quick_menu(harpoon:list())
+	end, opts)
 end
 
 return M

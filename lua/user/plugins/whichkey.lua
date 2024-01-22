@@ -6,6 +6,8 @@ local M = {
 function M.config()
 	local which_key = require("which-key")
 
+	local harpoon = require("harpoon")
+
 	local opts = {
 		mode = "n", -- NORMAL mode
 		prefix = "<leader>",
@@ -46,16 +48,7 @@ function M.config()
 		["w"] = { "<cmd>w!<CR>", "Save" },
 		["c"] = { "<cmd>:lua require('bufdelete').bufdelete(0, false)<cr>", "Save" },
 
-		-- NOTE: Check What this does.......
-		-- ["o"] = { "<cmd>Navbuddy<cr>", "Nav" },
-
-		b = {
-			name = "Buffers",
-			-- j = { "<cmd>BufferLinePick<cr>", "Jump" },
-			b = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
-			-- b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
-			-- n = { "<cmd>BufferLineCycleNext<cr>", "Next" },
-		},
+		["b"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
 
 		-- NOTE: Check if these can be shifted to the DAP file
 		d = {
@@ -163,20 +156,7 @@ function M.config()
 		},
 	}
 
-	local harpoon = require("harpoon")
 	local m_mappings = {
-		m = {
-			function()
-				harpoon:list():append()
-			end,
-			"Harpoon Menu",
-		},
-		b = {
-			function()
-				harpoon.ui:toggle_quick_menu(harpoon:list())
-			end,
-			"Harpoon Menu",
-		},
 		j = {
 			function()
 				harpoon:list():prev()
@@ -228,15 +208,15 @@ function M.config()
 		layout = {
 			height = { min = 4, max = 25 }, -- min and max height of the columns
 			width = { min = 20, max = 50 }, -- min and max width of the columns
-			spacing = 3, -- spacing between columns
-			align = "center", -- align columns left, center or right
+			spacing = 3,           -- spacing between columns
+			align = "center",      -- align columns left, center or right
 		},
 
-		ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
+		ignore_missing = true,                                                  -- enable this to hide mappings for which you didn't specify a label
 		hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-		show_help = true, -- show help message on the command line when the popup is visible
-		show_keys = true, -- show the currently pressed key and its label as a message in the command line
-		triggers = "auto", -- automatically setup triggers
+		show_help = true,                                                       -- show help message on the command line when the popup is visible
+		show_keys = true,                                                       -- show the currently pressed key and its label as a message in the command line
+		triggers = "auto",                                                      -- automatically setup triggers
 		-- triggers = {"<leader>"} -- or specify a list manually
 
 		triggers_blacklist = {
