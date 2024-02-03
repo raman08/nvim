@@ -35,12 +35,10 @@ function M.config()
 						table.insert(client_names, source.name)
 					end
 				end
+			elseif client.name == "copilot" then
+				copilot_active = true
 			else
 				table.insert(client_names, client.name)
-			end
-
-			if client.name == "copilot" then
-				copilot_active = true
 			end
 		end
 

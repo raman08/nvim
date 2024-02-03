@@ -1,7 +1,8 @@
 {
 	"diagnostics.globals": [
 		"vim",
-		"spec"
+		"spec",
+        "binary_search"
 	],
 	"workspace.library": [
 		"/home/raman/.local/share/nvim/lazy/neodev.nvim/types/stable",
