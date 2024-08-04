@@ -66,7 +66,7 @@ function M.config()
 			end
 		end,
 
-		close_fold_kinds = { "imports" },
+		close_fold_kinds_for_ft = { "imports" },
 		open_fold_hl_timeout = 500,
 		fold_virt_text_handler = foldTextFormatter,
 	})
@@ -77,4 +77,4 @@ function M.config()
 	vim.keymap.set("n", "zm", ufo.closeFoldsWith)
 end
 
-return M
+-- return M

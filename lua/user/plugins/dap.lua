@@ -45,40 +45,36 @@ function M.config()
 		return
 	end
 
-	local opts = {
-		mode = "n", -- NORMAL mode
-		prefix = "<leader>",
-		buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-		silent = true, -- use `silent` when creating keymaps
-		noremap = true, -- use `noremap` when creating keymaps
-		nowait = true, -- use `nowait` when creating keymaps
-	}
 
-	local mappings = {
-		d = {
-
-			name = "Debug",
-			t = {
-				"<cmd>lua require'dap'.toggle_breakpoint()<cr>",
-				"Toggle Breakpoint",
-			},
-			b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
-			c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-			C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
-			d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
-			g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
-			i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
-			o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-			u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-			p = { "<cmd>lua require'dap'.pause()<cr>", "Pause" },
-			r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
-			s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
-			q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
-			U = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle UI" },
+	which_key.add({
+		{ "<leader>d",  group = "Debug",                           nowait = true,        remap = false },
+		{
+			"<leader>dC",
+			"<cmd>lua require'dap'.run_to_cursor()<cr>",
+			desc = "Run To Cursor",
+			nowait = true,
+			remap = false,
 		},
-	}
-
-	which_key.register(mappings, opts)
+		{ "<leader>dU", "<cmd>lua require'dapui'.toggle()<cr>",    desc = "Toggle UI",   nowait = true, remap = false },
+		{ "<leader>db", "<cmd>lua require'dap'.step_back()<cr>",   desc = "Step Back",   nowait = true, remap = false },
+		{ "<leader>dc", "<cmd>lua require'dap'.continue()<cr>",    desc = "Continue",    nowait = true, remap = false },
+		{ "<leader>dd", "<cmd>lua require'dap'.disconnect()<cr>",  desc = "Disconnect",  nowait = true, remap = false },
+		{ "<leader>dg", "<cmd>lua require'dap'.session()<cr>",     desc = "Get Session", nowait = true, remap = false },
+		{ "<leader>di", "<cmd>lua require'dap'.step_into()<cr>",   desc = "Step Into",   nowait = true, remap = false },
+		{ "<leader>do", "<cmd>lua require'dap'.step_over()<cr>",   desc = "Step Over",   nowait = true, remap = false },
+		{ "<leader>dp", "<cmd>lua require'dap'.pause()<cr>",       desc = "Pause",       nowait = true, remap = false },
+		{ "<leader>dq", "<cmd>lua require'dap'.close()<cr>",       desc = "Quit",        nowait = true, remap = false },
+		{ "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", desc = "Toggle Repl", nowait = true, remap = false },
+		{ "<leader>ds", "<cmd>lua require'dap'.continue()<cr>",    desc = "Start",       nowait = true, remap = false },
+		{
+			"<leader>dt",
+			"<cmd>lua require'dap'.toggle_breakpoint()<cr>",
+			desc = "Toggle Breakpoint",
+			nowait = true,
+			remap = false,
+		},
+		{ "<leader>du", "<cmd>lua require'dap'.step_out()<cr>", desc = "Step Out", nowait = true, remap = false },
+	})
 
 	local status_dapui_ok, dapui = pcall(require, "dapui")
 	if not status_dapui_ok then

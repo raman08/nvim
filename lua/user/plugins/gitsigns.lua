@@ -10,36 +10,49 @@ M.config = function()
 	require("gitsigns").setup({
 		signs = {
 			add = {
-				hl = "GitSignsAdd",
 				text = icons.ui.BoldLineLeft,
-				numhl = "GitSignsAddNr",
-				linehl = "GitSignsAddLn",
 			},
 			change = {
-				hl = "GitSignsChange",
 				text = icons.ui.BoldLineLeft,
-				numhl = "GitSignsChangeNr",
-				linehl = "GitSignsChangeLn",
 			},
 			delete = {
-				hl = "GitSignsDelete",
 				text = icons.ui.TriangleShortArrowRight,
-				numhl = "GitSignsDeleteNr",
-				linehl = "GitSignsDeleteLn",
 			},
 			topdelete = {
-				hl = "GitSignsDelete",
 				text = icons.ui.TriangleShortArrowRight,
-				numhl = "GitSignsDeleteNr",
-				linehl = "GitSignsDeleteLn",
 			},
 			changedelete = {
-				hl = "GitSignsChange",
 				text = icons.ui.BoldLineLeft,
-				numhl = "GitSignsChangeNr",
-				linehl = "GitSignsChangeLn",
+			},
+			untracked = {
+				text = icons.ui.LineMiddle,
 			},
 		},
+		signs_staged = {
+			add = {
+				text = icons.ui.BoldLineLeft,
+			},
+			change = {
+				text = icons.ui.BoldLineLeft,
+			},
+			delete = {
+				text = icons.ui.TriangleShortArrowRight,
+			},
+			topdelete = {
+				text = icons.ui.TriangleShortArrowRight,
+			},
+			changedelete = {
+				text = icons.ui.BoldLineLeft,
+			},
+			untracked = {
+				text = icons.ui.LineMiddle,
+			},
+		},
+		signs_staged_enable = true,
+		signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+		numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+		linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+		word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
 		watch_gitdir = {
 			interval = 1000,
 			follow_files = true,
