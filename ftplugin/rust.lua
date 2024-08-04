@@ -3,38 +3,59 @@ if not status_ok then
 	return
 end
 
-local opts = {
-	mode = "n",
-	prefix = "<leader>",
-	buffer = nil,
-	silent = true,
-	noremap = true,
-	nowait = true,
-}
-
-local mappings = {
-	C = {
-		name = "Rust",
-		r = { "<cmd>RustLsp runnables<Cr>", "Runnables" },
-		t = { "<cmd>lua _CARGO_TEST()<cr>", "Cargo Test" },
-		m = { "<cmd>RustLsp expandMacro<Cr>", "Expand Macro" },
-		c = { "<cmd>RustLsp openCargo<Cr>", "Open Cargo" },
-		p = { "<cmd>RustLsp parentModule<Cr>", "Parent Module" },
-		d = { "<cmd>RustLsp debuggables<Cr>", "Debuggables" },
-		v = { "<cmd>RustLsp crateGraph<Cr>", "View Crate Graph" },
-		R = {
-			"<cmd>RustLsp reloadWorkspace<Cr>",
-			"Reload Workspace",
+which_key.add({
+	{
+		{ "<leader>C",  group = "Rust",                     nowait = true,             remap = false },
+		{
+			"<leader>CD",
+			"<cmd>lua require'crates'.show_dependencies_popup()<cr>",
+			desc = "[crates] show dependencies",
+			nowait = true,
+			remap = false,
 		},
-		o = { "<cmd>RustLsp externalDocs<Cr>", "Open External Docs" },
-
-		y = { "<cmd>lua require'crates'.open_repository()<cr>", "[crates] open repository" },
-		P = { "<cmd>lua require'crates'.show_popup()<cr>", "[crates] show popup" },
-		i = { "<cmd>lua require'crates'.show_crate_popup()<cr>", "[crates] show info" },
-		f = { "<cmd>lua require'crates'.show_features_popup()<cr>", "[crates] show features" },
-		D = { "<cmd>lua require'crates'.show_dependencies_popup()<cr>", "[crates] show dependencies" },
-		u = { "<cmd>lua require('crates').upgrade_crate()<cr>", "[crates] Upgrade Crate" },
+		{
+			"<leader>CP",
+			"<cmd>lua require'crates'.show_popup()<cr>",
+			desc = "[crates] show popup",
+			nowait = true,
+			remap = false,
+		},
+		{ "<leader>CR", "<cmd>RustLsp reloadWorkspace<Cr>", desc = "Reload Workspace", nowait = true, remap = false },
+		{ "<leader>Cc", "<cmd>RustLsp openCargo<Cr>",       desc = "Open Cargo",       nowait = true, remap = false },
+		{ "<leader>Cd", "<cmd>RustLsp debuggables<Cr>",     desc = "Debuggables",      nowait = true, remap = false },
+		{
+			"<leader>Cf",
+			"<cmd>lua require'crates'.show_features_popup()<cr>",
+			desc = "[crates] show features",
+			nowait = true,
+			remap = false,
+		},
+		{
+			"<leader>Ci",
+			"<cmd>lua require'crates'.show_crate_popup()<cr>",
+			desc = "[crates] show info",
+			nowait = true,
+			remap = false,
+		},
+		{ "<leader>Cm", "<cmd>RustLsp expandMacro<Cr>",  desc = "Expand Macro",       nowait = true, remap = false },
+		{ "<leader>Co", "<cmd>RustLsp externalDocs<Cr>", desc = "Open External Docs", nowait = true, remap = false },
+		{ "<leader>Cp", "<cmd>RustLsp parentModule<Cr>", desc = "Parent Module",      nowait = true, remap = false },
+		{ "<leader>Cr", "<cmd>RustLsp runnables<Cr>",    desc = "Runnables",          nowait = true, remap = false },
+		{ "<leader>Ct", "<cmd>lua _CARGO_TEST()<cr>",    desc = "Cargo Test",         nowait = true, remap = false },
+		{
+			"<leader>Cu",
+			"<cmd>lua require('crates').upgrade_crate()<cr>",
+			desc = "[crates] Upgrade Crate",
+			nowait = true,
+			remap = false,
+		},
+		{ "<leader>Cv", "<cmd>RustLsp crateGraph<Cr>", desc = "View Crate Graph", nowait = true, remap = false },
+		{
+			"<leader>Cy",
+			"<cmd>lua require'crates'.open_repository()<cr>",
+			desc = "[crates] open repository",
+			nowait = true,
+			remap = false,
+		},
 	},
-}
-
-which_key.register(mappings, opts)
+})
