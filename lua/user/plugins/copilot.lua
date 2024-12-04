@@ -5,6 +5,7 @@ local M = {
 	dependencies = {
 		"zbirenbaum/copilot-cmp",
 	},
+	enabled = false,
 }
 
 function M.config()

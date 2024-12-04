@@ -123,11 +123,16 @@ function M.config()
 				error = icons.diagnostics.BoldError,
 			},
 		},
-		--filters = {
-		--	dotfiles = false,
-		--	custom = { ".git", "node_modules" },
-		--	exclude = { ".gitignore", ".env" },
-		--},
+		filters = {
+			enable = true,
+			git_ignored = false,
+			dotfiles = false,
+			git_clean = false,
+			no_buffer = false,
+			no_bookmark = false,
+			custom = {},
+			exclude = {},
+		},
 		trash = { cmd = "trash" },
 	})
 end

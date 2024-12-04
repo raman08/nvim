@@ -73,7 +73,7 @@ end
 
 local lsp_servers = {
 	"lua_ls",
-	"tsserver",
+	-- "tsserver",
 	"astro",
 	"jsonls",
 	"yamlls",
