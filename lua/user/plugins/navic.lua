@@ -1,5 +1,6 @@
 local M = {
 	"SmiteshP/nvim-navic",
+	lazy = true,
 }
 
 function M.config()
@@ -14,6 +15,7 @@ function M.config()
 		separator = " " .. icons.ui.ChevronRight .. " ",
 		depth_limit = 0,
 		depth_limit_indicator = "..",
+		lazy_update_context = true,
 	})
 end
 

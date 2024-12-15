@@ -2,8 +2,14 @@
 	"diagnostics.globals": [
 		"vim",
 		"spec",
-        "binary_search"
+		"binary_search"
 	],
+	"Lua.runtime": {
+		"version": "LuaJIT",
+		"builtin": {
+			"spec": "require"
+		}
+	},
 	"workspace.library": [
 		"/home/raman/.local/share/nvim/lazy/neodev.nvim/types/stable",
 		"/usr/local/share/nvim/runtime/lua",

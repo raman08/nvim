@@ -1,6 +1,17 @@
 local M = {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	event = "VeryLazy",
+	init = function()
+		vim.g.lualine_laststatus = vim.o.laststatus
+		if vim.fn.argc(-1) > 0 then
+			-- set an empty statusline till lualine loads
+			vim.o.statusline = " "
+		else
+			-- hide the statusline on the starter page
+			vim.o.laststatus = 0
+		end
+	end,
 }
 
 function M.config()
@@ -65,23 +76,23 @@ function M.config()
 			component_separators = { left = "", right = "" },
 			section_separators = { left = "", right = "" },
 
+			theme = "auto",
+			globalstatus = vim.o.laststatus == 3,
+			disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
 			ignore_focus = { "NvimTree" },
 		},
 		sections = {
-			-- lualine_a = { {"branch", icon =""} },
-			-- lualine_b = { diff },
-			-- lualine_c = { "diagnostics" },
-			-- lualine_x = { copilot },
-			-- lualine_y = { "filetype" },
-			-- lualine_z = { "progress" },
 			lualine_a = { "mode" },
 			lualine_b = { "branch" },
 			lualine_c = { diff },
 			lualine_x = { "diagnostics", language_servers },
 			lualine_y = { "filetype" },
-			lualine_z = { "progress" },
+			lualine_z = {
+				{ "progress" },
+				{ "location" },
+			},
 		},
-		extensions = { "quickfix", "man", "fugitive" },
+		extensions = { "quickfix", "man", "fugitive", "nvim-tree" },
 	})
 end
 

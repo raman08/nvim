@@ -6,7 +6,7 @@ local M = {
 function M.config()
 	local which_key = require("which-key")
 
-	local harpoon = require("harpoon")
+	-- local harpoon = require("harpoon")
 
 	which_key.setup({
 		presets = "helix",
@@ -24,7 +24,7 @@ function M.config()
 				motions = false, -- adds help for motions
 				text_objects = false, -- help for text objects triggered after entering an operator
 				windows = false, -- default bindings on <c-w>
-				nav = true, -- misc bindings to work with windows
+				nav = false, -- misc bindings to work with windows
 				z = true, -- bindings for folds, spelling and others prefixed with z
 				g = true, -- bindings for prefixed with g
 			},
@@ -225,8 +225,8 @@ function M.config()
 		},
 	})
 
+	-- Find group and its mappings
 	which_key.add({
-		-- Find group and its mappings
 		{ "<leader>f",  group = "Find" },
 		{
 			"<leader>fb",
@@ -311,8 +311,8 @@ function M.config()
 		{ "<leader>fC", "<cmd>Telescope commands<cr>",  desc = "Commands",  noremap = true, nowait = true },
 	})
 
+	-- Git group and its mappings
 	which_key.add({
-		-- Git group and its mappings
 		{ "<leader>g",  group = "Git" },
 		{
 			"<leader>gj",
@@ -401,8 +401,8 @@ function M.config()
 		{ "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Git Diff", noremap = true, nowait = true },
 	})
 
+	-- LSP group and its mappings
 	which_key.add({
-		-- LSP group and its mappings
 		{ "<leader>l", group = "LSP" },
 		{
 			"<leader>la",
@@ -523,27 +523,27 @@ function M.config()
 		{ "la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action", noremap = true, nowait = true },
 	})
 
-	which_key.add({
-		mode = "n", -- Normal mode
-		{
-			"mj",
-			function()
-				harpoon:list():prev()
-			end,
-			desc = "Harpoon Prev",
-			noremap = true,
-			nowait = true,
-		},
-		{
-			"mk",
-			function()
-				harpoon:list():next()
-			end,
-			desc = "Harpoon Next",
-			noremap = true,
-			nowait = true,
-		},
-	})
+	-- 	which_key.add({
+	-- 		mode = "n", -- Normal mode
+	-- 		{
+	-- 			"mj",
+	-- 			function()
+	-- 				harpoon:list():prev()
+	-- 			end,
+	-- 			desc = "Harpoon Prev",
+	-- 			noremap = true,
+	-- 			nowait = true,
+	-- 		},
+	-- 		{
+	-- 			"mk",
+	-- 			function()
+	-- 				harpoon:list():next()
+	-- 			end,
+	-- 			desc = "Harpoon Next",
+	-- 			noremap = true,
+	-- 			nowait = true,
+	-- 		},
+	-- 	})
 end
 
 return M

@@ -1,7 +1,10 @@
 local M = {
 	"nvim-treesitter/nvim-treesitter",
-	event = { "BufReadPost", "BufNewFile" },
+	version = false,
 	build = ":TSUpdate",
+	--event = { "LazyFile", "VeryLazy" },
+	lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+	cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 	dependencies = {
 		{
 			"nvim-treesitter/nvim-treesitter-textobjects",
@@ -26,8 +29,20 @@ local M = {
 function M.config()
 	local treesitter = require("nvim-treesitter.configs")
 
+	---@diagnostic disable-next-line: missing-fields
 	treesitter.setup({
-		ensure_installed = { "lua", "markdown", "markdown_inline", "bash", "python", "rust" }, -- put the language you want in this array
+		auto_install = {},
+		ensure_installed = {
+			"astro",
+			"css",
+			"dockerfile",
+			"lua",
+			"markdown",
+			"markdown_inline",
+			"bash",
+			"python",
+			"rust",
+		}, -- put the language you want in this array
 		ignore_install = { "" },
 		sync_install = false,
 
@@ -61,39 +76,6 @@ function M.config()
 				"LawnGreen",
 			},
 			disable = { "html" },
-		},
-
-		textobjects = {
-			select = {
-				enable = true,
-				-- Automatically jump forward to textobj, similar to targets.vim
-				lookahead = true,
-				keymaps = {
-					-- You can use the capture groups defined in textobjects.scm
-					["af"] = "@function.outer",
-					["if"] = "@function.inner",
-					["at"] = "@class.outer",
-					["it"] = "@class.inner",
-					["ac"] = "@call.outer",
-					["ic"] = "@call.inner",
-					["aa"] = "@parameter.outer",
-					["ia"] = "@parameter.inner",
-					["al"] = "@loop.outer",
-					["il"] = "@loop.inner",
-					["ai"] = "@conditional.outer",
-					["ii"] = "@conditional.inner",
-					["a/"] = "@comment.outer",
-					["i/"] = "@comment.inner",
-					["ab"] = "@block.outer",
-					["ib"] = "@block.inner",
-					["as"] = "@statement.outer",
-					["is"] = "@scopename.inner",
-					["aA"] = "@attribute.outer",
-					["iA"] = "@attribute.inner",
-					["aF"] = "@frame.outer",
-					["iF"] = "@frame.inner",
-				},
-			},
 		},
 	})
 end

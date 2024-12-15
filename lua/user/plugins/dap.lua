@@ -4,6 +4,11 @@ local M = {
 		"rcarriga/nvim-dap-ui",
 		"mxsdev/nvim-dap-vscode-js",
 		-- "theHamsta/nvim-dap-virtual-text",
+		{
+			"jay-babu/mason-nvim-dap.nvim",
+			dependencies = "mason.nvim",
+			cmd = { "DapInstall", "DapUninstall" },
+		},
 	},
 	event = "VeryLazy",
 }
@@ -44,7 +49,6 @@ function M.config()
 	if not status_key_ok then
 		return
 	end
-
 
 	which_key.add({
 		{ "<leader>d",  group = "Debug",                           nowait = true,        remap = false },
@@ -121,8 +125,16 @@ function M.config()
 		},
 	})
 
+	vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+
 	dap.listeners.after.event_initialized["dapui_config"] = function()
 		dapui.open()
+	end
+
+	local vscode = require("dap.ext.vscode")
+	local json = require("plenary.json")
+	vscode.json_decode = function(str)
+		return vim.json.decode(json.json_strip_comments(str))
 	end
 
 	require("user.dap.cpp")
