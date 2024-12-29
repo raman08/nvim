@@ -76,7 +76,9 @@ function M.config()
 
 		{
 			"<leader>q",
-			"<cmd>confirm q<CR>",
+			function()
+				Snacks.bufdelete()
+			end,
 			desc = "Quit",
 			noremap = true,
 			nowait = true,
