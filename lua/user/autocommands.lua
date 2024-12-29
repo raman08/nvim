@@ -1,54 +1,120 @@
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+local function augroup(name)
+	return vim.api.nvim_create_augroup(name, { clear = true })
+end
+
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+	group = augroup("checktime"),
 	callback = function()
-		vim.cmd("set formatoptions-=cro")
+		if vim.o.buftype ~= "nofile" then
+			vim.cmd("checktime")
+		end
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = {
-		"netrw",
-		"Jaq",
-		"qf",
-		"git",
-		"help",
-		"man",
-		"lspinfo",
-		"spectre_panel",
-		"lir",
-		"DressingSelect",
-		"tsplayground",
-		"",
-	},
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = augroup("highlight_yank"),
 	callback = function()
-		vim.cmd([[
-		  nnoremap <silent> <buffer> q :close<CR>
-		  set nobuflisted
-    ]])
+		(vim.hl or vim.highlight).on_yank()
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
-	callback = function()
-		vim.cmd("quit")
-	end,
-})
-
+-- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
+	group = augroup("resize_splits"),
 	callback = function()
+		local current_tab = vim.fn.tabpagenr()
 		vim.cmd("tabdo wincmd =")
+		vim.cmd("tabnext " .. current_tab)
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-	pattern = { "*" },
-	callback = function()
-		vim.cmd("checktime")
+-- go to last loc when opening a buffer
+vim.api.nvim_create_autocmd("BufReadPost", {
+	group = augroup("last_loc"),
+	callback = function(event)
+		local exclude = { "gitcommit" }
+		local buf = event.buf
+		if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+			return
+		end
+		vim.b[buf].lazyvim_last_loc = true
+		local mark = vim.api.nvim_buf_get_mark(buf, '"')
+		local lcount = vim.api.nvim_buf_line_count(buf)
+		if mark[1] > 0 and mark[1] <= lcount then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+		end
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-	callback = function()
-		vim.highlight.on_yank({ higroup = "Visual", timeout = 40 })
+-- close some filetypes with <q>
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("close_with_q"),
+	pattern = {
+		"PlenaryTestPopup",
+		"checkhealth",
+		"dbout",
+		"gitsigns-blame",
+		"grug-far",
+		"help",
+		"lspinfo",
+		"neotest-output",
+		"neotest-output-panel",
+		"neotest-summary",
+		"notify",
+		"qf",
+		"spectre_panel",
+		"startuptime",
+		"tsplayground",
+	},
+	callback = function(event)
+		vim.bo[event.buf].buflisted = false
+		vim.schedule(function()
+			vim.keymap.set("n", "q", function()
+				vim.cmd("close")
+				pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+			end, {
+				buffer = event.buf,
+				silent = true,
+				desc = "Quit buffer",
+			})
+		end)
+	end,
+})
+
+-- close some filetypes with <q>
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("close_with_q"),
+	pattern = {
+		"PlenaryTestPopup",
+		"checkhealth",
+		"dbout",
+		"gitsigns-blame",
+		"grug-far",
+		"help",
+		"lspinfo",
+		"neotest-output",
+		"neotest-output-panel",
+		"neotest-summary",
+		"notify",
+		"qf",
+		"spectre_panel",
+		"startuptime",
+		"tsplayground",
+	},
+	callback = function(event)
+		vim.bo[event.buf].buflisted = false
+		vim.schedule(function()
+			vim.keymap.set("n", "q", function()
+				vim.cmd("close")
+				pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+			end, {
+				buffer = event.buf,
+				silent = true,
+				desc = "Quit buffer",
+			})
+		end)
 	end,
 })
 
@@ -57,51 +123,5 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	callback = function()
 		vim.opt_local.wrap = true
 		vim.opt_local.spell = true
-	end,
-})
-
--- OPEN NVIM TREE
-local function open_nvim_tree(data)
-	local IGNORED_FT = {
-		"gitcommit",
-		"alpha",
-	}
-
-	-- buffer is a real file on the disk
-	-- local real_file = vim.fn.filereadable(data.file) == 1
-
-	-- buffer is a [No Name]
-	-- local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
-
-	-- buffer is a directory
-	local directory = vim.fn.isdirectory(data.file) == 1
-
-	-- if not real_file and not no_name then
-	-- 	return
-	-- end
-
-	-- &ft
-	local filetype = vim.bo[data.buf].ft
-
-	if vim.tbl_contains(IGNORED_FT, filetype) then
-		return
-	end
-
-	-- change to the directory
-	if directory then
-		vim.cmd.cd(data.file)
-	end
-
-	-- open the tree but don't focus it
-	require("nvim-tree.api").tree.toggle({ focus = false })
-end
-
-vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
-
-vim.api.nvim_create_autocmd("BufRead", {
-	group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
-	pattern = "Cargo.toml",
-	callback = function()
-		require("cmp").setup.buffer({ sources = { { name = "crates" } } })
 	end,
 })

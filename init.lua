@@ -2,8 +2,7 @@ require("user.plugins.launch")
 
 require("user.options")
 require("user.keymaps")
-
---require("user.autocommands")
+require("user.autocommands")
 
 -- coding
 spec("user.plugins.autopairs")
