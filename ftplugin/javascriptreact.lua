@@ -24,4 +24,5 @@ local mappings = {
 	},
 }
 
-which_key.register(mappings, opts)
+which_key.add(mappings, opts)
+
