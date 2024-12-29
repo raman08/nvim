@@ -26,7 +26,7 @@ local M = {
 						action = ":lua Snacks.dashboard.pick('live_grep')",
 					},
 					{
-						action = ":lua require('telescope').extensions.projects.projects()<CR>",
+						action = ":lua require('telescope').extensions.projects.projects()",
 						desc = "Projects",
 						icon = " ",
 						key = "p",
