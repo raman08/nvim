@@ -31,7 +31,7 @@ function M.config()
 
 	---@diagnostic disable-next-line: missing-fields
 	treesitter.setup({
-		auto_install = {},
+		auto_install = false,
 		ensure_installed = {
 			"astro",
 			"css",
@@ -42,7 +42,19 @@ function M.config()
 			"bash",
 			"python",
 			"rust",
-		}, -- put the language you want in this array
+			"git_config",
+			"gitcommit",
+			"git_rebase",
+			"gitignore",
+			"gitattributes",
+			"go",
+			"gomod",
+			"gowork",
+			"gosum",
+			"json5",
+			"hyprlang",
+			"rasi",
+		},
 		ignore_install = { "" },
 		sync_install = false,
 
@@ -77,6 +89,22 @@ function M.config()
 			},
 			disable = { "html" },
 		},
+
+		vim.filetype.add({
+			extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
+			filename = {
+				["vifmrc"] = "vim",
+			},
+			pattern = {
+				[".*/waybar/config"] = "jsonc",
+				[".*/mako/config"] = "dosini",
+				[".*/kitty/.+%.conf"] = "kitty",
+				[".*/hypr/.+%.conf"] = "hyprlang",
+				["%.env%.[%w_.-]+"] = "sh",
+			},
+		}),
+
+		vim.treesitter.language.register("bash", "kitty"),
 	})
 end
 

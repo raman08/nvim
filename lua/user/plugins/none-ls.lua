@@ -11,6 +11,8 @@ function M.config()
 	-- local code_actions = null_ls.builtins.code_actions
 
 	none_ls.setup({
+
+		root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
 		sources = {
 			formatting.stylua,
 			-- formatting.prettier,
