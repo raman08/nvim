@@ -1,6 +1,6 @@
 local M = {
 	"mrcjkb/rustaceanvim",
-	version = "^3", -- Recommended
+	version = vim.fn.has("nvim-0.10.0") == 0 and "^4" or false,
 	dependencies = {
 		"neovim/nvim-lspconfig",
 	},
@@ -50,12 +50,32 @@ function M.config()
 		server = {
 			on_attach = function(client, bufnr)
 				default_on_attach(client, bufnr)
-				vim.keymap.set("n", "K", "<cmd>RustLsp hover actions<cr>", { buffer = bufnr })
+				vim.keymap.set(
+					"n",
+					"K",
+					"<cmd>RustLsp hover actions<cr>",
+					{ desc = "Rust Hover actions", buffer = bufnr }
+				)
 				vim.keymap.set("v", "K", "<cmd>RustLsp hover range<cr>", { buffer = bufnr })
 			end,
 			capabilities = capabilities,
 			standalone = true,
 			["rust-analyzer"] = {
+				cargo = {
+					allFeatures = true,
+					loadOutDirsFromCheck = true,
+					buildScripts = {
+						enable = true,
+					},
+				},
+				procMacro = {
+					enable = true,
+					ignored = {
+						["async-trait"] = { "async_trait" },
+						["napi-derive"] = { "napi" },
+						["async-recursion"] = { "async_recursion" },
+					},
+				},
 				imports = {
 					granularity = {
 						group = "module",
@@ -67,6 +87,19 @@ function M.config()
 				},
 				checkOnSave = {
 					command = "clippy",
+				},
+				files = {
+					excludeDirs = {
+						".direnv",
+						".git",
+						".github",
+						".gitlab",
+						"bin",
+						"node_modules",
+						"target",
+						"venv",
+						".venv",
+					},
 				},
 			},
 		},
