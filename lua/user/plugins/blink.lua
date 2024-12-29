@@ -1,7 +1,7 @@
 local M = {
 	"saghen/blink.cmp",
-	version = "*",
-	build = "cargo build --release",
+	version = "v0.8.*",
+	-- build = "cargo build --release",
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 		-- { "saadparwaiz1/cmp_luasnip" },
@@ -17,8 +17,6 @@ local M = {
 }
 
 function M.config()
-	---@module 'blink.cmp'
-	---@type blink.cmp.Config
 	local opts = {
 		keymap = {
 			preset = "enter",
@@ -35,14 +33,8 @@ function M.config()
 			nerd_font_variant = "mono",
 		},
 		completion = {
-			enabled = true,
-			min_width = 15,
-			max_height = 10,
-			border = "none",
-			scrollbar = false,
 			accept = {
 				-- experimental auto-brackets support
-				--
 				auto_brackets = {
 					enabled = true,
 				},
@@ -51,11 +43,17 @@ function M.config()
 				draw = {
 					treesitter = { "lsp" },
 				},
-				border = "padded",
+				border = "single",
+				auto_show = function(ctx)
+					return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
+				end,
 			},
 			documentation = {
-				auto_show = false,
+				auto_show = true,
 				auto_show_delay_ms = 200,
+				window = {
+					border = "single",
+				},
 			},
 			ghost_text = {
 				enabled = true,
@@ -65,7 +63,12 @@ function M.config()
 			},
 		},
 		-- experimental signature help support
-		signature = { enabled = true },
+		signature = {
+			enabled = true,
+			window = {
+				border = "single",
+			},
+		},
 
 		sources = {
 			default = { "lazydev", "lsp", "luasnip", "path", "snippets", "buffer" },
