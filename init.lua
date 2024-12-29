@@ -43,6 +43,7 @@ spec("user.plugins.cybu")
 spec("user.plugins.fidget")
 spec("user.plugins.nvim-ufo")
 spec("user.plugins.fugitive")
+spec("user.plugins.toggleterm")
 
 -- LSP and support
 spec("user.plugins.lsp.lsp-config")
