@@ -125,3 +125,12 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		vim.opt_local.spell = true
 	end,
 })
+
+-- snack notification
+vim.api.nvim_create_user_command(
+	"Notification", -- The name of the command
+	function()
+		Snacks.notifier.show_history()
+	end,
+	{ desc = "Show notification history using Snack.notify.show_history()" } -- Optional description
+)
