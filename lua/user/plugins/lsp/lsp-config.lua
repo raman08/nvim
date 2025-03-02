@@ -41,6 +41,7 @@ local lsp_servers = {
 	"yamlls",
 	"tailwindcss",
 	"bashls",
+	"gopls"
 }
 
 M.common_capabilities = function()

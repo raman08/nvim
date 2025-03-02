@@ -8,8 +8,8 @@ local M = {
 }
 
 function M.config()
-	local default_on_attach = require("user.plugins.lsp").on_attach
-	local capabilities = require("user.plugins.lsp").common_capabilities()
+	local default_on_attach = require("user.plugins.lsp.lsp-config").on_attach
+	local capabilities = require("user.plugins.lsp.lsp-config").common_capabilities()
 
 	local opts = {
 		tools = {
