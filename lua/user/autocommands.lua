@@ -78,41 +78,8 @@ vim.api.nvim_create_autocmd("FileType", {
 				buffer = event.buf,
 				silent = true,
 				desc = "Quit buffer",
-			})
-		end)
-	end,
-})
-
--- close some filetypes with <q>
-vim.api.nvim_create_autocmd("FileType", {
-	group = augroup("close_with_q"),
-	pattern = {
-		"PlenaryTestPopup",
-		"checkhealth",
-		"dbout",
-		"gitsigns-blame",
-		"grug-far",
-		"help",
-		"lspinfo",
-		"neotest-output",
-		"neotest-output-panel",
-		"neotest-summary",
-		"notify",
-		"qf",
-		"spectre_panel",
-		"startuptime",
-		"tsplayground",
-	},
-	callback = function(event)
-		vim.bo[event.buf].buflisted = false
-		vim.schedule(function()
-			vim.keymap.set("n", "q", function()
-				vim.cmd("close")
-				pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
-			end, {
-				buffer = event.buf,
-				silent = true,
-				desc = "Quit buffer",
+				mode = "n",
+				lhs = "q",
 			})
 		end)
 	end,
@@ -138,14 +105,14 @@ vim.api.nvim_create_user_command(
 -- snack file-rename with lsp integrations
 local prev = { new_name = "", old_name = "" } -- Prevents duplicate events
 vim.api.nvim_create_autocmd("User", {
-  pattern = "NvimTreeSetup",
-  callback = function()
-    local events = require("nvim-tree.api").events
-    events.subscribe(events.Event.NodeRenamed, function(data)
-      if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
-        data = data
-        Snacks.rename.on_rename_file(data.old_name, data.new_name)
-      end
-    end)
-  end,
+	pattern = "NvimTreeSetup",
+	callback = function()
+		local events = require("nvim-tree.api").events
+		events.subscribe(events.Event.NodeRenamed, function(data)
+			if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
+				data = data
+				Snacks.rename.on_rename_file(data.old_name, data.new_name)
+			end
+		end)
+	end,
 })

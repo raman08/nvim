@@ -6,8 +6,6 @@ local M = {
 function M.config()
 	local which_key = require("which-key")
 
-	-- local harpoon = require("harpoon")
-
 	which_key.setup({
 		presets = "helix",
 		plugins = {

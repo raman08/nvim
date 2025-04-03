@@ -7,8 +7,6 @@ local M = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"nvim-lua/plenary.nvim",
-			-- "jay-babu/mason-nvim-dap.nvim",
-			-- "WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 	},
 	opts = { document_highlight = { enabled = false } },
@@ -41,7 +39,8 @@ local lsp_servers = {
 	"yamlls",
 	"tailwindcss",
 	"bashls",
-	"gopls"
+	"gopls",
+	"sqlls",
 }
 
 M.common_capabilities = function()
@@ -104,7 +103,6 @@ M.on_attach = function(client, bufnr)
 
 	if client.name == "tsserver" then
 		client.serve_capabilities.document_formatting = false
-		vim.lsp.buf.inlayhints(bufnr, true)
 	end
 
 	lsp_keymaps(bufnr)

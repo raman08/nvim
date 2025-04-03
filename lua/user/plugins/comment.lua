@@ -19,7 +19,7 @@ function M.config()
 		padding = true, --Add a space b/w comment and the line
 		sticky = true, --Whether the cursor should stay at its position
 		ignore = "^$", --Lines to be ignored while (un)comment
-
+		mappings = false,
 		pre_hook = function(ctx)
 			require("ts_context_commentstring").update_commentstring()
 
@@ -41,6 +41,7 @@ function M.config()
 				location = location,
 			})
 		end,
+		post_hook = nil,
 	})
 end
 

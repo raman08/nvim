@@ -1,6 +1,6 @@
 local M = {
 	"saghen/blink.cmp",
-	version = "v0.8.*",
+	version = "v1.*",
 	-- build = "cargo build --release",
 	dependencies = {
 		"rafamadriz/friendly-snippets",
@@ -17,6 +17,8 @@ local M = {
 }
 
 function M.config()
+	---@module 'blink.cmp'
+	---@type blink.cmp.Config
 	local opts = {
 		keymap = {
 			preset = "enter",
@@ -61,7 +63,10 @@ function M.config()
 				enabled = true,
 			},
 			list = {
-				selection = "auto_insert", --| "auto_insert",
+				selection = {
+					preselect = false,
+					auto_insert = true,
+				},
 			},
 		},
 		-- experimental signature help support
@@ -74,7 +79,7 @@ function M.config()
 
 		sources = {
 			default = { "lazydev", "lsp", "luasnip", "path", "snippets", "buffer" },
-			cmdline = {},
+			-- cmdline = {},
 			providers = {
 				lazydev = {
 					name = "LazyDev",
@@ -99,53 +104,6 @@ function M.config()
 			end,
 		},
 	}
-
-	-- setup compat sources
-	-- local enabled = opts.sources.default
-	-- for _, source in ipairs(opts.sources.compat or {}) do
-	-- 	opts.sources.providers[source] = vim.tbl_deep_extend(
-	-- 		"force",
-	-- 		{ name = source, module = "blink.compat.source" },
-	-- 		opts.sources.providers[source] or {}
-	-- 	)
-	-- 	if type(enabled) == "table" and not vim.tbl_contains(enabled, source) then
-	-- 		table.insert(enabled, source)
-	-- 	end
-	-- end
-
-	-- opts.sources.completion = opts.sources.completion or {}
-	-- opts.sources.completion.enabled_providers = enabled
-	-- if vim.tbl_get(opts, "completion", "menu", "draw", "treesitter") then
-	-- 	---@diagnostic disable-next-line: assign-type-mismatch
-	-- 	opts.completion.menu.draw.treesitter = true
-	-- end
-
-	-- -- Unset custom prop to pass blink.cmp validation
-	-- opts.sources.compat = nil
-
-	-- -- check if we need to override symbol kinds
-	-- for _, provider in pairs(opts.sources.providers or {}) do
-	-- 	if provider.kind then
-	-- 		local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-	-- 		local kind_idx = #CompletionItemKind + 1
-
-	-- 		CompletionItemKind[kind_idx] = provider.kind
-	-- 		---@diagnostic disable-next-line: no-unknown
-	-- 		CompletionItemKind[provider.kind] = kind_idx
-
-	-- 		local transform_items = provider.transform_items
-	-- 		provider.transform_items = function(ctx, items)
-	-- 			items = transform_items and transform_items(ctx, items) or items
-	-- 			for _, item in ipairs(items) do
-	-- 				item.kind = kind_idx or item.kind
-	-- 			end
-	-- 			return items
-	-- 		end
-
-	-- 		-- Unset custom prop to pass blink.cmp validation
-	-- 		provider.kind = nil
-	-- 	end
-	-- end
 
 	require("blink.cmp").setup(opts)
 end

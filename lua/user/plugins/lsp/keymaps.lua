@@ -17,7 +17,7 @@ local keymaps_list = {
 						vim.notify("Crates plugin is not available or popup is not supported", vim.log.levels.WARN)
 					end
 				else
-					vim.lsp.buf.hover()
+					vim.lsp.buf.hover({ border = "rounded" })
 				end
 			end,
 			"Show hover",

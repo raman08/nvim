@@ -4,38 +4,12 @@ local M = {
 }
 
 function M.config()
-	require("illuminate").configure({
-		filetypes_denylist = {
-			"mason",
-			"harpoon",
-			"DressingInput",
-			"NeogitCommitMessage",
-			"qf",
-			"dirvish",
-			"minifiles",
-			"fugitive",
-			"alpha",
-			"NvimTree",
-			"lazy",
-			"NeogitStatus",
-			"Trouble",
-			"netrw",
-			"lir",
-			"DiffviewFiles",
-			"Outline",
-			"Jaq",
-			"spectre_panel",
-			"toggleterm",
-			"DressingSelect",
-			"TelescopePrompt",
-		},
-		providers = { "lsp", "treesitter", "regex" },
-		delay = 200,
-		under_cursor = true,
-		large_file_cutoff = 2000,
-		large_file_overrides = {
-			providers = { "lsp" },
-		},
+	---@class lazydev.Config
+	require("lazydev").setup({
+		library = {},
+		enabled = function()
+			return vim.g.lazydev_enabled == nil and true or vim.g.lazydev_enabled
+		end,
 	})
 end
 

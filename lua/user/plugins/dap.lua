@@ -86,8 +86,33 @@ function M.config()
 	end
 
 	dapui.setup({
+		controls = {
+			element = "repl",
+			enabled = true,
+			icons = {
+				disconnect = "",
+				pause = "",
+				play = "",
+				run_last = "",
+				step_back = "",
+				step_into = "",
+				step_out = "",
+				step_over = "",
+				terminate = "",
+			},
+		},
 		expand_lines = true,
-		icons = { expanded = "", collapsed = "", circular = "" },
+		render = {
+			indent = 1,
+			max_value_lines = 100,
+		},
+		force_buffers = true,
+		element_mappings = {},
+		icons = {
+			collapsed = "",
+			current_frame = "",
+			expanded = "",
+		},
 		mappings = {
 			-- Use a table to apply multiple mappings
 			expand = { "<CR>", "<2-LeftMouse>" },
@@ -133,6 +158,8 @@ function M.config()
 
 	local vscode = require("dap.ext.vscode")
 	local json = require("plenary.json")
+
+	---@diagnostic disable-next-line: duplicate-set-field
 	vscode.json_decode = function(str)
 		return vim.json.decode(json.json_strip_comments(str))
 	end

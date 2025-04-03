@@ -77,4 +77,4 @@ function M.config()
 	vim.keymap.set("n", "zm", ufo.closeFoldsWith)
 end
 
-return {}
+return M
